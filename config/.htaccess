@@ -1,0 +1,36 @@
+# Some examples:
+#ErrorDocument 500 "The server made a boo boo."
+#ErrorDocument 404 /missing.html
+#ErrorDocument 404 "/cgi-bin/missing_handler.pl"
+#ErrorDocument 402 http://www.example.com/subscription_info.html
+
+
+#RewriteEngine on
+
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+#Options -Indexes
+
+#ErrorDocument 403 "/erreurs/error.php?error=maintenance"
+#ErrorDocument 200 "/erreurs/error.php?error=200"
+#ErrorDocument 201 "/erreurs/error.php?error=201"
+#ErrorDocument 202 "/erreurs/error.php?error=202"
+#ErrorDocument 203 "/erreurs/error.php?error=203"
+#ErrorDocument 204 "/erreurs/error.php?error=204"
+#ErrorDocument 205 "/erreurs/error.php?error=205"
+#ErrorDocument 206 "/erreurs/error.php?error=206"
+#ErrorDocument 301 "/erreurs/error.php?error=301"
+#ErrorDocument 302 "/erreurs/error.php?error=302"
+#ErrorDocument 303 "/erreurs/error.php?error=303"
+#ErrorDocument 304 "/erreurs/error.php?error=304"
+#ErrorDocument 400 "/erreurs/error.php?error=400"
+#ErrorDocument 401 "/erreurs/error.php?error=401"
+#ErrorDocument 402 "/erreurs/error.php?error=402"
+#ErrorDocument 403 "/erreurs/error.php?error=403"
+#ErrorDocument 404 "/erreurs/error.php?error=404"
+#ErrorDocument 500 "/erreurs/error.php?error=500"
+#ErrorDocument 501 "/erreurs/error.php?error=501"
+#ErrorDocument 502 "/erreurs/error.php?error=502"
+#ErrorDocument 503 "/erreurs/error.php?error=503"
+#ErrorDocument 504 "/erreurs/error.php?error=504"

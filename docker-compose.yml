@@ -1,0 +1,50 @@
+# Adopt version 2 syntax:
+#   https://docs.docker.com/compose/compose-file/#/versioning
+version: '2'
+
+services:
+###########################
+# Setup the Apache container
+###########################
+    httpd:
+        container_name: ${NAME_HTTPD_CONTAINER}
+        restart: always
+        image: httpd:${VALUE_HTTPD_VERSION}
+        ports:
+            - ${VALUE_HTTPD_PORT}:80
+        volumes:
+            - ./.docker/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+            - ./.docker/apache/vhosts/:/usr/local/apache2/conf/vhosts
+            - ./projecttmp/tmp/httpd/:/usr/local/apache2/tmp/httpd:rw
+            - ./projecttmp/log/httpd/:/usr/local/apache2/logs:rw
+        volumes_from:
+            - php
+
+###########################
+# Setup the PHP container
+###########################
+    php:
+        container_name: ${NAME_PHP_CONTAINER}
+        restart: always
+        build: ./.docker/php/
+        volumes:
+            - ./project/www/:/usr/local/apache2/www
+            - ./project/unit/:/usr/local/apache2/unit:rw
+            - ./project/cron/:/usr/local/apache2/cron:rw
+            - ./project/install/:/usr/local/apache2/install:rw
+            - ./project/error/:/usr/local/apache2/error:rw
+            - ./project/docs/:/usr/local/apache2/docs:rw
+            - ./projecttmp/data:/usr/local/projecttmp/data:rw
+            - ./projecttmp/log/php:/usr/local/projecttmp/log/php:rw
+            - ./projecttmp/log/xdebug:/usr/local/projecttmp/log/xdebug:rw
+            - ./projecttmp/tmp/php:/usr/local/projecttmp/tmp/php:rw
+            - ./.docker/php/phpDocumentor.ini:/usr/local/lib/php/data/PhpDocumentor/phpDocumentor.ini:ro
+            - ./.docker/php/opcache-recommended.ini:/usr/local/etc/php/conf.d/opcache-recommended.ini:ro
+            - ./.docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
+            - ./.docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+            - ./.docker/mysql/conf.d:/etc/mysql/conf.d
+            - ./.docker/config/config_cron_path.php:/usr/local/apache2/cron/config_path.php:rw
+            - ./.docker/config/config_error_path.php:/usr/local/apache2/error/config_path.php:rw
+            - ./.docker/config/config_install_path.php:/usr/local/apache2/install/config_path.php:rw
+            - ./config/.htaccess:/usr/local/apache2/www/.htaccess:rw
+            
