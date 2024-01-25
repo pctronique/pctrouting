@@ -47,4 +47,8 @@ services:
             - ./.docker/config/config_error_path.php:/usr/local/apache2/error/config_path.php:rw
             - ./.docker/config/config_install_path.php:/usr/local/apache2/install/config_path.php:rw
             - ./config/.htaccess:/usr/local/apache2/www/.htaccess:rw
+            - ./config/config_path.php:/usr/local/apache2/unit/config_path.php:rw
+            - ./config/config_install_path.php:/usr/local/apache2/install/config_path.php:rw
+            - ./config/config_error_path.php:/usr/local/apache2/error/config_path.php:rw
+            - ./config/config_cron_path.php:/usr/local/apache2/cron/config_path.php:rw
             

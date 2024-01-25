@@ -18,7 +18,7 @@ if (!class_exists('RouteMain')) {
          * constructeur par defaut.
          */
         public function __construct(bool $isRoutage = true) {
-            $this->tabIgnore = array("testing", "template", "default", "src", "img", "data");
+            $this->tabIgnore = array();
             $this->isRoutage = $isRoutage;
             $this->parentPath = "./";
             $this->currentDir = "./";
@@ -59,22 +59,6 @@ if (!class_exists('RouteMain')) {
         public function addIgnorePath(string|null $name):self {
             array_push($this->tabIgnore, $name);
             return $this;
-        }
-
-        /**
-         * pas utilise.
-         */
-        private function php_self():array|null {
-            $php_self_tab = explode("/", $_SERVER['PHP_SELF']);
-            $tab_value = array();
-            if(!empty($php_self_tab)) {
-                foreach ($php_self_tab as $value) {
-                    if(!empty($value) && $value != "." && $value != ".." && !preg_match('/\.php$/i', $value)) {
-                        array_push($tab_value, $value);
-                    } 
-                }
-            }
-            return $tab_value;
         }
 
         /**
@@ -180,6 +164,3 @@ if (!class_exists('RouteMain')) {
     }
 
 }
-
-$test = new RouteMain();
-$test->folderroute();
