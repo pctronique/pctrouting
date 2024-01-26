@@ -1,7 +1,7 @@
 <?php
 
-if (!enum_exists("EnumPlatform")) {
-    enum EnumPlatform
+if (!enum_exists("PlatformEnum")) {
+    enum PlatformEnum
     {
         case NULL;
         case ANDROID;

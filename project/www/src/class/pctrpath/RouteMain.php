@@ -4,7 +4,8 @@
 if (!class_exists('RouteMain')) {
 
     /* en cas d'erreur sur la classe */
-    include_once __DIR__ . '/PathPhp.php';
+    include_once __DIR__ . '/Path.php';
+    include_once __DIR__ . '/PathServe.php';
 
     class RouteMain {
 
@@ -26,9 +27,8 @@ if (!class_exists('RouteMain')) {
             $foler_next="";
             if(!empty($this->folderroute())) {
                 foreach (explode('/', $_GET["url"]) as $value) {
-                    $folder = PathPhp::path($this->folderroute(), $foler_next);
-                    $folder = PathPhp::path($folder, $value);
-                    if(file_exists($folder)) {
+                    $path1 = new Path($foler_next, $value);
+                    if(file_exists($path1->getPath())) {
                         $foler_next.="/".$value;
                         $foler_next=trim($foler_next,"/");
                         array_push($this->tabIgnore, $value);
@@ -36,7 +36,8 @@ if (!class_exists('RouteMain')) {
                 }
             }
             if(!empty($_GET) && array_key_exists('url', $_GET) && $isRoutage) {
-                $nbParentCurrentDirectory = substr_count(PathPhp::currentPath($_GET["url"]), '/');
+                $path = new PathServe($_GET["url"]);
+                $nbParentCurrentDirectory = substr_count($path->getPath(), '/');
                 for ($i=0; $i < $nbParentCurrentDirectory; $i++) { 
                     $this->parentPath .= "../";
                     $this->currentDir .= "../";
@@ -85,7 +86,8 @@ if (!class_exists('RouteMain')) {
                 return "";
             }
             $pathOut = "";
-            $explodeCurrentDirectory = explode("/", trim(explode("?", explode("#", PathPhp::currentPath($path), 2)[0], 2)[0], "/"));
+            $path = new PathServe($path);
+            $explodeCurrentDirectory = explode("/", trim(explode("?", explode("#", $path->getPath(), 2)[0], 2)[0], "/"));
             foreach ($explodeCurrentDirectory as $value) {
                 if($value == "..") {
                     $pathOut .= "../";
@@ -119,7 +121,8 @@ if (!class_exists('RouteMain')) {
                     } catch (Exception $e) {}
                     
                 }
-                $explodePath = explode("#", PathPhp::currentPath($path), 2);
+                $path1 = new PathServe($path);
+                $explodePath = explode("#", $path1->getPath(), 2);
                 $explodePathGet = explode("?", $explodePath[0], 2);
                 $pathGetIndex .= $this->currentDirectory($path);
                 
@@ -143,7 +146,8 @@ if (!class_exists('RouteMain')) {
                 }
                 $path = $pathGetIndex;
             }
-            return PathPhp::path($this->parentPath, $path);
+            $path1 = new PathServe($this->parentPath, $path);
+            return $path1->getAbsolutePath();
         }
 
         /**

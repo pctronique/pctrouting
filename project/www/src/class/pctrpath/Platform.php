@@ -5,14 +5,14 @@
 
 if (!class_exists('Platform')) {
 
-    include_once __DIR__ . "/EnumPlatform.php";
+    include_once __DIR__ . "/PlatformEnum.php";
 
     /**
      * Creation de la class pour la lecture du fichier ini avec les configurations
      */
     class Platform {
 
-        private EnumPlatform|null $name;
+        private PlatformEnum|null $name;
 
         public function __construct() {
             $this->name=$this->recupPlarform(PHP_OS);
@@ -31,26 +31,26 @@ if (!class_exists('Platform')) {
                     strtoupper($name)))))));
         }
 
-        private function recupPlarform(string|null $name):EnumPlatform|null {
+        private function recupPlarform(string|null $name):PlatformEnum|null {
             if(empty($name)) {
-                return EnumPlatform::UNKNOWN;
+                return PlatformEnum::UNKNOWN;
             }
             $name = $this->transformName($name);
-            foreach(EnumPlatform::cases() as $enumPlatform) {
+            foreach(PlatformEnum::cases() as $enumPlatform) {
                 if($enumPlatform->name == $name) {
                     return $enumPlatform;
                 }
             }
-            return EnumPlatform::UNKNOWN;
+            return PlatformEnum::UNKNOWN;
         }
 
 
         /**
          * Get the value of name
          *
-         * @return EnumPlatform|null
+         * @return PlatformEnum|null
          */
-        public function getName(): EnumPlatform|null
+        public function getName(): PlatformEnum|null
         {
             return $this->name;
         }
