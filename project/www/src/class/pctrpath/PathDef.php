@@ -13,7 +13,7 @@ if (!class_exists('Path')) {
     /**
      * Creation de la class pour la lecture du fichier ini avec les configurations
      */
-    class PathDef {
+    abstract class PathDef {
 
         protected string|null $name;
         protected string|null $parent;
@@ -25,10 +25,25 @@ if (!class_exists('Path')) {
         /**
          * Undocumented function
          *
-         * @param string|null|null $pathParent
-         * @param string|null|null $path
+         * @param string|null $pathParent
+         * @param string|null $path
          */
         public function __construct(string|null $pathParent = null, string|null $path = null) {
+            if(empty($pathParent) && empty($path)) {
+                $this->recupvalue($this->absolut_def());
+            } else {
+                $this->recupvalue($pathParent, $path);
+            }
+        }
+
+        /**
+         * Undocumented function
+         *
+         * @param string|null $pathParent
+         * @param string|null $path
+         * @return self
+         */
+        private function recupvalue(string|null $pathParent = null, string|null $path = null):self {
             if(empty($pathParent)) {
                 $pathParent = "";
             }
@@ -46,31 +61,25 @@ if (!class_exists('Path')) {
             $is_absolute = $this->getIsAbsolute($this->parent);
             $this->sep_file_parent($this->not_dote_path($this->parent."/".$this->name));
             if($is_absolute) {
+                $this->path = "/" . trim($this->reg_slash($this->parent . "/" . $this->name), "/");
                 $this->parent = "/" . trim($this->parent, "/");
+                $this->path = $this->diskname . $this->path;
+                $this->absoluteParent = $this->diskname . rtrim($this->parent, "/");
                 $this->parent = $this->diskname . $this->parent;
-                $this->absoluteParent = rtrim($this->parent, "/");
-                $this->parent = "";
-                $this->path = $this->name;
-                $this->absolutePath = rtrim($this->absoluteParent, "/") . $this->reg_slash("/" . rtrim($this->path, "/"));
+                //$this->parent = "";
+                $this->absolutePath = $this->diskname . rtrim($this->absoluteParent, "/") . $this->reg_slash("/" . rtrim($this->name, "/"));
             } else {
                 $basepath = $this->absolut_def();
                 if(!empty($basepath)) {
-                    $this->path = trim($this->reg_slash($this->parent . "/" . $this->name), "/");
+                    $this->path = "./".trim($this->reg_slash($this->parent . "/" . $this->name), "/");
                     $this->absoluteParent = rtrim($basepath, "/") . $this->reg_slash("/" . rtrim($this->parent, "/"));
                     $this->diskname = $this->recup_name_disk($this->absoluteParent);
                     $this->absoluteParent = $this->diskname."/".trim($this->not_dote_path($this->del_name_disk($this->absoluteParent)), "/");
                     $this->absolutePath = rtrim($this->absoluteParent, "/") . $this->reg_slash("/" . rtrim($this->name, "/"));
+                    $this->parent = "./".trim($this->parent, "/");
                 }
             }
-        }
-
-        /**
-         * Undocumented function
-         *
-         * @return string|null
-         */
-        protected function absolut_def():string|null {
-            return "";
+            return $this;
         }
 
         /**
@@ -213,9 +222,26 @@ if (!class_exists('Path')) {
             return $thepath;
         }
 
+        /**
+         * Undocumented function
+         *
+         * @return string|null
+         */
+        protected function absolut_def():string|null {
+            return "";
+        }
 
         /**
-         * Get the value of name
+         * Undocumented function
+         *
+         * @return string|null
+         */
+        public static function base():string|null {
+            return "";
+        }
+
+        /**
+         * Undocumented function
          *
          * @return string|null
          */
@@ -225,7 +251,7 @@ if (!class_exists('Path')) {
         }
 
         /**
-         * Get the value of parent
+         * Undocumented function
          *
          * @return string|null
          */
@@ -235,7 +261,7 @@ if (!class_exists('Path')) {
         }
 
         /**
-         * Get the value of diskname
+         * Undocumented function
          *
          * @return string|null
          */
@@ -245,7 +271,7 @@ if (!class_exists('Path')) {
         }
 
         /**
-         * Get the value of absoluteParent
+         * Undocumented function
          *
          * @return string|null
          */
@@ -255,7 +281,7 @@ if (!class_exists('Path')) {
         }
 
         /**
-         * Get the value of absolutePath
+         * Undocumented function
          *
          * @return string|null
          */
@@ -265,7 +291,7 @@ if (!class_exists('Path')) {
         }
 
         /**
-         * Get the value of path
+         * Undocumented function
          *
          * @return string|null
          */

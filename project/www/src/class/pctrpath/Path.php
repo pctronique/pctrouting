@@ -12,10 +12,16 @@ if (!class_exists('Path')) {
     define("RACINE_SITE", __DIR__."/../../..");
 
     /**
-     * Creation de la class pour la lecture du fichier ini avec les configurations
+     * Undocumented class
      */
     class Path extends PathDef {
 
+        /**
+         * Undocumented function
+         *
+         * @param string|null $pathParent
+         * @param string|null $path
+         */
         public function __construct(string|null $pathParent = null, string|null $path = null) {
             parent::__construct($pathParent, $path);
             $this->name = $this->separator_system($this->name);
@@ -25,20 +31,45 @@ if (!class_exists('Path')) {
             $this->path = $this->separator_system($this->path);
         }
 
+        /**
+         * Undocumented function
+         *
+         * @return string|null
+         */
         protected function absolut_def():string|null {
-            $valueModif = RACINE_SITE;
+            $valueout = "";
             if(!empty($_SERVER) && array_key_exists("SCRIPT_FILENAME" ,$_SERVER) && !empty($_SERVER['SCRIPT_FILENAME'])) {
-                $valueModif = $_SERVER['SCRIPT_FILENAME'];
+                $valueout = $_SERVER['SCRIPT_FILENAME'];
             }
-            $endvalue = strrev(explode('/', strrev($this->reg_slash($valueModif)))[0]);
-            if(is_file($valueModif)) {
-                $valueModif=str_replace($endvalue, '', $valueModif);
+            $endvalue = strrev(explode('/', strrev($this->reg_slash($valueout)))[0]);
+            if(is_file($valueout) || preg_match_all(RegexPath::ENDFILE->value, $endvalue) != false) {
+                $valueout=str_replace($endvalue, '', $valueout);
             }
-            return $valueModif;
+            if(empty($valueout)) {
+                $valueout = Path::base();
+            }
+            return preg_replace(RegexPath::ENDPATH->value, '', $valueout);
         }
 
+        /**
+         * Undocumented function
+         *
+         * @return string|null
+         */
+        public static function base():string|null {
+            $valueout = new Path(RACINE_SITE);
+            var_dump($valueout->getAbsolutePath());
+            return preg_replace(RegexPath::ENDPATH->value, '', $valueout->getAbsolutePath());
+        }
+
+        /**
+         * Undocumented function
+         *
+         * @param string|null $path
+         * @return string|null
+         */
         private function separator_system(string|null $path):string|null {
-            return str_replace("/", DIRECTORY_SEPARATOR, $path);
+            return preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $path);
         }
 
     }

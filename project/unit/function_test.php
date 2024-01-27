@@ -8,6 +8,69 @@ require __DIR__ . "/config_path.php";
  * and open the template in the editor.
  */
 
+function array_path()
+{
+    return array(
+        ["/usr/local/www/../site/../../tmp/index.php",
+        "/usr/tmp/index.php",
+        "/usr/tmp"],
+        ["/usr/local/www/../../../../../../site/../../tmp/index.php",
+        "/tmp/index.php",
+        "/tmp",
+        "/tmp"],
+        ["../site/../../tmp/../index.php",
+        "./../../index.php",
+        "./../..",
+        ""],
+        ["./../site/../../tmp/../index.php",
+        "./../../index.php",
+        "./../..",
+        ""],
+        ["c:\\usr\\local\\www\\..\\site\\..\\..\\tmp\\index.php",
+        "c:\\usr\\tmp\\index.php",
+        "c:\\usr\\tmp",
+        "c:\\usr\\tmp"],
+        ["c:\\usr\\local\\www\\..\\..\\..\\..\\..\\..\\site\\..\\..\\tmp\\index.php",
+        "c:\\tmp\\index.php",
+        "c:\\tmp",
+        "c:\\tmp"],
+        ["c:",
+        "c:",
+        "c:",
+        "c:"],
+        ["/",
+        "/",
+        "/",
+        "/"]
+    );
+}
+
+function array_https()
+{
+    return array(
+        ["https://test.fr/usr/local/www/../site/../../tmp/index.php",
+        "https://test.fr/usr/tmp/index.php",
+        "https://test.fr/usr/tmp",
+        "https://test.fr/usr/tmp"],
+        ["https://test.fr/usr/local/www/../../../../../../site/../../tmp/index.php",
+        "https://test.fr/tmp/index.php",
+        "https://test.fr/tmp",
+        "https://test.fr/tmp"],
+        ["../site/../../tmp/../index.php",
+        "./../../index.php",
+        "./../..",
+        ""],
+        ["./../site/../../tmp/../index.php",
+        "./../../index.php",
+        "./../..",
+        ""],
+        ["https://test.fr",
+        "https://test.fr",
+        "https://test.fr",
+        "https://test.fr"]
+    );
+}
+
 function array_string()
 {
     return array(

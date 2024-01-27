@@ -12,16 +12,41 @@ if (!class_exists('PathServe')) {
     define("RACINE_SITE", __DIR__."/../../..");
 
     /**
-     * Creation de la class pour la lecture du fichier ini avec les configurations
+     * Undocumented class
      */
     class PathServe extends PathDef {
 
+        /**
+         * Undocumented function
+         *
+         * @param string|null $pathParent
+         * @param string|null $path
+         */
         public function __construct(string|null $pathParent = null, string|null $path = null) {
             parent::__construct($pathParent, $path);
         }
 
+        /**
+         * Undocumented function
+         *
+         * @return string|null
+         */
         protected function absolut_def():string|null {
             return "";
+        }
+
+        /**
+         * Undocumented function
+         *
+         * @return string|null
+         */
+        public static function base():string|null {
+            if(!array_key_exists('REQUEST_SCHEME', $_SERVER) || !array_key_exists('HTTP_HOST', $_SERVER)) {
+                return "";
+            }
+            $valueout = new PathServe($_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST'].'/');
+            var_dump($valueout->getAbsolutePath());
+            return preg_replace(RegexPath::ENDPATH->value, '', $valueout->getAbsolutePath());
         }
 
     }

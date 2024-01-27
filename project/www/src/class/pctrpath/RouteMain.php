@@ -7,6 +7,9 @@ if (!class_exists('RouteMain')) {
     include_once __DIR__ . '/Path.php';
     include_once __DIR__ . '/PathServe.php';
 
+    /**
+     * Undocumented class
+     */
     class RouteMain {
 
         private string|null $parentPath;
@@ -16,7 +19,9 @@ if (!class_exists('RouteMain')) {
         private array|null $tabIgnore;
 
         /**
-         * constructeur par defaut.
+         * Undocumented function
+         *
+         * @param boolean $isRoutage
          */
         public function __construct(bool $isRoutage = true) {
             $this->tabIgnore = array();
@@ -55,15 +60,10 @@ if (!class_exists('RouteMain')) {
         }
 
         /**
-         * un dossier a ignorer sur l'emplacement du lien
-         */
-        public function addIgnorePath(string|null $name):self {
-            array_push($this->tabIgnore, $name);
-            return $this;
-        }
-
-        /**
-         * Creation d'un tableau d'index.
+         * Undocumented function
+         *
+         * @param string|null $path
+         * @return array|null
          */
         private function createTabIndex(string|null $path):array|null {
             if(empty($path)) {
@@ -79,7 +79,10 @@ if (!class_exists('RouteMain')) {
         }
 
         /**
-         * creer le dossier courant.
+         * Undocumented function
+         *
+         * @param string|null $path
+         * @return string|null
          */
         private function currentDirectory(string|null $path):string|null {
             if(empty($path)) {
@@ -96,6 +99,22 @@ if (!class_exists('RouteMain')) {
             return $pathOut;
         }
 
+        /**
+         * Undocumented function
+         *
+         * @param string|null $name
+         * @return self
+         */
+        public function addIgnorePath(string|null $name):self {
+            array_push($this->tabIgnore, $name);
+            return $this;
+        }
+
+        /**
+         * Undocumented function
+         *
+         * @return string|null
+         */
         public function folderroute():string|null {
             $valueout=$_SERVER['SCRIPT_FILENAME'];
             $endvalue = strrev(explode('/', strrev(str_replace("\\", "/", $valueout)))[0]);
@@ -105,9 +124,12 @@ if (!class_exists('RouteMain')) {
             $valueout=rtrim($valueout, "/");
             return $valueout;
         }
-
+        
         /**
-         * creation du lien.
+         * Undocumented function
+         *
+         * @param string|null $path
+         * @return string|null
          */
         public function path(string|null $path):string|null {
             if(!$this->isRoutage) {
@@ -149,16 +171,20 @@ if (!class_exists('RouteMain')) {
             $path1 = new PathServe($this->parentPath, $path);
             return $path1->getAbsolutePath();
         }
-
+        
         /**
-         * le tableau des index.
+         * Undocumented function
+         *
+         * @return array|null
          */
         public function tabGetIndPg():array|null {
             return  $this->index;
         }
-
+        
         /**
-         * recuperer le dossier courant
+         * Undocumented function
+         *
+         * @return string|null
          */
         public function getCurrentDir():string|null
         {
