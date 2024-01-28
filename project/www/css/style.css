@@ -1,0 +1,139 @@
+:root {
+    --default-bg-color: #d5d5d5;
+    --color-text-default: black;
+    --color-text-dark: rgb(0, 0, 68);
+    --color-text-light: white;
+    --menu-floatcolor-bg: #00327B;
+    --a-menu-bg-color-hover: #e8c204;
+    --a-menu-color-text-hover: #00327B;
+    --color-icon-menu: #e8c204;
+    --height-menu-mobile: 50px;
+    --menu-margin-top-mobile: -105px;
+    --height-menu-img-mobile: 45px;
+    --height-menu: 40px;
+    --menu-margin-top: -40px;
+    --height-img-menu: 40px;
+    --height-img-menu-mg: -40px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    /*grid-template-columns: auto auto;*/
+}
+
+.firstsection {
+    /*margin-top: var(--menu-margin-top);*/
+    margin-top: 51px;
+}
+
+/*
+header
+*/
+header a {
+    color: var(--color-text-dark);
+    max-width: 100px;
+    text-align: center;
+    text-decoration: none;
+    margin: 0px 3px;
+    /*padding: 1.04em;*/
+}
+
+header .bt-menu {
+    height: 100%;
+}
+
+header {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    z-index: 10;
+    min-height: var(--height-menu);
+    background-color: var(--default-bg-color);
+    flex-direction: row;
+    filter: drop-shadow(7px 9px 11px rgba(0, 0, 0, 0.15));
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    /*border: 0.01em solid blue;*/
+    /*margin-top: var(--menu-margin-top);*/
+}
+
+header img {
+    height: var(--height-img-menu);
+}
+
+.all-logo {
+    height: 100%;
+    margin-left: 15px;
+}
+
+/*
+  menu
+  */
+header ul {
+    box-sizing: border-box;
+    list-style-type: none;
+    overflow: none;
+}
+
+header ul li {
+    padding: 1.04em;
+    box-sizing: border-box;
+    overflow: none;
+}
+
+header ul li span {
+    letter-spacing: 0.1em;
+}
+
+.all-bt-menu {
+    /*display: none;*/
+    display: flex;
+    align-items: center;
+    min-height: 100%;
+}
+
+.bt-menu {
+    position: relative;
+    /*max-width: 170px;*/
+    text-align: center;
+    min-height: 100%;
+}
+
+.all-bt-menu i {
+    font-size: 0.74em;
+    padding-left: 0.455em;
+}
+
+.bt-menu {
+    position: relative;
+    text-align: center;
+    min-height: 100%;
+    /*padding: 10px 0px;*/
+}
+
+/*.bt-menu:hover {
+    border-bottom: 5px var(--color-icon-menu) solid;
+  }*/
+
+#menu-burger {
+    display: none;
+}
+
+#menu-burger i {
+    font-weight: bold;
+    font-size: 2em;
+    margin-right: 10px;
+}
+
+#menu-display {
+    display: none;
+}

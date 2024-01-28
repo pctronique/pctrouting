@@ -60,25 +60,54 @@ if (!class_exists('Path')) {
             $this->path = "";
             $is_absolute = $this->getIsAbsolute($this->parent);
             $this->sep_file_parent($this->not_dote_path($this->parent."/".$this->name));
-            if($is_absolute) {
-                $this->path = "/" . trim($this->reg_slash($this->parent . "/" . $this->name), "/");
-                $this->parent = "/" . trim($this->parent, "/");
-                $this->path = $this->diskname . $this->path;
-                $this->absoluteParent = $this->diskname . rtrim($this->parent, "/");
-                $this->parent = $this->diskname . $this->parent;
-                //$this->parent = "";
-                $this->absolutePath = $this->diskname . rtrim($this->absoluteParent, "/") . $this->reg_slash("/" . rtrim($this->name, "/"));
+            if($is_absolute || !empty($this->diskname)) {
+                $this->pathmodabsol();
             } else {
-                $basepath = $this->absolut_def();
-                if(!empty($basepath)) {
-                    $this->path = "./".trim($this->reg_slash($this->parent . "/" . $this->name), "/");
-                    $this->absoluteParent = rtrim($basepath, "/") . $this->reg_slash("/" . rtrim($this->parent, "/"));
-                    $this->diskname = $this->recup_name_disk($this->absoluteParent);
-                    $this->absoluteParent = $this->diskname."/".trim($this->not_dote_path($this->del_name_disk($this->absoluteParent)), "/");
-                    $this->absolutePath = rtrim($this->absoluteParent, "/") . $this->reg_slash("/" . rtrim($this->name, "/"));
-                    $this->parent = "./".trim($this->parent, "/");
-                }
+                $this->pathmodrelat($this->absolut_def());
             }
+            if(empty($this->diskname)) {
+                $this->diskname = "/";
+            }
+            if(empty($this->absoluteParent)) {
+                $this->absoluteParent = "/";
+            }
+            if(empty($this->absolutePath)) {
+                $this->absolutePath = "/";
+            }
+            return $this;
+        }
+
+        private function pathmodabsol():self {
+            $this->path = "/" . trim($this->reg_slash($this->parent . "/" . $this->name), "/");
+            $this->parent = "/" . trim($this->parent, "/");
+            $this->path = rtrim($this->diskname . $this->path, "/");
+            $this->parent = rtrim($this->diskname . $this->parent, "/");
+            $this->absoluteParent = rtrim($this->parent, "/");
+            //$this->parent = "";
+            $this->absolutePath = rtrim($this->absoluteParent . $this->reg_slash("/" . rtrim($this->name, "/")), "/");
+            if(empty($this->parent)) {
+                $this->parent = "/";
+            }
+            if(empty($this->path)) {
+                $this->path = "/";
+            }
+            return $this;
+        }
+
+        private function pathmodrelat(string|null $basepath = null):self {
+            $this->path = "./".trim($this->reg_slash($this->parent . "/" . $this->name), "/");
+            $basepath = $this->absolut_def();
+            if(!empty($basepath)) {
+                $is_absolute = $this->getIsAbsolute($basepath);
+                $this->diskname = $this->recup_name_disk($basepath);
+                $basepath = $this->del_name_disk($basepath);
+                if($is_absolute || !empty($this->diskname)) {
+                    $this->absoluteParent = rtrim($this->diskname."/".trim($this->not_dote_path($basepath."/".$this->parent), "/"), "/");
+                    $this->absolutePath = rtrim($this->diskname."/".trim($this->not_dote_path($basepath."/".$this->parent."/" . $this->name), "/"), "/");
+                }
+                
+            }
+            $this->parent = "./".trim($this->parent, "/");
             return $this;
         }
 

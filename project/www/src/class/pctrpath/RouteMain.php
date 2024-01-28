@@ -6,6 +6,7 @@ if (!class_exists('RouteMain')) {
     /* en cas d'erreur sur la classe */
     include_once __DIR__ . '/Path.php';
     include_once __DIR__ . '/PathServe.php';
+    require_once __DIR__ . "/RegexPath.php";
 
     /**
      * Undocumented class
@@ -13,10 +14,11 @@ if (!class_exists('RouteMain')) {
     class RouteMain {
 
         private string|null $parentPath;
+        private string|null $currentDir;
+        private string|null $cssImgDir;
+        private array|null $tabIgnore;
         private array|null $index;
         private bool $isRoutage;
-        private string|null $currentDir;
-        private array|null $tabIgnore;
 
         /**
          * Undocumented function
@@ -28,26 +30,20 @@ if (!class_exists('RouteMain')) {
             $this->isRoutage = $isRoutage;
             $this->parentPath = "./";
             $this->currentDir = "./";
+            $this->cssImgDir = "./";
             $this->index = array();
-            $foler_next="";
-            if(!empty($this->folderroute())) {
-                foreach (explode('/', $_GET["url"]) as $value) {
-                    $path1 = new Path($foler_next, $value);
-                    if(file_exists($path1->getPath())) {
-                        $foler_next.="/".$value;
-                        $foler_next=trim($foler_next,"/");
-                        array_push($this->tabIgnore, $value);
-                    }
-                }
-            }
-            if(!empty($_GET) && array_key_exists('url', $_GET) && $isRoutage) {
-                $path = new PathServe($_GET["url"]);
-                $nbParentCurrentDirectory = substr_count($path->getPath(), '/');
+            $tart21 = substr_count($_SERVER["REDIRECT_URL"], '/');
+            $tart22 = substr_count($_SERVER["REQUEST_URI"], '/');
+            if(!empty($_GET) && array_key_exists('url', $_GET) && !empty($_GET['url']) && $isRoutage) {
+                $nbParentCurrentDirectory = substr_count(preg_replace(RegexPath::TWOSLASH->value, "/", $_GET["url"]), '/');
                 for ($i=0; $i < $nbParentCurrentDirectory; $i++) { 
                     $this->parentPath .= "../";
                     $this->currentDir .= "../";
+                    $this->cssImgDir .= "../";
                 }
-
+                for ($i=0; $i < ($tart22-$tart21); $i++) { 
+                    $this->cssImgDir .= "../";
+                }
                 $this->index = $this->createTabIndex($_GET["url"]);
             }
             if(!empty($_GET)) {
@@ -108,21 +104,6 @@ if (!class_exists('RouteMain')) {
         public function addIgnorePath(string|null $name):self {
             array_push($this->tabIgnore, $name);
             return $this;
-        }
-
-        /**
-         * Undocumented function
-         *
-         * @return string|null
-         */
-        public function folderroute():string|null {
-            $valueout=$_SERVER['SCRIPT_FILENAME'];
-            $endvalue = strrev(explode('/', strrev(str_replace("\\", "/", $valueout)))[0]);
-            if(is_file($valueout)) {
-                $valueout=str_replace($endvalue, '', $valueout);
-            }
-            $valueout=rtrim($valueout, "/");
-            return $valueout;
         }
         
         /**
@@ -191,6 +172,46 @@ if (!class_exists('RouteMain')) {
             return $this->currentDir;
         }
 
+
+        /**
+         * Get the value of parentPath
+         *
+         * @return string|null
+         */
+        public function getParentPath(): string|null
+        {
+                return $this->parentPath;
+        }
+
+        /**
+         * Get the value of cssImgDir
+         *
+         * @return string|null
+         */
+        public function getCssImgDir(): string|null
+        {
+                return $this->cssImgDir;
+        }
+
+        /**
+         * Get the value of isRoutage
+         *
+         * @return bool
+         */
+        public function getIsRoutage(): bool
+        {
+                return $this->isRoutage;
+        }
+
+        /**
+         * Get the value of tabIgnore
+         *
+         * @return array|null
+         */
+        public function getTabIgnore(): array|null
+        {
+                return $this->tabIgnore;
+        }
     }
 
 }

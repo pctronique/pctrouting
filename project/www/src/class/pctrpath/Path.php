@@ -38,12 +38,11 @@ if (!class_exists('Path')) {
          */
         protected function absolut_def():string|null {
             $valueout = "";
-            if(!empty($_SERVER) && array_key_exists("SCRIPT_FILENAME" ,$_SERVER) && !empty($_SERVER['SCRIPT_FILENAME'])) {
-                $valueout = $_SERVER['SCRIPT_FILENAME'];
-            }
-            $endvalue = strrev(explode('/', strrev($this->reg_slash($valueout)))[0]);
-            if(is_file($valueout) || preg_match_all(RegexPath::ENDFILE->value, $endvalue) != false) {
-                $valueout=str_replace($endvalue, '', $valueout);
+            if(!empty($_SERVER) && array_key_exists("PWD" ,$_SERVER) && !empty($_SERVER['PWD']) && 
+            array_key_exists("REQUEST_URI" ,$_SERVER) && !empty($_SERVER['REQUEST_URI'])) {
+                $valueout = $_SERVER['PWD']."/".$_SERVER['REQUEST_URI'];
+            } else if(!empty($_SERVER) && array_key_exists("PWD" ,$_SERVER) && !empty($_SERVER['PWD'])) {
+                $valueout = $_SERVER['PWD'];
             }
             if(empty($valueout)) {
                 $valueout = Path::base();
@@ -58,7 +57,6 @@ if (!class_exists('Path')) {
          */
         public static function base():string|null {
             $valueout = new Path(RACINE_SITE);
-            var_dump($valueout->getAbsolutePath());
             return preg_replace(RegexPath::ENDPATH->value, '', $valueout->getAbsolutePath());
         }
 

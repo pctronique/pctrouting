@@ -32,7 +32,14 @@ if (!class_exists('PathServe')) {
          * @return string|null
          */
         protected function absolut_def():string|null {
-            return "";
+            $valueout = "";
+            if(!empty($_SERVER) && !empty($_SERVER) && array_key_exists("REQUEST_URI" ,$_SERVER) && !empty($_SERVER['REQUEST_URI'])) {
+                $valueout = PathServe::base().$_SERVER['REQUEST_URI'];
+            }
+            if(empty($valueout)) {
+                $valueout = PathServe::base();
+            }
+            return preg_replace(RegexPath::ENDPATH->value, '', $valueout);
         }
 
         /**
@@ -45,7 +52,6 @@ if (!class_exists('PathServe')) {
                 return "";
             }
             $valueout = new PathServe($_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST'].'/');
-            var_dump($valueout->getAbsolutePath());
             return preg_replace(RegexPath::ENDPATH->value, '', $valueout->getAbsolutePath());
         }
 

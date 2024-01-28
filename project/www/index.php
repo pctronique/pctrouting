@@ -113,70 +113,92 @@ function display($txt, $testout) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
-
-        body {
-            display: grid;
-            grid-template-columns: auto auto;
-        }
-
-        div {
-            border: 1px black solid;
-            padding: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
 </head>
 <body>
-    <div>
-        <?php
-            foreach ($testpathhttp as $value) {
-                display($value, new PathServe($value[0]));
-            }
-        ?>
-    </div>
-    <div>
-        <?php
-            foreach ($testpath as $value) {
-                display($value, new Path($value[0]));
-            }
-        ?>
-    </div>
-    <div>
-        <?php
-            $test2 = new PathServe();
-            var_dump($test2);
-            var_dump(PathServe::base());
-            $test2 = new PathServe("test021/jhgf", "rtyu/frt");
-            var_dump($test2);
-            $test2 = new PathServe("http://localhost:86");
-            var_dump($test2);
-        ?>
-    </div>
-    <div>
-        <?php
-            $test2 = new Path();
-            var_dump($test2);
-            var_dump(Path::base());
-            $test2 = new Path("test021/jhgf", "rtyu/frt");
-            var_dump($test2);
-            $test2 = new Path("/usr/local/apache2/www");
-            var_dump($test2);
-        ?>
-    </div>
-    <div>
-        <?php
-            var_dump(preg_replace(RegexPath::ENDFILE->value, '_ph', "filephp.php"));
-            var_dump(preg_replace(RegexPath::ENDFILE->value, '_ph', "filehtml.html"));
-        ?>
-    </div>
-    <div>
-        <?php
-            var_dump([(new RouteMain()), (new RouteMain(true))]);
-        ?>
-    </div>
+    <header>
+      <div class="all-logo">
+        <img
+            src="./favicon.ico"
+            alt="logo site"
+        />
+      </div>
+      <menu>
+        <label id="menu-burger" for="menu-display">
+          <i class="bi bi-list"></i>
+        </label>
+        <input type="checkbox" name="menu display" id="menu-display" />
+        <ul class="all-bt-menu">
+          <li class="bt-menu no-submenu">
+            <a href="./">acc</a>
+            <a href="./phpinfo.php" target="_blank">phpinfo</a>
+            <a href="./test/">path</a>
+            <a href="./test/route">route</a>
+            <a href="./test/route/page1">page1</a>
+            <a href="./test/route/page2">page2</a>
+            <a href="./test/route/page3">page3</a>
+            <a href="./test/route/page1/item1">item11</a>
+            <a href="./test/route/page2/item1">item21</a>
+            <a href="./test/route/page2/item2">item22</a>
+            <a href="./test/route/page3/item1">item31</a>
+            <a href="./test/route/page3/item2">item32</a>
+            <a href="./test/route/page3/item2/item1">item321</a>
+          </li>
+        </ul>
+      </menu>
+    </header>
+    <section class="firstsection">
+        <div>
+            <?php
+                foreach ($testpathhttp as $value) {
+                    display($value, new PathServe($value[0]));
+                }
+            ?>
+        </div>
+        <div>
+            <?php
+                foreach ($testpath as $value) {
+                    display($value, new Path($value[0]));
+                }
+            ?>
+        </div>
+        <div>
+            <?php
+                $test2 = new Path();
+                var_dump($test2);
+                var_dump(Path::base());
+                $test2 = new Path("test021/jhgf", "rtyu/frt");
+                var_dump($test2);
+                $test2 = new Path("/usr/local/apache2/www");
+                var_dump($test2);
+            ?>
+        </div>
+        <div>
+            <?php
+                $test2 = new PathServe();
+                var_dump($test2);
+                var_dump(PathServe::base());
+                $test2 = new PathServe("test021/jhgf", "rtyu/frt");
+                var_dump($test2);
+                $test2 = new PathServe("http://localhost:86");
+                var_dump($test2);
+            ?>
+        </div>
+        <div>
+            <?php
+                var_dump(preg_replace(RegexPath::ENDFILE->value, '_ph', "filephp.php"));
+                var_dump(preg_replace(RegexPath::ENDFILE->value, '_ph', "filehtml.html"));
+            ?>
+        </div>
+        <div>
+            <?php
+                var_dump([(new RouteMain()), (new RouteMain(true))]);
+            ?>
+        </div>
+    </section>
 </body>
 </html>

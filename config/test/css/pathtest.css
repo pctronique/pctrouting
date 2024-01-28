@@ -1,0 +1,46 @@
+section {
+    border: 1px black solid;
+    padding: 10px;
+}
+
+h1 {
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+    background-color: #00bcd45c;
+    margin-bottom: 5px;
+}
+
+.allclass {
+    margin: 5px;
+    padding: 5px;
+    border: blue 3px solid;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.pathtrue {
+    background-color: green;
+}
+
+.pathfalse {
+    background-color: red;
+}
+
+.textval {
+    border: unset;
+}
+
+.texttrue {
+    color: green;
+}
+
+.textfalse {
+    color: red;
+}
+
+h6 {
+  width: 100%;
+  text-align: center;
+  font-size: large;
+}
