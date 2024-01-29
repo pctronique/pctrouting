@@ -13,50 +13,17 @@ $table2 = new RouteMain(false);
 
 function createtabclass($pathclass) {
     return [
-        "tabGetIndPg" => $pathclass->tabGetIndPg(),
+        "getIndPg" => $pathclass->getIndPg(),
+        "getIndAndKeyPg" => $pathclass->getIndAndKeyPg(),
         "getCssImgDir" => $pathclass->getCssImgDir(),
         "getCurrentDir" => $pathclass->getCurrentDir(),
         "getParentPath" => $pathclass->getParentPath(),
-        "getIsRoutage" => ($pathclass->getIsRoutage() ? "true" : "false")
+        "getIsRoutage" => $pathclass->getIsRoutage(),
+        "path 1" => $pathclass->path("route0/route1"),
+        "path 2" => $pathclass->path("route0/route1?test=8&pass=lkjh"),
+        "path img" => $pathclass->pathFile("image.png"),
+        "path img 2" => $pathclass->pathFile("../image2.png")
     ];
-}
-
-function displaytab($table, $name) {
-    $nmclassv = "nullvl";
-    if(array_key_exists("validpath", $table)) {
-        $nmclassv = pathvalid($table["validpath"] == "true");
-    }
-    ?>
-    <div class="tab">
-        <div class="tabtitle">
-            <div class="dispval <?= $nmclassv ?>"></div>
-            <h2><?= $name ?></h2>
-        </div>
-        <div class="tabbody">
-            <?php foreach ($table as $key => $value) { ?>
-                <div class="tabth tab0"><?= $key ?></div>
-                <div class="tabth tab1">
-                    <?php 
-                        if(gettype($value) == "array") {
-                            echo "<pre>";
-                            print_r($value);
-                            echo "</pre>";
-                        } else {
-                            echo str_replace(
-                                "true",
-                                '<div class="textval texttrue">true</div>',
-                                str_replace(
-                                    "false",
-                                    '<div class="textval textfalse">false</div>',
-                                     $value
-                            ));
-                        }
-                    ?>
-                </div>
-            <?php } ?>
-        </div>
-    </div>
-    <?php
 }
 
 //var_dump($_SERVER);

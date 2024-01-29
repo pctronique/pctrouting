@@ -3,7 +3,7 @@
  * Pour lire le fichier avec les configurations du site.
  */
 
-if (!class_exists('Path')) {
+if (!class_exists('PathDef')) {
 
     require_once __DIR__ . "/Platform.php";
     require_once __DIR__ . "/RegexPath.php";
@@ -53,12 +53,13 @@ if (!class_exists('Path')) {
             $this->diskname = $this->recup_name_disk($pathParent);
             $this->name = $this->del_name_disk($path);
             $this->parent = $this->del_name_disk($pathParent);
+            $is_absolute = $this->getIsAbsolute($this->parent);
+            //var_dump($is_absolute);
             $this->name = $this->del_relative($this->name);
             $this->parent = $this->del_relative($this->parent);
             $this->absoluteParent = "";
             $this->absolutePath = "";
             $this->path = "";
-            $is_absolute = $this->getIsAbsolute($this->parent);
             $this->sep_file_parent($this->not_dote_path($this->parent."/".$this->name));
             if($is_absolute || !empty($this->diskname)) {
                 $this->pathmodabsol();
@@ -173,12 +174,17 @@ if (!class_exists('Path')) {
          * @return self
          */
         private function sep_file_parent(string|null $pathParent):self {
-            $tabval = explode('/', strrev($this->reg_slash(rtrim($pathParent, "/"))), 2);
-            $this->name = strrev($tabval[0]);
-            if(count($tabval) > 1) {
-                $this->parent = $this->not_dote_path(strrev($tabval[1]));
+            $this->parent = $pathParent;
+            if(preg_match_all(RegexPath::PATHENDRETU->value, rtrim($pathParent, "/")) == false) {
+                $tabval = explode('/', strrev($this->reg_slash(rtrim($pathParent, "/"))), 2);
+                $this->name = strrev($tabval[0]);
+                if(count($tabval) > 1) {
+                    $this->parent = $this->not_dote_path(strrev($tabval[1]));
+                } else {
+                    $this->parent = "";
+                }
             } else {
-                $this->parent = "";
+                $this->name = "";
             }
             return $this;
         }
@@ -246,6 +252,9 @@ if (!class_exists('Path')) {
             if($isabsolute) {
                 while (preg_match_all(RegexPath::PATHNORETU->value, $thepath) != false) {
                     $thepath = preg_replace(RegexPath::PATHNORETU->value, '', $thepath);
+                }
+                if($thepath == "..") {
+                    $thepath = "";
                 }
                 $thepath = "/".$thepath;
             }
@@ -329,6 +338,7 @@ if (!class_exists('Path')) {
         {
                 return $this->path;
         }
+
     }
 
 }

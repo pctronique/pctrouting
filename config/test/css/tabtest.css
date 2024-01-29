@@ -54,3 +54,23 @@
 .tabtitle, .nullvl {
     background-color: #e9e9e9;
 }
+
+.pathtrue {
+    background-color: green;
+}
+
+.pathfalse {
+    background-color: red;
+}
+
+.textval {
+    border: unset;
+}
+
+.texttrue {
+    color: green;
+}
+
+.textfalse {
+    color: red;
+}

@@ -1,7 +1,18 @@
 <?php
 
 include_once dirname(__FILE__) . '/../../src/class/pctrpath/RouteMain.php';
+include_once dirname(__FILE__) . '/../code/tabletest.php';
 include_once dirname(__FILE__) . '/../code/routetest.php';
+
+//$lien_pg = $table->getCurrentDir();
+//$lien_cssimg = $table->getCssImgDir();
+
+/*var_dump($lien_cssimg."../../css/style.css");
+var_dump($lien_cssimg."../css/tabtest.css");
+var_dump($lien_cssimg."../css/route.css");
+var_dump($table->pathFile("./../../css/style.css"));
+var_dump($table->pathFile("./../css/tabtest.css"));
+var_dump($table->pathFile("./../css/route.css"));*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,9 +20,9 @@ include_once dirname(__FILE__) . '/../code/routetest.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?= $lien_cssimg ?>../../css/style.css" />
-    <link rel="stylesheet" href="<?= $lien_cssimg ?>../css/tabtest.css" />
-    <link rel="stylesheet" href="<?= $lien_cssimg ?>../css/route.css" />
+    <link rel="stylesheet" href="<?= $table->pathFile("../../css/style.css") ?>" />
+    <link rel="stylesheet" href="<?= $table->pathFile("../css/tabtest.css") ?>" />
+    <link rel="stylesheet" href="<?= $table->pathFile("../css/route.css") ?>" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
@@ -21,7 +32,7 @@ include_once dirname(__FILE__) . '/../code/routetest.php';
     <header>
       <div class="all-logo">
         <img
-            src="<?= $lien_cssimg ?>../../favicon.ico"
+            src="<?= $table->pathFile("../../favicon.ico") ?>"
             alt="logo site"
         />
       </div>
@@ -32,33 +43,31 @@ include_once dirname(__FILE__) . '/../code/routetest.php';
         <input type="checkbox" name="menu display" id="menu-display" />
         <ul class="all-bt-menu">
           <li class="bt-menu no-submenu">
-            <a href="<?= $lien_pg ?>../../">acc</a>
-            <a href="<?= $lien_pg ?>phpinfo.php" target="_blank">phpinfo</a>
-            <a href="<?= $lien_pg ?>../">path</a>
-            <a href="<?= $lien_pg ?>">route</a>
-            <a href="<?= $lien_pg ?>page1">page1</a>
-            <a href="<?= $lien_pg ?>page2">page2</a>
-            <a href="<?= $lien_pg ?>page3">page3</a>
-            <a href="<?= $lien_pg ?>page1/item1">item11</a>
-            <a href="<?= $lien_pg ?>page2/item1">item21</a>
-            <a href="<?= $lien_pg ?>page2/item2">item22</a>
-            <a href="<?= $lien_pg ?>page3/item1">item31</a>
-            <a href="<?= $lien_pg ?>page3/item2">item32</a>
-            <a href="<?= $lien_pg ?>page3/item2/item1">item321</a>
-            <a href="<?= $lien_pg ?>page3/item2//item2">item322</a>
+            <a href="<?= $table->path("../../") ?>">acc</a>
+            <a href="<?= $table->path("phpinfo.php") ?>" target="_blank">phpinfo</a>
+            <a href="<?= $table->path("../") ?>">path</a>
+            <a href="<?= $table->path("../pathtest.php") ?>">pathtest</a>
+            <a href="<?= $table->path("") ?>">route</a>
+            <a href="<?= $table->path("page1") ?>">page1</a>
+            <a href="<?= $table->path("page2") ?>">page2</a>
+            <a href="<?= $table->path("page3") ?>">page3</a>
+            <a href="<?= $table->path("page1/item1") ?>">item11</a>
+            <a href="<?= $table->path("page2/item1") ?>">item21</a>
+            <a href="<?= $table->path("page2/item2") ?>">item22</a>
+            <a href="<?= $table->path("page3/item1") ?>">item31</a>
+            <a href="<?= $table->path("page3/item2") ?>">item32</a>
+            <a href="<?= $table->path("page3/item2/item1") ?>">item321</a>
+            <a href="<?= $table->path("page3/item2//item2") ?>">item322</a>
           </li>
         </ul>
       </menu>
     </header>
     <section class="firstsection">
-        <img src="<?= $lien_cssimg ?>images/imgtest.png" alt="test img">
+        <img src="<?= $table->pathFile("images/imgtest.png") ?>" alt="test img">
         <?php
+            var_dump($table->pathFile("images/imgtest.png"));
             displaytab(createtabclass($table), "class");
             displaytab(createtabclass($table2), "class");
-            var_dump($table->path("page3/item2"));
-            var_dump($table2->path("page3/item2"));
-            var_dump($table->path("page3/item2?test=8&pass=lkjh"));
-            var_dump($table2->path("page3/item2?test=8&pass=lkjh"));
         ?>
     </section>
     

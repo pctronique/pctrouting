@@ -19,26 +19,6 @@ h1 {
     grid-template-columns: auto auto;
 }
 
-.pathtrue {
-    background-color: green;
-}
-
-.pathfalse {
-    background-color: red;
-}
-
-.textval {
-    border: unset;
-}
-
-.texttrue {
-    color: green;
-}
-
-.textfalse {
-    color: red;
-}
-
 h6 {
   width: 100%;
   text-align: center;

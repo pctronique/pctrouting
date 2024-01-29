@@ -6,69 +6,14 @@ include_once dirname(__FILE__) . '/../../src/class/pctrpath/RouteMain.php';
 include_once dirname(__FILE__) . '/../../src/class/pctrpath/Platform.php';
 include_once dirname(__FILE__) . '/../../src/class/pctrpath/PathServe.php';
 
-$testpathhttp = [
-    ["https://test.fr/usr/local/www/../site/../../tmp/index.php",
-        "https://test.fr/usr/tmp/index.php",
-        "https://test.fr/usr/tmp",
-        "https://test.fr/usr/tmp"],
-        ["https://test.fr/usr/local/www/../../../../../../site/../../tmp/index.php",
-        "https://test.fr/tmp/index.php",
-        "https://test.fr/tmp",
-        "https://test.fr/tmp"],
-        ["../site/../../tmp/../index.php",
-        "./../../index.php",
-        "./../..",
-        ""],
-        ["./../site/../../tmp/../index.php",
-        "./../../index.php",
-        "./../..",
-        ""],
-        ["https://test.fr",
-        "https://test.fr",
-        "https://test.fr",
-        "https://test.fr"]
-];
 
-$testpath = [
-    ["/usr/local/www/../site/../../tmp/index.php",
-        "/usr/tmp/index.php",
-        "/usr/tmp"],
-        ["/usr/local/www/../../../../../../site/../../tmp/index.php",
-        "/tmp/index.php",
-        "/tmp",
-        "/tmp"],
-        ["../site/../../tmp/../index.php",
-        "./../../index.php",
-        "./../..",
-        ""],
-        ["./../site/../../tmp/../index.php",
-        "./../../index.php",
-        "./../..",
-        ""],
-        ["c:\\usr\\local\\www\\..\\site\\..\\..\\tmp\\index.php",
-        "c:\\usr\\tmp\\index.php",
-        "c:\\usr\\tmp",
-        "c:\\usr\\tmp"],
-        ["c:\\usr\\local\\www\\..\\..\\..\\..\\..\\..\\site\\..\\..\\tmp\\index.php",
-        "c:\\tmp\\index.php",
-        "c:\\tmp",
-        "c:\\tmp"],
-        ["c:",
-        "c:",
-        "c:",
-        "c:"],
-        ["/",
-        "/",
-        "/",
-        "/"]
-];
 
-function pathvalid($boolpath) {
+/*function pathvalid($boolpath) {
     if($boolpath) {
         return "pathtrue";
     }
     return "pathfalse";
-}
+}*/
 
 function pathclass($text) {
     return preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $text);
@@ -82,7 +27,7 @@ function tabvalues($texttab, $textclass){
     return [
         "pathclass" => pathclass($textclass),
         "pathtable" => $texttab,
-        "validpath" => testpath($texttab, $textclass) ? "true" : "false"
+        "validpath" => testpath($texttab, $textclass)
     ];
 }
 
@@ -106,6 +51,7 @@ function createtabpathall($pathall) {
     ];
 }
 
+/*
 function displaytab($table, $name) {
     $nmclassv = "nullvl";
     if(array_key_exists("validpath", $table)) {
@@ -136,20 +82,27 @@ function displaytab($table, $name) {
     </div>
     <?php
 }
+*/
 
 function displaytaball($txt, $testout) {
     $pathclass = createtabclass($testout);
     $pathall = createtabpathall($txt);
     $tabvalues1 = tabvalues($testout->getPath(), $txt[1]);
-    $tabvalues2 = tabvalues($testout->getParent(), $txt[2]); ?>
+    $tabvalues2 = tabvalues($testout->getParent(), $txt[2]);
+    $tabvalues3 = tabvalues($testout->getAbsoluteParent(), $txt[3]);
+    $valbool1 = ($tabvalues1 && $tabvalues2);
+    $valbool2 = (empty($txt[3]) || (!empty($txt[3]) && $tabvalues3));
+    $valbool3 = ($valbool1 && $valbool2);
+     ?>
     <div class="allclass">
-        <?php displaytab($pathclass, "class");
+        <?php displaytab($pathclass, "class ".'"'.$txt[0].'"');
         displaytab($pathall, "paths");
-        displaytab($tabvalues1, "path test");
-        displaytab($tabvalues2, "parent test");
+        displaytab($tabvalues1, "path test", $tabvalues1["validpath"]);
+        displaytab($tabvalues2, "parent test", $tabvalues2["validpath"]);
         if(!empty($txt[3])) {
             $tabvalues3 = tabvalues($testout->getAbsoluteParent(), $txt[3]);
-            displaytab($tabvalues3, "absoluteParent test");
+            displaytab($tabvalues3, "absoluteParent test", $tabvalues3["validpath"]);
         } ?>
     </div>
-<?php }
+<?php 
+}

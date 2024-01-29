@@ -121,8 +121,12 @@ if (!class_exists('RouteMain')) {
                 }
                 $path = $pathGetIndex;
             }
-            $path1 = new PathServe($this->currentDir, $path);
-            return $path1->getPath();
+            if(!$this->isRoutage) {
+                return $this->currentDir.$path;
+            }
+            return "./".$path;
+            //$path1 = new PathServe($this->currentDir, $path);
+            //return $path1->getPath();
         }
 
         /**
@@ -132,7 +136,11 @@ if (!class_exists('RouteMain')) {
          * @return string|null
          */
         public function pathFile(string|null $path):string|null {
-            return (new PathServe($this->cssImgDir, $path))->getPath();
+            if(!$this->isRoutage) {
+                return $this->cssImgDir.$path;
+            }
+            return "./".$path;
+            //return (new PathServe($this->cssImgDir, $path))->getPath();
         }
         
         /**

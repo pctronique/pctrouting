@@ -1,8 +1,13 @@
 <?php
 
+include_once dirname(__FILE__) . '/code/tabpathtest2.php';
 include_once dirname(__FILE__) . '/code/tabpathtest.php';
 include_once dirname(__FILE__) . '/code/tabletest.php';
 include_once dirname(__FILE__) . '/code/pathtest.php';
+
+function boolstring($val) {
+    return $val ? "true" : "false";
+}
 
 ?>
 <!DOCTYPE html>
@@ -58,46 +63,36 @@ include_once dirname(__FILE__) . '/code/pathtest.php';
             ?>
         <h1>Path test</h1>
         <?php
-            foreach ($testpath as $value) {
-                displaytaball($value, new Path($value[0]));
-            }
-            foreach ($testpatrelatif as $value) {
-                displaytaball($value, new Path($value[0]));
-            }
+        foreach ($testpath as $value) {
+            displaytaball($value, new Path($value[0]));
+        }
+        foreach ($testpatrelatif as $value) {
+            displaytaball($value, new Path($value[0]));
+        }
+        foreach ($testpath2 as $value) {
+            displaytaball($value, new Path($value[3], $value[4]));
+        }
+        foreach ($testpatrelatif2 as $value) {
+            displaytaball($value, new Path($value[3], $value[4]));
+        }
         ?>
     </section>
     <section>
-        <h1>Path</h1>
-        <h6>path base : <?= Path::base() ?></h6>
-        <div class="allclass">
-            <?php
-                displaytab(createtabclass(new Path()), "new Path()");
-                displaytab(createtabclass(new Path("./folder/")), 'new Path("./folder/")');
-                displaytab(createtabclass(new Path(new Path("./folder/"), "./file")), 'new Path(new Path("./folder/"), "./file")');
-                displaytab(createtabclass(new Path("test021/jhgf", "rtyu/frt")), 'new Path("test021/jhgf", "rtyu/frt")');
-                displaytab(createtabclass(new Path("/usr/local/apache2/www")), 'new Path("/usr/local/apache2/www")');
-            ?>
-        </div>
-    </section>
-    <section>
-        <h1>PathServe test</h1>
-        <?php foreach ($testpathhttp as $value) {
+        <h1>PathServe test</h1>-
+        <?php 
+        foreach ($testpathhttp as $value) {
             displaytaball($value, new PathServe($value[0]));
         }
         foreach ($testpatrelatif as $value) {
             displaytaball($value, new PathServe($value[0]));
-        } ?>
-    </section>
-    <section>
-        <h1>PathServe</h1>
-        <h6>path base : <?= PathServe::base() ?></h6>
-        <div class="allclass">
-            <?php
-                displaytab(createtabclass(new PathServe()), "class 1");
-                displaytab(createtabclass(new PathServe("test021/jhgf", "rtyu/frt")), "class 2");
-                displaytab(createtabclass(new PathServe("http://localhost:86")), "class 3");
-            ?>
-        </div>
+        }
+        foreach ($testpathhttp2 as $value) {
+            displaytaball($value, new PathServe($value[3], $value[4]));
+        }
+        foreach ($testpatrelatif2 as $value) {
+            displaytaball($value, new PathServe($value[3], $value[4]));
+        }
+        ?>
     </section>
 </body>
 </html>
