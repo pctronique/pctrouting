@@ -1,12 +1,48 @@
 <?php
 
 require __DIR__ . "/config_path.php";
+require_once(RACINE_WWW . '/src/class/pctrpath/RouteMain.php');
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+function array_route() {
+    return array(
+        ["",
+        "./",
+        "./"],
+        ["./",
+        "./",
+        "./"],
+        ["?key0=value0",
+        "./?key0=value0",
+        "./?key0=value0"],
+        ["./?key0=value0",
+        "./?key0=value0",
+        "./?key0=value0"],
+        ["?key0=value0&key1=value1",
+        "./?key0=value0&key1=value1",
+        "./?key0=value0&key1=value1"],
+        ["./?key0=value0&key1=value1",
+        "./?key0=value0&key1=value1",
+        "./?key0=value0&key1=value1"],
+        ["route1?key0=value0&key1=value1",
+        "./route1?key0=value0&key1=value1",
+        "./?".RouteMain::$NAMEKEY."0=route1&key0=value0&key1=value1"],
+        ["./route1?key0=value0&key1=value1",
+        "./route1?key0=value0&key1=value1",
+        "./?".RouteMain::$NAMEKEY."0=route1&key0=value0&key1=value1"],
+        ["route1/route2?key0=value0&key1=value1",
+        "./route1/route2?key0=value0&key1=value1",
+        "./?".RouteMain::$NAMEKEY."0=route1&".RouteMain::$NAMEKEY."1=route2&key0=value0&key1=value1"],
+        ["./route1/route2?key0=value0&key1=value1",
+        "./route1/route2?key0=value0&key1=value1",
+        "./?".RouteMain::$NAMEKEY."0=route1&".RouteMain::$NAMEKEY."1=route2&key0=value0&key1=value1"]
+    );
+}
 
 function array_path()
 {

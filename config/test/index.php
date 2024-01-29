@@ -50,6 +50,9 @@ include_once dirname(__FILE__) . '/code/pathtest.php';
       </menu>
     </header>
     <section class="firstsection">
+      <?php $path01 = new Path();
+            $path02 = new Path($path01);
+            ?>
         <h1>Path test</h1>
         <?php
             foreach ($testpath as $value) {
@@ -62,9 +65,11 @@ include_once dirname(__FILE__) . '/code/pathtest.php';
         <h6>path base : <?= Path::base() ?></h6>
         <div class="allclass">
             <?php
-                displaytab(createtabclass(new Path()), "class 1");
-                displaytab(createtabclass(new Path("test021/jhgf", "rtyu/frt")), "class 2");
-                displaytab(createtabclass(new Path("/usr/local/apache2/www")), "class 3");
+                displaytab(createtabclass(new Path()), "new Path()");
+                displaytab(createtabclass(new Path("./folder/")), 'new Path("./folder/")');
+                displaytab(createtabclass(new Path(new Path("./folder/"), "./file")), 'new Path(new Path("./folder/"), "./file")');
+                displaytab(createtabclass(new Path("test021/jhgf", "rtyu/frt")), 'new Path("test021/jhgf", "rtyu/frt")');
+                displaytab(createtabclass(new Path("/usr/local/apache2/www")), 'new Path("/usr/local/apache2/www")');
             ?>
         </div>
     </section>

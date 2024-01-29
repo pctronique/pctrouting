@@ -16,9 +16,9 @@ if (!class_exists('RouteMain')) {
         private string|null $parentPath;
         private string|null $currentDir;
         private string|null $cssImgDir;
-        private array|null $tabIgnore;
         private array|null $index;
         private bool $isRoutage;
+        public static string $NAMEKEY = "rt_index_";
 
         /**
          * Undocumented function
@@ -26,14 +26,13 @@ if (!class_exists('RouteMain')) {
          * @param boolean $isRoutage
          */
         public function __construct(bool $isRoutage = true) {
-            $this->tabIgnore = array();
             $this->isRoutage = $isRoutage;
             $this->parentPath = "./";
             $this->currentDir = "./";
             $this->cssImgDir = "./";
             $this->index = array();
-            $tart21 = substr_count($_SERVER["REDIRECT_URL"], '/');
-            $tart22 = substr_count($_SERVER["REQUEST_URI"], '/');
+            $nbredir = substr_count($_SERVER["REDIRECT_URL"], '/');
+            $nbrequ = substr_count($_SERVER["REQUEST_URI"], '/');
             if(!empty($_GET) && array_key_exists('url', $_GET) && !empty($_GET['url']) && $isRoutage) {
                 $nbParentCurrentDirectory = substr_count(preg_replace(RegexPath::TWOSLASH->value, "/", $_GET["url"]), '/');
                 for ($i=0; $i < $nbParentCurrentDirectory; $i++) { 
@@ -41,17 +40,10 @@ if (!class_exists('RouteMain')) {
                     $this->currentDir .= "../";
                     $this->cssImgDir .= "../";
                 }
-                for ($i=0; $i < ($tart22-$tart21); $i++) { 
+                for ($i=0; $i < ($nbrequ-$nbredir); $i++) { 
                     $this->cssImgDir .= "../";
                 }
                 $this->index = $this->createTabIndex($_GET["url"]);
-            }
-            if(!empty($_GET)) {
-                foreach ($_GET as $key => $value) {
-                    if(!array_key_exists($key, $this->index)) {
-                        $this->index[$key] = $value;
-                    }
-                }
             }
         }
 
@@ -68,7 +60,7 @@ if (!class_exists('RouteMain')) {
             $arrayIndex = array();
             $tabIndex = explode("/", trim($path, "/"));
             foreach ($tabIndex as $key => $value) {
-                $arrayIndex["index".$key] = $value;
+                $arrayIndex[RouteMain::$NAMEKEY.$key] = $value;
             }
             unset($tabIndex);
             return $arrayIndex;
@@ -94,17 +86,6 @@ if (!class_exists('RouteMain')) {
             }
             return $pathOut;
         }
-
-        /**
-         * Undocumented function
-         *
-         * @param string|null $name
-         * @return self
-         */
-        public function addIgnorePath(string|null $name):self {
-            array_push($this->tabIgnore, $name);
-            return $this;
-        }
         
         /**
          * Undocumented function
@@ -115,17 +96,8 @@ if (!class_exists('RouteMain')) {
         public function path(string|null $path):string|null {
             if(!$this->isRoutage) {
                 $pathGetIndex = "./";
-                foreach($this->tabIgnore as $value) {
-                    try{
-                        if(preg_match("/".$value."/", $path)) {
-                            $pathGetIndex .= $value."/";
-                            $path = str_replace($value."/", "", $path);
-                        }
-                    } catch (Exception $e) {}
-                    
-                }
                 $path1 = new PathServe($path);
-                $explodePath = explode("#", $path1->getPath(), 2);
+                $explodePath = explode("#", preg_replace(RegexPath::RELATIVE->value, "", $path1->getPath()), 2);
                 $explodePathGet = explode("?", $explodePath[0], 2);
                 $pathGetIndex .= $this->currentDirectory($path);
                 
@@ -149,8 +121,18 @@ if (!class_exists('RouteMain')) {
                 }
                 $path = $pathGetIndex;
             }
-            $path1 = new PathServe($this->parentPath, $path);
-            return $path1->getAbsolutePath();
+            $path1 = new PathServe($this->currentDir, $path);
+            return $path1->getPath();
+        }
+
+        /**
+         * Undocumented function
+         *
+         * @param string|null $path
+         * @return string|null
+         */
+        public function pathFile(string|null $path):string|null {
+            return (new PathServe($this->cssImgDir, $path))->getPath();
         }
         
         /**
@@ -158,8 +140,44 @@ if (!class_exists('RouteMain')) {
          *
          * @return array|null
          */
-        public function tabGetIndPg():array|null {
+        public function getIndAndKeyPg():array|null {
             return  $this->index;
+        }
+        
+        /**
+         * Undocumented function
+         *
+         * @return array|null
+         */
+        public function getIndPg():array|null {
+            return  array_values($this->index);
+        }
+        
+        /**
+         * Undocumented function
+         *
+         * @param string|null $key
+         * @return string|null
+         */
+        public function getIndAndKeyPgKey(string|null $key):string|null {
+            if(!empty($key) && !empty($this->index) && array_key_exists($key, $this->index)) {
+                return $this->index[$key];
+            }
+            return  "";
+        }
+        
+        /**
+         * Undocumented function
+         *
+         * @param integer $key
+         * @return string|null
+         */
+        public function getIndPgKey(int $key):string|null {
+            if(($key >= 0) && !empty($this->index) && ($key < count($this->index))) {
+                return  array_values($this->index)[$key];
+            } else {
+                return "";
+            }
         }
         
         /**
@@ -171,7 +189,6 @@ if (!class_exists('RouteMain')) {
         {
             return $this->currentDir;
         }
-
 
         /**
          * Get the value of parentPath
@@ -203,15 +220,6 @@ if (!class_exists('RouteMain')) {
                 return $this->isRoutage;
         }
 
-        /**
-         * Get the value of tabIgnore
-         *
-         * @return array|null
-         */
-        public function getTabIgnore(): array|null
-        {
-                return $this->tabIgnore;
-        }
     }
 
 }

@@ -83,7 +83,6 @@ if (!class_exists('Path')) {
             $this->path = rtrim($this->diskname . $this->path, "/");
             $this->parent = rtrim($this->diskname . $this->parent, "/");
             $this->absoluteParent = rtrim($this->parent, "/");
-            //$this->parent = "";
             $this->absolutePath = rtrim($this->absoluteParent . $this->reg_slash("/" . rtrim($this->name, "/")), "/");
             if(empty($this->parent)) {
                 $this->parent = "/";
@@ -178,6 +177,8 @@ if (!class_exists('Path')) {
             $this->name = strrev($tabval[0]);
             if(count($tabval) > 1) {
                 $this->parent = $this->not_dote_path(strrev($tabval[1]));
+            } else {
+                $this->parent = "";
             }
             return $this;
         }

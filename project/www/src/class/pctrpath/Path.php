@@ -9,7 +9,7 @@ if (!class_exists('Path')) {
     require_once __DIR__ . "/PathDef.php";
     require_once __DIR__ . "/RegexPath.php";
 
-    define("RACINE_SITE", __DIR__."/../../..");
+    define("PCTR_PATH_RACINE_SITE", __DIR__."/../../..");
 
     /**
      * Undocumented class
@@ -19,10 +19,13 @@ if (!class_exists('Path')) {
         /**
          * Undocumented function
          *
-         * @param string|null $pathParent
+         * @param Path|string|null $pathParent
          * @param string|null $path
          */
-        public function __construct(string|null $pathParent = null, string|null $path = null) {
+        public function __construct(Path|string|null $pathParent = null, string|null $path = null) {
+            if(strtolower(gettype($pathParent)) == "object" && strtolower(get_class($pathParent)) == "path") {
+                $pathParent = $pathParent->getPath();
+            }
             parent::__construct($pathParent, $path);
             $this->name = $this->separator_system($this->name);
             $this->parent = $this->separator_system($this->parent);
@@ -56,7 +59,7 @@ if (!class_exists('Path')) {
          * @return string|null
          */
         public static function base():string|null {
-            $valueout = new Path(RACINE_SITE);
+            $valueout = new Path(PCTR_PATH_RACINE_SITE);
             return preg_replace(RegexPath::ENDPATH->value, '', $valueout->getAbsolutePath());
         }
 

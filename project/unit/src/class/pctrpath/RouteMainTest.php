@@ -14,32 +14,121 @@ class RouteMainTest extends TestCase
 {
 
     protected RouteMain|null $object;
-    
+
     protected function setUp(): void {
+        $this->object = new RouteMain(false);
+        $this->test();
         $this->object = new RouteMain();
+        $this->test();
     }
 
-    public function __construct(bool $isRoutage = true) {
+    private function test(): void {
+        $this->testGetIndAndKeyPg();
+        $this->testGetIndPg();
+        $this->testGetIndAndKeyPgKey();
+        $this->testGetIndPgKey();
+        $this->testGetCurrentDir();
+        $this->testGetParentPath();
+        $this->testGetCssImgDir();
+        $this->testGetIsRoutage();
     }
 
-    public function addIgnorePath(string|null $name):self {
+    public function testPath(): void {
+        $object = new RouteMain();
+        $objectf = new RouteMain(false);
+        foreach (array_string_all() as $value) {
+            $testFunction = $object->path($value);
+            $this->assertNotNull($testFunction);
+            $this->assertIsString($testFunction);
+            $testFunction = $objectf->path($value);
+            $this->assertNotNull($testFunction);
+            $this->assertIsString($testFunction);
+        }
+        foreach (array_route() as $value) {
+            $testFunction = $object->path($value[0]);
+            $this->assertNotNull($testFunction);
+            $this->assertIsString($testFunction);
+            $this->assertEquals($testFunction, $value[1]);
+            $testFunction = $objectf->path($value[0]);
+            $this->assertNotNull($testFunction);
+            $this->assertIsString($testFunction);
+            $this->assertEquals($testFunction, $value[2]);
+        }
     }
 
-    public function folderroute():string|null {
-        return null;
+    public function testPathFile(): void {
+        $object = new RouteMain();
+        $objectf = new RouteMain(false);
+        foreach (array_string_all() as $value) {
+            $testFunction = $object->pathFile($value);
+            $this->assertNotNull($testFunction);
+            $this->assertIsString($testFunction);
+            $testFunction = $objectf->pathFile($value);
+            $this->assertNotNull($testFunction);
+            $this->assertIsString($testFunction);
+        }
+        foreach (array_route() as $value) {
+            $testFunction = $object->path($value[0]);
+            $this->assertNotNull($testFunction);
+            $this->assertIsString($testFunction);
+            $this->assertEquals($testFunction, $value[1]);
+            $testFunction = $objectf->path($value[0]);
+            $this->assertNotNull($testFunction);
+            $this->assertIsString($testFunction);
+            $this->assertEquals($testFunction, $value[2]);
+        }
     }
     
-    public function path(string|null $path):string|null {
-        return null;
+    public function testGetIndAndKeyPg(): void {
+        $testFunction = $this->object->getIndAndKeyPg();
+        $this->assertNotNull($testFunction);
+        $this->assertIsArray($testFunction);
     }
     
-    public function tabGetIndPg():array|null {
-        return null;
+    public function testGetIndPg(): void {
+        $testFunction = $this->object->getIndPg();
+        $this->assertNotNull($testFunction);
+        $this->assertIsArray($testFunction);
     }
 
-    public function getCurrentDir():string|null
-    {
-        return null;
+    public function testGetIndAndKeyPgKey(): void {
+        foreach (array_string_all() as $value) {
+            $testFunction = $this->object->getIndAndKeyPgKey($value);
+            $this->assertNotNull($testFunction);
+            $this->assertIsString($testFunction);
+        }
+    }
+    
+    public function testGetIndPgKey(): void {
+        for ($i=-10; $i < 10; $i++) {
+            $testFunction = $this->object->getIndPgKey($i);
+            $this->assertNotNull($testFunction);
+            $this->assertIsString($testFunction);
+        }
+    }
+
+    public function testGetCurrentDir(): void {
+        $testFunction = $this->object->getCurrentDir();
+        $this->assertNotNull($testFunction);
+        $this->assertIsString($testFunction);
+    }
+    
+    public function testGetParentPath(): void {
+        $testFunction = $this->object->getParentPath();
+        $this->assertNotNull($testFunction);
+        $this->assertIsString($testFunction);
+    }
+    
+    public function testGetCssImgDir(): void {
+        $testFunction = $this->object->getCssImgDir();
+        $this->assertNotNull($testFunction);
+        $this->assertIsString($testFunction);
+    }
+    
+    public function testGetIsRoutage(): void {
+        $testFunction = $this->object->getIsRoutage();
+        $this->assertNotNull($testFunction);
+        $this->assertIsBool($testFunction);
     }
 
 }

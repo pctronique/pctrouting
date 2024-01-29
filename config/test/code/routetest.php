@@ -14,7 +14,6 @@ $table2 = new RouteMain(false);
 function createtabclass($pathclass) {
     return [
         "tabGetIndPg" => $pathclass->tabGetIndPg(),
-        "getTabIgnore" => $pathclass->getTabIgnore(),
         "getCssImgDir" => $pathclass->getCssImgDir(),
         "getCurrentDir" => $pathclass->getCurrentDir(),
         "getParentPath" => $pathclass->getParentPath(),

@@ -55,6 +55,10 @@ include_once dirname(__FILE__) . '/../code/routetest.php';
         <?php
             displaytab(createtabclass($table), "class");
             displaytab(createtabclass($table2), "class");
+            var_dump($table->path("page3/item2"));
+            var_dump($table2->path("page3/item2"));
+            var_dump($table->path("page3/item2?test=8&pass=lkjh"));
+            var_dump($table2->path("page3/item2?test=8&pass=lkjh"));
         ?>
     </section>
     

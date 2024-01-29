@@ -9,8 +9,6 @@ if (!class_exists('PathServe')) {
     require_once __DIR__ . "/PathDef.php";
     require_once __DIR__ . "/RegexPath.php";
 
-    define("RACINE_SITE", __DIR__."/../../..");
-
     /**
      * Undocumented class
      */
@@ -19,10 +17,13 @@ if (!class_exists('PathServe')) {
         /**
          * Undocumented function
          *
-         * @param string|null $pathParent
+         * @param PathServe|string|null $pathParent
          * @param string|null $path
          */
-        public function __construct(string|null $pathParent = null, string|null $path = null) {
+        public function __construct(PathServe|string|null $pathParent = null, string|null $path = null) {
+            if(strtolower(gettype($pathParent)) == "object" && strtolower(get_class($pathParent)) == "pathserve") {
+                $pathParent = $pathParent->getPath();
+            }
             parent::__construct($pathParent, $path);
         }
 
