@@ -7,18 +7,10 @@ include_once dirname(__FILE__) . '/functcreatetab.php';
 $line = "<br/>";
 
 function createtab($value, $line) {
-    $absolutpath = "";
-    $name = "";
-    $namedisk = "";
-    if(!empty($value[3])) {
-        $namedisk = recup_name_disk($value[3]);
-        if(empty($namedisk)) {
-            $namedisk = "/";
-        }
-
-        $name = trim(str_replace($value[2], "", $value[1]), "/");
-        $absolutpath = $value[3]."/".$name;
-    }
+    $tabAllVal = recupeother($value);
+    $name = $tabAllVal["name"];
+    $namedisk = $tabAllVal["namedisk"];
+    $absolutpath = $tabAllVal["absolutpath"];
     echo "[".$line;
     echo '"data" => "'.$value[0].'",'.$line;
     echo '"path" => "'.$value[1].'",'.$line;
@@ -31,19 +23,19 @@ function createtab($value, $line) {
     echo '"filein" => "'.$value[5].'",'.$line;
     echo "],".$line;
 }
-echo "<br /><br />".$line;
+//echo "<br /><br />".$line;
 echo "\$testpathhttp2 = [".$line;
 foreach ($testpathhttp2 as $value) {
     createtab($value, $line);
 }
 echo "];".$line;
-echo "<br /><br />".$line;
+//echo "<br /><br />".$line;
 echo "\$testpatrelatif2 = [".$line;
 foreach ($testpatrelatif2 as $value) {
     createtab($value, $line);
 }
 echo "];".$line;
-echo "<br /><br />".$line;
+//echo "<br /><br />".$line;
 echo "\$testpath2 = [".$line;
 foreach ($testpath2 as $value) {
     createtab($value, $line);

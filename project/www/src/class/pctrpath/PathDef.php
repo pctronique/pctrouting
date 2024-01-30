@@ -60,7 +60,11 @@ if (!class_exists('PathDef')) {
             $this->absoluteParent = "";
             $this->absolutePath = "";
             $this->path = "";
-            $this->sep_file_parent($this->not_dote_path($this->parent."/".$this->name));
+            $pathall=$this->parent."/".$this->name;
+            if(!($is_absolute || !empty($this->diskname))) {
+                $pathall=trim($pathall, "/");
+            }
+            $this->sep_file_parent(trim($this->not_dote_path($pathall), "/"));
             if($is_absolute || !empty($this->diskname)) {
                 $this->pathmodabsol();
             } else {
@@ -338,7 +342,7 @@ if (!class_exists('PathDef')) {
         {
                 return $this->path;
         }
-
+        
     }
 
 }

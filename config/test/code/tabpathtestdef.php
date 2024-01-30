@@ -14,6 +14,12 @@ $testpathhttp = [
         "https://test.fr/tmp"
     ],
     [
+        "https://test.fr/usr/local/www/../../../../../../site/../../ tmp /index.php",
+        "https://test.fr/tmp/index.php",
+        "https://test.fr/tmp",
+        "https://test.fr/tmp"
+    ],
+    [
         "https://test.fr",
         "https://test.fr",
         "https://test.fr",
@@ -66,6 +72,12 @@ $testpatrelatif = [
     ],
     [
         "./../css/tabtest.css",
+        "./../css/tabtest.css",
+        "./../css",
+        ""
+    ],
+    [
+        "./../ css /tabtest.css",
         "./../css/tabtest.css",
         "./../css",
         ""

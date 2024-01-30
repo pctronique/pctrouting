@@ -65,7 +65,6 @@ var_dump($table->pathFile("./../css/route.css"));*/
     <section class="firstsection">
         <img src="<?= $table->pathFile("images/imgtest.png") ?>" alt="test img">
         <?php
-            var_dump($table->pathFile("images/imgtest.png"));
             displaytab(createtabclass($table), "class");
             displaytab(createtabclass($table2), "class");
         ?>

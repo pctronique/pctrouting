@@ -34,8 +34,11 @@ if (!class_exists('RouteMain')) {
             $nbredir = substr_count($_SERVER["REDIRECT_URL"], '/');
             $nbrequ = substr_count($_SERVER["REQUEST_URI"], '/');
             if(!empty($_GET) && array_key_exists('url', $_GET) && !empty($_GET['url']) && $isRoutage) {
-                $nbParentCurrentDirectory = substr_count(preg_replace(RegexPath::TWOSLASH->value, "/", $_GET["url"]), '/');
-                for ($i=0; $i < $nbParentCurrentDirectory; $i++) { 
+                $geturl = preg_replace(RegexPath::RELATIVE->value, "", (new PathServe($_GET["url"]))->getPath());
+                $this->index = $this->createTabIndex($geturl);
+                //$nbParentCurrentDirectory = substr_count(preg_replace(RegexPath::TWOSLASH->value, "/", $geturl), '/');
+                //for ($i=0; $i < $nbParentCurrentDirectory; $i++) { 
+                foreach ($this->index as $value) {
                     $this->parentPath .= "../";
                     $this->currentDir .= "../";
                     $this->cssImgDir .= "../";
@@ -43,7 +46,9 @@ if (!class_exists('RouteMain')) {
                 for ($i=0; $i < ($nbrequ-$nbredir); $i++) { 
                     $this->cssImgDir .= "../";
                 }
-                $this->index = $this->createTabIndex($_GET["url"]);
+                $this->parentPath = (new PathServe($this->parentPath))->getPath()."/";
+                $this->currentDir = (new PathServe($this->currentDir))->getPath()."/";
+                $this->cssImgDir = (new PathServe($this->cssImgDir))->getPath()."/";
             }
         }
 
@@ -95,7 +100,7 @@ if (!class_exists('RouteMain')) {
          */
         public function path(string|null $path):string|null {
             if(!$this->isRoutage) {
-                $pathGetIndex = "./";
+                $pathGetIndex = "";
                 $path1 = new PathServe($path);
                 $explodePath = explode("#", preg_replace(RegexPath::RELATIVE->value, "", $path1->getPath()), 2);
                 $explodePathGet = explode("?", $explodePath[0], 2);
@@ -121,10 +126,10 @@ if (!class_exists('RouteMain')) {
                 }
                 $path = $pathGetIndex;
             }
-            if(!$this->isRoutage) {
-                return $this->currentDir.$path;
+            if($this->isRoutage) {
+                $path = (new PathServe($this->currentDir,$path))->getPath();
             }
-            return "./".$path;
+            return (new PathServe($path))->getAbsolutePath();
             //$path1 = new PathServe($this->currentDir, $path);
             //return $path1->getPath();
         }
@@ -136,11 +141,12 @@ if (!class_exists('RouteMain')) {
          * @return string|null
          */
         public function pathFile(string|null $path):string|null {
-            if(!$this->isRoutage) {
-                return $this->cssImgDir.$path;
+            $pathou = "./".$path;
+            if($this->isRoutage) {
+                $pathou = $this->cssImgDir.$path;
             }
-            return "./".$path;
-            //return (new PathServe($this->cssImgDir, $path))->getPath();
+            return (new PathServe($pathou))->getAbsolutePath();
+            //return "./".$path;
         }
         
         /**

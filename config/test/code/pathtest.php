@@ -35,10 +35,13 @@ function createtabclass($pathclass) {
 
 function createtabpathall($pathall) {
     return [
-        "start" => $pathall[0],
-        "path" => $pathall["path"],
+        "name" => $pathall["name"],
         "parent" => $pathall["parent"],
-        "absoluteParent" => $pathall["absolutparent"]
+        "absoluteParent" => $pathall["absolutparent"],
+        "absolutePath" => $pathall["absolutpath"],
+        "path" => $pathall["path"],
+        "diskname" => $pathall["diskname"],
+        "data" => $pathall["data"],
     ];
 }
 

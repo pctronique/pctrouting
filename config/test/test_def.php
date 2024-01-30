@@ -9,6 +9,60 @@ function boolstring($val) {
     return $val ? "true" : "false";
 }
 
+function displayvalue($tab, $theclass, $nb, $linetab) {
+    $testName = $theclass->getName() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $tab["name"]);
+    $testPath = $theclass->getPath() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $tab["path"]);
+    $testParent = $theclass->getParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $tab["parent"]);
+    $testAbsParent = true;
+    $testAbsPath = true;
+    $testAbsDisk = true;
+    $displayAbs = false;
+    if(!empty($tab["absolutparent"])) {
+        $testAbsParent = $theclass->getAbsoluteParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $tab["absolutparent"]);
+        $testAbsPath = $theclass->getAbsolutePath() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $tab["absolutpath"]);
+        $testAbsDisk = $theclass->getDiskname() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $tab["namedisk"]);
+        $displayAbs = true;
+    }
+    if(!($testName && $testPath && $testParent && $testAbsParent && $testAbsPath && $testAbsDisk)) {
+        var_dump("-----------------00000000000000000000000--------------------");
+        echo "nb ".$nb." : <br /><br />";
+        echo "tab (".$linetab.") : testpath <br />";
+        echo "<br />";
+        echo $theclass->getMsgerror();
+        //echo $table->getErrortxt();
+        var_dump("data             : ".$tab["data"]);
+        var_dump("---------------------------");
+        var_dump("name class       : ".$theclass->getName());
+        var_dump("name test        : ".$tab["name"]);
+        var_dump("name bool        : ".boolstring($testName));
+        var_dump("---------------------------");
+        var_dump("path class       : ".$theclass->getPath());
+        var_dump("path test        : ".$tab["path"]);
+        var_dump("path bool        : ".boolstring($testPath));
+        var_dump("---------------------------");
+        var_dump("parent class     : ".$theclass->getParent());
+        var_dump("parent test      : ".$tab["parent"]);
+        var_dump("parent bool      : ".boolstring($testParent));
+        var_dump("---------------------------");
+        if($displayAbs) {
+            var_dump("absolParent class   : ".$theclass->getAbsoluteParent());
+            var_dump("absolParent test    : ".$tab["absolutparent"]);
+            var_dump("absolParent bool    : ".boolstring($testAbsParent));
+            var_dump("---------------------------");
+            var_dump("absolPath class     : ".$theclass->getAbsolutePath());
+            var_dump("absolPath test      : ".$tab["absolutpath"]);
+            var_dump("absolPath bool      : ".boolstring($testAbsPath));
+            var_dump("---------------------------");
+            var_dump("diskname class      : ".$theclass->getDiskname());
+            var_dump("diskname test       : ".$tab["namedisk"]);
+            var_dump("diskname bool       : ".boolstring($testAbsDisk));
+        }
+        var_dump("-----------------11111111111111111111111--------------------");
+        return true;
+    }
+    return false;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,142 +116,30 @@ function boolstring($val) {
             ?>
         <!--<h1>Path test</h1>-->
         <?php
-        $i = 0;
+        $i = 1;
         foreach ($testpath as $value) {
-            //displaytaball($value, new Path($value["parentin"]));
-            $table = new Path($value["parentin"]);
-            $test1 = $table->getPath() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["path"]);
-            $test2 = $table->getParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["parent"]);
-            $test3 = true;
-            $display3 = false;
-            if(!empty($value["absolutparent"])) {
-                $test2 = $table->getAbsoluteParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["absolutparent"]);
-                $display3 = true;
-            }
-            if(!$test1 || !$test2) {
-                var_dump("-----------------00000000000000000000000--------------------");
-                echo "tab (".__LINE__.") : testpath <br />";
+            if(displayvalue($value, (new Path($value["parentin"])), $i, __LINE__)) {
                 $i++;
-                echo "nb ".$i." : <br />";
-                echo "<br />";
-                //echo $table->getErrortxt();
-                var_dump($value);
-                var_dump("getPath class       : ".$table->getPath());
-                var_dump("getPath test        : ".$value["path"]);
-                var_dump("getPath bool        : ".boolstring($test1));
-                var_dump("getParent class     : ".$table->getParent());
-                var_dump("getParent test      : ".$value["parent"]);
-                var_dump("getParent bool      : ".boolstring($test2));
-                if($display3) {
-                    var_dump("absolParent class   : ".$table->getAbsoluteParent());
-                    var_dump("absolParent test    : ".$value["absolutparent"]);
-                    var_dump("absolParent bool    : ".boolstring($test3));
-                }
-                var_dump($table);
-                var_dump("-----------------11111111111111111111111--------------------");
             }
+            //displaytaball($value, new Path($value["parentin"]));
         }
         foreach ($testpatrelatif as $value) {
-            //displaytaball($value, new Path($value["parentin"]));
-            $table = new Path($value["parentin"]);
-            $test1 = $table->getPath() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["path"]);
-            $test2 = $table->getParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["parent"]);
-            $test3 = true;
-            $display3 = false;
-            if(!empty($value["absolutparent"])) {
-                $test2 = $table->getAbsoluteParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["absolutparent"]);
-                $display3 = true;
-            }
-            if(!$test1 || !$test2) {
-                var_dump("-----------------00000000000000000000000--------------------");
-                echo "tab (".__LINE__.") : testpatrelatif <br />";
+            if(displayvalue($value, (new Path($value["parentin"])), $i, __LINE__)) {
                 $i++;
-                echo "nb ".$i." : <br />";
-                echo "<br />";
-                //echo $table->getErrortxt();
-                var_dump($value);
-                var_dump("getPath class       : ".$table->getPath());
-                var_dump("getPath test        : ".$value["path"]);
-                var_dump("getPath bool        : ".boolstring($test1));
-                var_dump("getParent class     : ".$table->getParent());
-                var_dump("getParent test      : ".$value["parent"]);
-                var_dump("getParent bool      : ".boolstring($test2));
-                if($display3) {
-                    var_dump("absolParent class   : ".$table->getAbsoluteParent());
-                    var_dump("absolParent test    : ".$value["absolutparent"]);
-                    var_dump("absolParent bool    : ".boolstring($test3));
-                }
-                var_dump($table);
-                var_dump("-----------------11111111111111111111111--------------------");
             }
+            //displaytaball($value, new Path($value["parentin"]));
         }
         foreach ($testpath2 as $value) {
-            //displaytaball($value, new Path($value["absolutparent"], $value["parentin"])); 
-            $table = new Path($value["parentin"], $value["filein"]);
-            $test1 = $table->getPath() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["path"]);
-            $test2 = $table->getParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["parent"]);
-            $test3 = true;
-            $display3 = false;
-            if(!empty($value["absolutparent"])) {
-                $test2 = $table->getAbsoluteParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["absolutparent"]);
-                $display3 = true;
-            }
-            if(!$test1 || !$test2) {
-                var_dump("-----------------00000000000000000000000--------------------");
-                echo "tab (".__LINE__.") : testpath2 <br />";
+            if(displayvalue($value, (new Path($value["parentin"], $value["filein"])), $i, __LINE__)) {
                 $i++;
-                echo "nb ".$i." : <br />";
-                echo "<br />";
-                //echo $table->getErrortxt();
-                var_dump($value);
-                var_dump("getPath class       : ".$table->getPath());
-                var_dump("getPath test        : ".$value["path"]);
-                var_dump("getPath bool        : ".boolstring($test1));
-                var_dump("getParent class     : ".$table->getParent());
-                var_dump("getParent test      : ".$value["parent"]);
-                var_dump("getParent bool      : ".boolstring($test2));
-                if($display3) {
-                    var_dump("absolParent class   : ".$table->getAbsoluteParent());
-                    var_dump("absolParent test    : ".$value["absolutparent"]);
-                    var_dump("absolParent bool    : ".boolstring($test3));
-                }
-                var_dump($table);
-                var_dump("-----------------11111111111111111111111--------------------");
             }
+            //displaytaball($value, new Path($value["absolutparent"], $value["parentin"])); 
         }
         foreach ($testpatrelatif2 as $value) {
-            //displaytaball($value, new Path($value["absolutparent"], $value["parentin"]));
-            $table = new Path($value["parentin"], $value["filein"]);
-            $test1 = $table->getPath() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["path"]);
-            $test2 = $table->getParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["parent"]);
-            $test3 = true;
-            $display3 = false;
-            if(!empty($value["absolutparent"])) {
-                $test2 = $table->getAbsoluteParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["absolutparent"]);
-                $display3 = true;
-            }
-            if(!$test1 || !$test2) {
-                var_dump("-----------------00000000000000000000000--------------------");
-                echo "tab (".__LINE__.") : testpatrelatif2 <br />";
+            if(displayvalue($value, (new Path($value["parentin"], $value["filein"])), $i, __LINE__)) {
                 $i++;
-                echo "nb ".$i." : <br />";
-                echo "<br />";
-                //echo $table->getErrortxt();
-                var_dump($value);
-                var_dump("getPath class       : ".$table->getPath());
-                var_dump("getPath test        : ".$value["path"]);
-                var_dump("getPath bool        : ".boolstring($test1));
-                var_dump("getParent class     : ".$table->getParent());
-                var_dump("getParent test      : ".$value["parent"]);
-                var_dump("getParent bool      : ".boolstring($test2));
-                if($display3) {
-                    var_dump("absolParent class   : ".$table->getAbsoluteParent());
-                    var_dump("absolParent test    : ".$value["absolutparent"]);
-                    var_dump("absolParent bool    : ".boolstring($test3));
-                }
-                var_dump($table);
-                var_dump("-----------------11111111111111111111111--------------------");
             }
+            //displaytaball($value, new Path($value["absolutparent"], $value["parentin"]));
         }
         ?>
     </section>
@@ -205,140 +147,28 @@ function boolstring($val) {
         <!--<h1>PathServe test</h1>-->
         <?php 
         foreach ($testpathhttp as $value) {
-            //displaytaball($value, new PathServe($value["parentin"]));
-            $table = new PathServe($value["parentin"]);
-            $test1 = $table->getPath() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["path"]);
-            $test2 = $table->getParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["parent"]);
-            $test3 = true;
-            $display3 = false;
-            if(!empty($value["absolutparent"])) {
-                $test2 = $table->getAbsoluteParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["absolutparent"]);
-                $display3 = true;
-            }
-            if(!$test1 || !$test2) {
-                var_dump("-----------------00000000000000000000000--------------------");
-                echo "tab (".__LINE__.") : testpathhttp <br />";
+            if(displayvalue($value, (new PathServe($value["parentin"])), $i, __LINE__)) {
                 $i++;
-                echo "nb ".$i." : <br />";
-                echo "<br />";
-                //echo $table->getErrortxt();
-                var_dump($value);
-                var_dump("getPath class       : ".$table->getPath());
-                var_dump("getPath test        : ".$value["path"]);
-                var_dump("getPath bool        : ".boolstring($test1));
-                var_dump("getParent class     : ".$table->getParent());
-                var_dump("getParent test      : ".$value["parent"]);
-                var_dump("getParent bool      : ".boolstring($test2));
-                if($display3) {
-                    var_dump("absolParent class   : ".$table->getAbsoluteParent());
-                    var_dump("absolParent test    : ".$value["absolutparent"]);
-                    var_dump("absolParent bool    : ".boolstring($test3));
-                }
-                var_dump($table);
-                var_dump("-----------------11111111111111111111111--------------------");
             }
+            //displaytaball($value, new PathServe($value["parentin"]));
         }
         foreach ($testpatrelatif as $value) {
-            //displaytaball($value, new PathServe($value["parentin"]));
-            $table = new PathServe($value["parentin"]);
-            $test1 = $table->getPath() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["path"]);
-            $test2 = $table->getParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["parent"]);
-            $test3 = true;
-            $display3 = false;
-            if(!empty($value["absolutparent"])) {
-                $test2 = $table->getAbsoluteParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["absolutparent"]);
-                $display3 = true;
-            }
-            if(!$test1 || !$test2) {
-                var_dump("-----------------00000000000000000000000--------------------");
-                echo "tab (".__LINE__.") : testpatrelatif <br />";
+            if(displayvalue($value, (new PathServe($value["parentin"])), $i, __LINE__)) {
                 $i++;
-                echo "nb ".$i." : <br />";
-                echo "<br />";
-                //echo $table->getErrortxt();
-                var_dump($value);
-                var_dump("getPath class       : ".$table->getPath());
-                var_dump("getPath test        : ".$value["path"]);
-                var_dump("getPath bool        : ".boolstring($test1));
-                var_dump("getParent class     : ".$table->getParent());
-                var_dump("getParent test      : ".$value["parent"]);
-                var_dump("getParent bool      : ".boolstring($test2));
-                if($display3) {
-                    var_dump("absolParent class   : ".$table->getAbsoluteParent());
-                    var_dump("absolParent test    : ".$value["absolutparent"]);
-                    var_dump("absolParent bool    : ".boolstring($test3));
-                }
-                var_dump($table);
-                var_dump("-----------------11111111111111111111111--------------------");
             }
+            //displaytaball($value, new PathServe($value["parentin"]));
         }
         foreach ($testpathhttp2 as $value) {
-            //displaytaball($value, new PathServe($value["absolutparent"], $value["parentin"]));
-            $table = new PathServe($value["parentin"], $value["filein"]);
-            $test1 = $table->getPath() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["path"]);
-            $test2 = $table->getParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["parent"]);
-            $test3 = true;
-            $display3 = false;
-            if(!empty($value["absolutparent"])) {
-                $test2 = $table->getAbsoluteParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["absolutparent"]);
-                $display3 = true;
-            }
-            if(!$test1 || !$test2) {
-                var_dump("-----------------00000000000000000000000--------------------");
-                echo "tab (".__LINE__.") : testpathhttp2 <br />";
+            if(displayvalue($value, (new PathServe($value["parentin"], $value["filein"])), $i, __LINE__)) {
                 $i++;
-                echo "nb ".$i." : <br />";
-                echo "<br />";
-                //echo $table->getErrortxt();
-                var_dump($value);
-                var_dump("getPath class       : ".$table->getPath());
-                var_dump("getPath test        : ".$value["path"]);
-                var_dump("getPath bool        : ".boolstring($test1));
-                var_dump("getParent class     : ".$table->getParent());
-                var_dump("getParent test      : ".$value["parent"]);
-                var_dump("getParent bool      : ".boolstring($test2));
-                if($display3) {
-                    var_dump("absolParent class   : ".$table->getAbsoluteParent());
-                    var_dump("absolParent test    : ".$value["absolutparent"]);
-                    var_dump("absolParent bool    : ".boolstring($test3));
-                }
-                var_dump($table);
-                var_dump("-----------------11111111111111111111111--------------------");
             }
+            //displaytaball($value, new PathServe($value["absolutparent"], $value["parentin"]));
         }
         foreach ($testpatrelatif2 as $value) {
-            //displaytaball($value, new PathServe($value["absolutparent"], $value["parentin"]));
-            $table = new PathServe($value["parentin"], $value["filein"]);
-            $test1 = $table->getPath() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["path"]);
-            $test2 = $table->getParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["parent"]);
-            $test3 = true;
-            $display3 = false;
-            if(!empty($value["absolutparent"])) {
-                $test2 = $table->getAbsoluteParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value["absolutparent"]);
-                $display3 = true;
-            }
-            if(!$test1 || !$test2) {
-                var_dump("-----------------00000000000000000000000--------------------");
-                echo "tab (".__LINE__.") : testpatrelatif2 <br />";
+            if(displayvalue($value, (new PathServe($value["parentin"], $value["filein"])), $i, __LINE__)) {
                 $i++;
-                echo "nb ".$i." : <br />";
-                echo "<br />";
-                //echo $table->getErrortxt();
-                var_dump($value);
-                var_dump("getPath class       : ".$table->getPath());
-                var_dump("getPath test        : ".$value["path"]);
-                var_dump("getPath bool        : ".boolstring($test1));
-                var_dump("getParent class     : ".$table->getParent());
-                var_dump("getParent test      : ".$value["parent"]);
-                var_dump("getParent bool      : ".boolstring($test2));
-                if($display3) {
-                    var_dump("absolParent class   : ".$table->getAbsoluteParent());
-                    var_dump("absolParent test    : ".$value["absolutparent"]);
-                    var_dump("absolParent bool    : ".boolstring($test3));
-                }
-                var_dump($table);
-                var_dump("-----------------11111111111111111111111--------------------");
             }
+            //displaytaball($value, new PathServe($value["absolutparent"], $value["parentin"]));
         }
         ?>
     </section>
