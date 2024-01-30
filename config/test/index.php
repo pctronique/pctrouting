@@ -59,10 +59,10 @@ include_once dirname(__FILE__) . '/code/pathtest.php';
         <h1>Path test</h1>
         <?php
             foreach ($testpath as $value) {
-                displaytaball($value, new Path($value[0]));
+                displaytaball($value, new Path($value["parentin"]));
             }
             foreach ($testpatrelatif as $value) {
-                displaytaball($value, new Path($value[0]));
+                displaytaball($value, new Path($value["parentin"]));
             }
         ?>
     </section>
@@ -82,10 +82,10 @@ include_once dirname(__FILE__) . '/code/pathtest.php';
     <section>
         <h1>PathServe test</h1>
         <?php foreach ($testpathhttp as $value) {
-            displaytaball($value, new PathServe($value[0]));
+            displaytaball($value, new PathServe($value["parentin"]));
         }
         foreach ($testpatrelatif as $value) {
-            displaytaball($value, new PathServe($value[0]));
+            displaytaball($value, new PathServe($value["parentin"]));
         } ?>
     </section>
     <section>

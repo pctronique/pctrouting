@@ -64,33 +64,33 @@ function boolstring($val) {
         <h1>Path test</h1>
         <?php
         foreach ($testpath as $value) {
-            displaytaball($value, new Path($value[0]));
+            displaytaball($value, new Path($value["parentin"]));
         }
         foreach ($testpatrelatif as $value) {
-            displaytaball($value, new Path($value[0]));
+            displaytaball($value, new Path($value["parentin"]));
         }
         foreach ($testpath2 as $value) {
-            displaytaball($value, new Path($value[3], $value[4]));
+            displaytaball($value, new Path($value["parentin"], $value["filein"]));
         }
         foreach ($testpatrelatif2 as $value) {
-            displaytaball($value, new Path($value[3], $value[4]));
+            displaytaball($value, new Path($value["parentin"], $value["filein"]));
         }
         ?>
     </section>
     <section>
-        <h1>PathServe test</h1>-
+        <h1>PathServe test</h1>
         <?php 
         foreach ($testpathhttp as $value) {
-            displaytaball($value, new PathServe($value[0]));
+            displaytaball($value, new PathServe($value["parentin"]));
         }
         foreach ($testpatrelatif as $value) {
-            displaytaball($value, new PathServe($value[0]));
+            displaytaball($value, new PathServe($value["parentin"]));
         }
         foreach ($testpathhttp2 as $value) {
-            displaytaball($value, new PathServe($value[3], $value[4]));
+            displaytaball($value, new PathServe($value["parentin"], $value["filein"]));
         }
         foreach ($testpatrelatif2 as $value) {
-            displaytaball($value, new PathServe($value[3], $value[4]));
+            displaytaball($value, new PathServe($value["parentin"], $value["filein"]));
         }
         ?>
     </section>
