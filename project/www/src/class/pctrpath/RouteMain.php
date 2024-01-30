@@ -143,9 +143,24 @@ if (!class_exists('RouteMain')) {
         public function pathFile(string|null $path):string|null {
             $pathou = "./".$path;
             if($this->isRoutage) {
-                $pathou = $this->cssImgDir.$path;
+                $pathou = $this->currentDir.$path;
             }
             return (new PathServe($pathou))->getAbsolutePath();
+            //return "./".$path;
+        }
+
+        /**
+         * Undocumented function
+         *
+         * @param string|null $path
+         * @return string|null
+         */
+        public function pathSystem(string|null $path):string|null {
+            $pathou = "./".$path;
+            if($this->isRoutage) {
+                $pathou = $this->currentDir.$path;
+            }
+            return (new Path($pathou))->getAbsolutePath();
             //return "./".$path;
         }
         

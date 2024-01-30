@@ -22,7 +22,9 @@ function createtabclass($pathclass) {
         "path 1" => $pathclass->path("route0/route1"),
         "path 2" => $pathclass->path("route0/route1?test=8&pass=lkjh"),
         "path img" => $pathclass->pathFile("image.png"),
-        "path img 2" => $pathclass->pathFile("../image2.png")
+        "path img 2" => $pathclass->pathFile("../image2.png"),
+        "path sys 1" => $pathclass->pathSystem("image.png"),
+        "path sys 2" => $pathclass->pathSystem("../image2.png")
     ];
 }
 
