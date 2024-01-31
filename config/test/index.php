@@ -35,19 +35,9 @@ include_once dirname(__FILE__) . '/code/pathtest.php';
         <ul class="all-bt-menu">
           <li class="bt-menu no-submenu">
             <a href="./../">acc</a>
-            <a href="./phpinfo.php" target="_blank">phpinfo</a>
             <a href="./">path</a>
             <a href="./pathtest.php">pathtest</a>
             <a href="./route">route</a>
-            <a href="./route/page1">page1</a>
-            <a href="./route/page2">page2</a>
-            <a href="./route/page3">page3</a>
-            <a href="./route/page1/item1">item11</a>
-            <a href="./route/page2/item1">item21</a>
-            <a href="./route/page2/item2">item22</a>
-            <a href="./route/page3/item1">item31</a>
-            <a href="./route/page3/item2">item32</a>
-            <a href="./route/page3/item2/item1">item321</a>
           </li>
         </ul>
       </menu>

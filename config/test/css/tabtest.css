@@ -35,6 +35,10 @@
     width: 45px;
 }
 
+.tabth {
+    background-color: white;
+}
+
 .tab0 {
     background-color: #fffdc8;
     word-wrap: break-word
@@ -42,9 +46,6 @@
 
 .tab1 {
     word-wrap: break-word
-}
-
-.tabth {
 }
 
 .tabth pre {

@@ -5,13 +5,14 @@ if (!enum_exists("RegexPath")) {
     {
         case NULL = '';
         case ABSOLIN = '/^\//sim';
-        case RELATIVE = '/^[.]{1}\//sim';
         case ANTISLASH = '/\\\\/sim';
-        case MAXSLASH = '/^[\/]{2,}/sim';
         case NAMROUTE = '/^%1\//sim';
-        case ENDFILE = '/\.[a-zA-Z]*$/sim';
-        case PATHNORETU = '/^[.]{2}\//sim';
+        case RTINDEX = '/%1[\d]{1,}/sim';
+        case RELATIVE = '/^[.]{1}\//sim';
+        case MAXSLASH = '/^[\/]{2,}/sim';
         case PATHENDRETU = '/[.]{2}$/sim';
+        case PATHNORETU = '/^[.]{2}\//sim';
+        case ENDFILE = '/\.[a-zA-Z]*$/sim';
         case ENDPATH = '/[\/\\\\]{1,}$/sim';
         case SEPSYSTEM = '/[\/\\\\]{1}/sim';
         case ABSOWIN = '/^[^.^\/^\\\\.]{1,}:/sim';

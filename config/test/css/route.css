@@ -5,3 +5,28 @@ section {
 .textval {
     border: unset;
 }
+
+.ctpgroute {
+    display: flex;
+    align-items: center;
+    align-content: stretch;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+body:before {
+    content: "";
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: 0.145;
+}
+
+body {
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
