@@ -54,9 +54,7 @@ include_once dirname(__FILE__) . '/../../code/routetest.php';
         <img src="<?= $table->pathFile("../images/imgtest.png") ?>" alt="test img">
         <?php
             displaytab(createtabclass($table), "class");
-            displaytab(createtabclass($table2), "class");
         ?>
     </section>
-    
 </body>
 </html>

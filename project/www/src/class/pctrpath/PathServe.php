@@ -40,7 +40,7 @@ if (!class_exists('PathServe')) {
             if(empty($valueout)) {
                 $valueout = PathServe::base();
             }
-            return preg_replace(RegexPath::ENDPATH->value, '', $valueout);
+            return preg_replace(RegexPath::ENDPATH->value, '', PathServe::del_get_anc($valueout));
         }
 
         /**
@@ -52,8 +52,8 @@ if (!class_exists('PathServe')) {
             if(!array_key_exists('REQUEST_SCHEME', $_SERVER) || !array_key_exists('HTTP_HOST', $_SERVER)) {
                 return "";
             }
-            $valueout = new PathServe($_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST'].'/');
-            return preg_replace(RegexPath::ENDPATH->value, '', $valueout->getAbsolutePath());
+            $valueout = (new PathServe($_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST'].'/'))->getAbsolutePath();
+            return preg_replace(RegexPath::ENDPATH->value, '', PathServe::del_get_anc($valueout));
         }
 
     }

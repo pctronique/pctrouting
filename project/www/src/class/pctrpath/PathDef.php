@@ -265,6 +265,13 @@ if (!class_exists('PathDef')) {
             return $thepath;
         }
 
+        protected static function del_get_anc(string|null $lien):string|null {
+            if(empty($lien)) {
+                return "";
+            }
+            return explode("?", explode("#", $lien)[0])[0];
+        }
+
         /**
          * Undocumented function
          *

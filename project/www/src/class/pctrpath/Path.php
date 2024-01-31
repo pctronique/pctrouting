@@ -50,7 +50,7 @@ if (!class_exists('Path')) {
             if(empty($valueout)) {
                 $valueout = Path::base();
             }
-            return preg_replace(RegexPath::ENDPATH->value, '', $valueout);
+            return preg_replace(RegexPath::ENDPATH->value, '', PathServe::del_get_anc($valueout));
         }
 
         /**
@@ -60,7 +60,7 @@ if (!class_exists('Path')) {
          */
         public static function base():string|null {
             $valueout = new Path(PCTR_PATH_RACINE_SITE);
-            return preg_replace(RegexPath::ENDPATH->value, '', $valueout->getAbsolutePath());
+            return preg_replace(RegexPath::ENDPATH->value, '', Path::del_get_anc($valueout->getAbsolutePath()));
         }
 
         /**

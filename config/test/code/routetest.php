@@ -1,15 +1,7 @@
 <?php
 include_once dirname(__FILE__) . '/../../src/class/pctrpath/RouteMain.php';
 
-$isroute=true;
-
-$table = new RouteMain($isroute);
-$lien_pg = $table->getCurrentDir();
-$lien_cssimg = $table->getCssImgDir();
-//$lien_pg = $table->getLienpg() . "/";
-$table2 = new RouteMain(false);
-//$lien_pg = $table->getCurrentDir();
-//$lien_cssimg = $table->getCssImgDir();
+$table = new RouteMain();
 
 function createtabclass($pathclass) {
     return [
@@ -27,5 +19,3 @@ function createtabclass($pathclass) {
         "path sys 2" => $pathclass->pathSystem("../image2.png")
     ];
 }
-
-//var_dump($_SERVER);

@@ -26,7 +26,8 @@ if (!class_exists('RouteMain')) {
          * @param boolean $isRoutage
          */
         public function __construct(bool $isRoutage = true) {
-            $this->isRoutage = $isRoutage;
+            //$this->isRoutage = $isRoutage;
+            $this->isRoutage = array_key_exists("url", $_GET);
             $this->parentPath = "./";
             $this->currentDir = "./";
             $this->cssImgDir = "./";
