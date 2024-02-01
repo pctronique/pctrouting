@@ -22,7 +22,7 @@ if ($table->indexbool("item1")) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
   <style>
     body:before {
-      background-image: url(<?= $table->pathFile("../images/56420-O8POFY-458.svg") ?>);
+      background-image: url(<?= $table->pathFile("../images/motherboard-binary.svg") ?>);
     }
   </style>
 </head>
@@ -61,8 +61,8 @@ if ($table->indexbool("item1")) {
     <h1><?= $txttitle ?></h1>
     <div class="ctpgroute">
       <?php
-      displaytab(createtabclass($table), "class");
-      displaytab(createtabclass($table2), "class");
+      displaytab(createtabclassr($table0), "class RouteMain | routing");
+      displaytab(createtabclass($table2), "class RouteMain | no routing");
       ?>
     </div>
   </section>

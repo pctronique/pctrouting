@@ -4,39 +4,55 @@ include_once dirname(__FILE__) . '/../../src/class/pctrpath/RouteMain.php';
 include_once dirname(__FILE__) . '/../code/tabletest.php';
 include_once dirname(__FILE__) . '/../code/routetest.php';
 
-//$lien_pg = $table->getCurrentDir();
-//$lien_cssimg = $table->getCssImgDir();
+$txttitle = "";
+switch (true) {
+  case $table->indexbool("page2"):
+    switch (true) {
+      case $table->indexbool("page2/item1"):
+        $txttitle = "page2/item1";
+        break;
 
-/*var_dump($lien_cssimg."../../css/style.css");
-var_dump($lien_cssimg."../css/tabtest.css");
-var_dump($lien_cssimg."../css/route.css");
-var_dump($table->pathFile("./../../css/style.css"));
-var_dump($table->pathFile("./../css/tabtest.css"));
-var_dump($table->pathFile("./../css/route.css"));*/
-
-$txttitle = "route";
-if ($table->indexbool("page2")) {
-  if ($table->indexbool("page2/item1")) {
-    $txttitle = "page2/item1";
-  } else if ($table->indexbool("page2/item2")) {
-    $txttitle = "page2/item2";
-  } else {
-    $txttitle = "page2";
-  }
-} else if ($table->indexbool("page3")) {
-  if ($table->indexbool("page3/item1")) {
-    $txttitle = "page3/item1";
-  } else if ($table->indexbool("page3/item2")) {
-    if ($table->indexbool("page3/item2/item1")) {
-      $txttitle = "page3/item2/item1";
-    } else if ($table->indexbool("page3/item2/item2")) {
-      $txttitle = "page3/item2/item2";
-    } else {
-      $txttitle = "page3/item2";
+      case $table->indexbool("page2/item2"):
+        $txttitle = "page2/item2";
+        break;
+      
+      default:
+        $txttitle = "page2";
+        break;
     }
-  } else {
-    $txttitle = "page3";
-  }
+    break;
+  
+  case $table->indexbool("page3"):
+    switch (true) {
+      case $table->indexbool("page3/item1"):
+        $txttitle = "page2/item1";
+        break;
+
+      case $table->indexbool("page3/item2"):
+        switch (true) {
+          case $table->indexbool("page3/item2/item1"):
+            $txttitle = "page3/item2/item1";
+            break;
+    
+          case $table->indexbool("page3/item2/item2"):
+            $txttitle = "page3/item2/item2";
+            break;
+          
+          default:
+          $txttitle = "page3/item2";
+            break;
+        }
+        break;
+      
+      default:
+      $txttitle = "page3";
+        break;
+    }
+    break;
+    
+  default:
+    $txttitle = "route";
+    break;
 }
 ?>
 <!DOCTYPE html>
@@ -52,7 +68,7 @@ if ($table->indexbool("page2")) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
   <style>
     body:before {
-      background-image: url(<?= $table->pathFile("images/56420-O8POFY-458.svg") ?>);
+      background-image: url(<?= $table->pathFile("images/motherboard-binary.svg") ?>);
     }
   </style>
 </head>
@@ -91,7 +107,7 @@ if ($table->indexbool("page2")) {
     <h1><?= $txttitle ?></h1>
     <div class="ctpgroute">
       <?php
-      displaytab(createtabclass($table), "class RouteMain | routing");
+      displaytab(createtabclassr($table0), "class RouteMain | routing");
       displaytab(createtabclass($table2), "class RouteMain | no routing");
       ?>
     </div>

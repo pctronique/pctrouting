@@ -1,20 +1,18 @@
 <?php
 
-
 if (!class_exists('RouteMain')) {
 
     /* en cas d'erreur sur la classe */
     include_once __DIR__ . '/Path.php';
     include_once __DIR__ . '/PathServe.php';
     require_once __DIR__ . "/RegexPath.php";
+    define("PCTR_ROUTING_NR", "nurl");
 
     /**
      * Undocumented class
      */
     class RouteMain {
-
-        public static string $NAMEKEY = "pctroutind";
-        private string|null $parentPath;
+        
         private string|null $currentDir;
         private string|null $url;
         private array|null $index;
@@ -27,29 +25,23 @@ if (!class_exists('RouteMain')) {
          */
         public function __construct() {
             $this->isRoutage = array_key_exists("url", $_GET);
-            $this->parentPath = "./";
             $this->currentDir = "./";
             $this->index = array();
-            if(!empty($_GET) && array_key_exists('url', $_GET) && !empty($_GET['url'])) {
-                $geturl = preg_replace(RegexPath::RELATIVE->value, "", (new PathServe($_GET["url"]))->getPath());
-                $this->index = $this->createTabIndex($geturl);
+            $this->url = "";
+            $this->isRoutage = (!empty($_GET) && array_key_exists("url", $_GET));
+            if($this->isRoutage && !empty($_GET['url'])) {
+                $this->url = preg_replace(RegexPath::RELATIVE->value, "", (new PathServe($_GET["url"]))->getPath());
+            } else if(!$this->isRoutage && !empty($_GET) && array_key_exists(PCTR_ROUTING_NR, $_GET) && !empty($_GET[PCTR_ROUTING_NR])) {
+                $this->url = preg_replace(RegexPath::RELATIVE->value, "", (new PathServe($_GET[PCTR_ROUTING_NR]))->getPath());
+            }
+            $this->index = $this->createTabIndex($this->url);
+            if($this->isRoutage) {
                 foreach ($this->index as $value) {
-                    $this->parentPath .= "../";
                     $this->currentDir .= "../";
                 }
-                $this->parentPath = (new PathServe($this->parentPath))->getPath()."/";
-                $this->currentDir = (new PathServe($this->currentDir))->getPath()."/";
-            } else {
-                if(!empty($_GET)) {
-                    $regex_ind = str_replace("%1", RouteMain::$NAMEKEY, RegexPath::RTINDEX->value);
-                    foreach ($_GET as $key => $value) {
-                        if(preg_match_all($regex_ind, $key) && !array_key_exists($key, $this->index)) {
-                            $this->index[$key] = $value;
-                        }
-                    }
-                }
+                $this->currentDir = trim((new PathServe($this->currentDir))->getPath(), "/")."/";
+
             }
-            $this->url = trim(implode("/", $this->index), "/");
         }
 
         /**
@@ -65,7 +57,8 @@ if (!class_exists('RouteMain')) {
             $arrayIndex = array();
             $tabIndex = explode("/", trim($path, "/"));
             foreach ($tabIndex as $key => $value) {
-                $arrayIndex[RouteMain::$NAMEKEY.$key] = $value;
+                array_push($arrayIndex, $value);
+                //$arrayIndex[RouteMain::$NAMEKEY.$key] = $value;
             }
             unset($tabIndex);
             return $arrayIndex;
@@ -113,23 +106,32 @@ if (!class_exists('RouteMain')) {
          * @param string|null $path
          * @return string|null
          */
-        public function path(string|null $path):string|null {
+        public function path(string|null $path = null):string|null {
+            if(empty($path)) {
+                $path = "";
+            }
             $path = trim(preg_replace(RegexPath::TWOSLASH->value, "/", preg_replace(RegexPath::RELATIVE->value, "", $path)), "/");
             if(!$this->isRoutage) {
                 $pathGetIndex = "";
-                $path1 = new PathServe($path);
-                $explodePath = explode("#", preg_replace(RegexPath::RELATIVE->value, "", $path1->getPath()), 2);
+                $explodePath = [];
+                if(!empty($path)) {
+                    $pathrecp = new PathServe($path);
+                    $explodePath = explode("#", preg_replace(RegexPath::RELATIVE->value, "", $pathrecp->getPath()), 2);
+                }
                 $explodePathGet = explode("?", $explodePath[0], 2);
                 $tabpath = $this->pathnoroute($explodePathGet[0]);
                 $pathGetIndex .= $tabpath["parent"];
                 //$pathGetIndex .= $this->currentDirectory($path);
                 $tabIndex = $this->createTabIndex($tabpath["path"]);
-                if(count($tabIndex) > 0) {
+                if(!empty($tabpath["path"])) {
+                    $pathGetIndex .= "?nurl=".$tabpath["path"];
+                }
+                /*if(count($tabIndex) > 0) {
                     $pathGetIndex .= "?";
                 }
                 foreach ($tabIndex as $key => $value) {
                     $pathGetIndex .= $key . "=" .$value . "&";
-                }
+                }*/
                 $pathGetIndex = trim($pathGetIndex, "&");
                 if(count($explodePathGet) > 1) {
                     if(count($tabIndex) > 0) {
@@ -206,30 +208,8 @@ if (!class_exists('RouteMain')) {
          *
          * @return array|null
          */
-        public function getIndAndKeyPg():array|null {
-            return  $this->index;
-        }
-        
-        /**
-         * Undocumented function
-         *
-         * @return array|null
-         */
         public function getIndPg():array|null {
-            return  array_values($this->index);
-        }
-        
-        /**
-         * Undocumented function
-         *
-         * @param string|null $key
-         * @return string|null
-         */
-        public function getIndAndKeyPgKey(string|null $key):string|null {
-            if(!empty($key) && !empty($this->index) && array_key_exists($key, $this->index)) {
-                return $this->index[$key];
-            }
-            return  "";
+            return  $this->index;
         }
         
         /**
@@ -257,16 +237,6 @@ if (!class_exists('RouteMain')) {
         }
 
         /**
-         * Get the value of parentPath
-         *
-         * @return string|null
-         */
-        public function getParentPath(): string|null
-        {
-                return $this->parentPath;
-        }
-
-        /**
          * Get the value of isRoutage
          *
          * @return bool
@@ -275,7 +245,6 @@ if (!class_exists('RouteMain')) {
         {
                 return $this->isRoutage;
         }
-
 
         /**
          * Get the value of url
