@@ -63,6 +63,7 @@ if ($table->indexbool("item1")) {
       <?php
       displaytab(createtabclassr($table0), "class RouteMain | routing");
       displaytab(createtabclass($table2), "class RouteMain | no routing");
+      displaytab(createtabclass($table), "class RouteMain | def");
       ?>
     </div>
   </section>
