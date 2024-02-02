@@ -114,6 +114,7 @@ function display($txt, $testout) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/style_media.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
@@ -135,18 +136,12 @@ function display($txt, $testout) {
         <ul class="all-bt-menu">
           <li class="bt-menu no-submenu">
             <a href="./">acc</a>
-            <a href="./phpinfo.php" target="_blank">phpinfo</a>
+          </li>
+          <li class="bt-menu no-submenu">
             <a href="./test/">path</a>
+          </li>
+          <li class="bt-menu no-submenu">
             <a href="./test/route">route</a>
-            <a href="./test/route/page1">page1</a>
-            <a href="./test/route/page2">page2</a>
-            <a href="./test/route/page3">page3</a>
-            <a href="./test/route/page1/item1">item11</a>
-            <a href="./test/route/page2/item1">item21</a>
-            <a href="./test/route/page2/item2">item22</a>
-            <a href="./test/route/page3/item1">item31</a>
-            <a href="./test/route/page3/item2">item32</a>
-            <a href="./test/route/page3/item2/item1">item321</a>
           </li>
         </ul>
       </menu>

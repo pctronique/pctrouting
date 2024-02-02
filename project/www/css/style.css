@@ -28,6 +28,7 @@ body {
     flex-direction: column;
     box-sizing: border-box;
     overflow: none;
+    min-width: 300px;
     /*grid-template-columns: auto auto;*/
 }
 

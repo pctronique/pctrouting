@@ -5,7 +5,8 @@ include_once dirname(__FILE__) . '/../code/tabpathtest.php';
 
 $line = "<br/>";
 
-function createtab($value, $value1, $line) {
+function createtab($value, $value1) {
+    global $line;
     $value[0] = preg_replace(RegexPath::ANTISLASH->value, "/", $value[0]);
     $value[1] = preg_replace(RegexPath::ANTISLASH->value, "/", $value[1]);
     $value[2] = preg_replace(RegexPath::ANTISLASH->value, "/", $value[2]);
@@ -30,51 +31,51 @@ function createtab($value, $value1, $line) {
 echo "\$testpathhttp2 = [".$line;
 foreach ($testpathhttp as $value) {
     foreach ($testpathhttp as $value1) {
-        createtab($value, $value1, $line);
+        createtab($value, $value1);
     }
 }
 foreach ($testpathhttp as $value) {
     foreach ($testpatrelatif as $value1) {
-        createtab($value, $value1, $line);
+        createtab($value, $value1);
     }
 }
 foreach ($testpathhttp as $value) {
     foreach ($testpath as $value1) {
-        createtab($value, $value1, $line);
+        createtab($value, $value1);
     }
 }
 echo "];".$line;
 echo "\$testpatrelatif2 = [".$line;
 foreach ($testpatrelatif as $value) {
     foreach ($testpathhttp as $value1) {
-        createtab($value, $value1, $line);
+        createtab($value, $value1);
     }
 }
 foreach ($testpatrelatif as $value) {
     foreach ($testpatrelatif as $value1) {
-        createtab($value, $value1, $line);
+        createtab($value, $value1);
     }
 }
 foreach ($testpatrelatif as $value) {
     foreach ($testpath as $value1) {
-        createtab($value, $value1, $line);
+        createtab($value, $value1);
     }
 }
 echo "];".$line;
 echo "\$testpath2 = [".$line;
 foreach ($testpath as $value) {
     foreach ($testpathhttp as $value1) {
-        createtab($value, $value1, $line);
+        createtab($value, $value1);
     }
 }
 foreach ($testpath as $value) {
     foreach ($testpatrelatif as $value1) {
-        createtab($value, $value1, $line);
+        createtab($value, $value1);
     }
 }
 foreach ($testpath as $value) {
     foreach ($testpath as $value1) {
-        createtab($value, $value1, $line);
+        createtab($value, $value1);
     }
 }
 echo "];".$line;

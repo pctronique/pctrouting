@@ -1,0 +1,30 @@
+@media screen and (max-width: 720px) {
+  
+    #menu-burger {
+      display: unset;
+    }
+
+    .all-bt-menu {
+      display: none;
+      align-items: stretch;
+      position: absolute;
+      min-height: 100%;
+      flex-direction: column;
+      background-color: #d1d1d1;
+      right: 0;
+      text-align: left;
+    }
+
+    .all-bt-menu li, .all-bt-menu li a {
+      width: 100%;
+      text-align: left;
+      margin:0;
+      padding:12px;
+    }
+
+    #menu-display:checked ~ .all-bt-menu {
+      display: flex;
+    }
+  
+}
+

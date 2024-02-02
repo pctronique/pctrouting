@@ -20,6 +20,7 @@ $testAllpathhtt = array_merge($testpathhttp, array_merge($testpatrelatif, array_
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./../css/style.css" />
+    <link rel="stylesheet" href="./../css/style_media.css" />
     <link rel="stylesheet" href="./css/tabtest.css" />
     <link rel="stylesheet" href="./css/pathtest.css" />
     <link
@@ -43,9 +44,17 @@ $testAllpathhtt = array_merge($testpathhttp, array_merge($testpatrelatif, array_
         <ul class="all-bt-menu">
           <li class="bt-menu no-submenu">
             <a href="./../">acc</a>
+          </li>
+          <li class="bt-menu no-submenu">
             <a href="./phpinfo.php" target="_blank">phpinfo</a>
+          </li>
+          <li class="bt-menu no-submenu">
             <a href="./">path</a>
+          </li>
+          <li class="bt-menu no-submenu">
             <a href="./pathtest.php">pathtest</a>
+          </li>
+          <li class="bt-menu no-submenu">
             <a href="./route">route</a>
           </li>
         </ul>

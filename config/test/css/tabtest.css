@@ -2,7 +2,7 @@
     border: 1px #ebebeb solid;
     display: flex;
     flex-direction: column;
-    word-wrap: break-word
+    overflow-wrap: anywhere;
 }
 
 .tab {
@@ -19,7 +19,6 @@
 
 .tabtitle h2 {
     width: 100%;
-    word-wrap: break-word
 }
 
 .tabtitle h2, .tabth {
@@ -41,11 +40,9 @@
 
 .tab0 {
     background-color: #fffdc8;
-    word-wrap: break-word
 }
 
 .tab1 {
-    word-wrap: break-word
 }
 
 .tabth pre {
@@ -74,4 +71,23 @@
 
 .textfalse {
     color: red;
+}
+
+.tdval {
+    height: 20px;
+    border: unset;
+    width: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.tdval0 {
+    border: unset;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.tdvalnul {
+    background-color: #ededed;
 }

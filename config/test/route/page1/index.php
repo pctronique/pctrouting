@@ -17,6 +17,7 @@ if ($table->indexbool("item1")) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="<?= $table->pathFile("../../../css/style.css") ?>" />
+  <link rel="stylesheet" href="<?= $table->pathFile("../../../css/style_media.css") ?>" />
   <link rel="stylesheet" href="<?= $table->pathFile("../../css/tabtest.css") ?>" />
   <link rel="stylesheet" href="<?= $table->pathFile("../../css/route.css") ?>" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
@@ -40,18 +41,44 @@ if ($table->indexbool("item1")) {
       <ul class="all-bt-menu">
         <li class="bt-menu no-submenu">
           <a href="<?= $table->path("../../../") ?>">acc</a>
+          </li>
+          <li class="bt-menu no-submenu">
           <a href="<?= $table->path("../../") ?>">path</a>
+          </li>
+          <li class="bt-menu no-submenu">
           <a href="<?= $table->path("../../pathtest.php") ?>">pathtest</a>
+          </li>
+          <li class="bt-menu no-submenu">
           <a href="<?= $table->path("../") ?>">route</a>
+          </li>
+          <li class="bt-menu no-submenu">
           <a href="<?= $table->path("") ?>">page1</a>
+          </li>
+          <li class="bt-menu no-submenu">
           <a href="<?= $table->path("../page2") ?>">page2</a>
+          </li>
+          <li class="bt-menu no-submenu">
           <a href="<?= $table->path("../page3") ?>">page3</a>
+          </li>
+          <li class="bt-menu no-submenu">
           <a href="<?= $table->path("item1") ?>">item11</a>
+          </li>
+          <li class="bt-menu no-submenu">
           <a href="<?= $table->path("../page2/item1") ?>">item21</a>
+          </li>
+          <li class="bt-menu no-submenu">
           <a href="<?= $table->path("../page2/item2") ?>">item22</a>
+          </li>
+          <li class="bt-menu no-submenu">
           <a href="<?= $table->path("../page3/item1") ?>">item31</a>
+          </li>
+          <li class="bt-menu no-submenu">
           <a href="<?= $table->path("../page3/item2") ?>">item32</a>
+          </li>
+          <li class="bt-menu no-submenu">
           <a href="<?= $table->path("../page3/item2/item1") ?>">item321</a>
+          </li>
+          <li class="bt-menu no-submenu">
           <a href="<?= $table->path("../page3/item2//item2") ?>">item322</a>
         </li>
       </ul>

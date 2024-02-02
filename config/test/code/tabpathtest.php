@@ -179,10 +179,10 @@ $testpath = [
         "data" => "/usr/local/www/../site/../../tmp/index.php",
         "path" => "/usr/tmp/index.php",
         "parent" => "/usr/tmp",
-        "absolutparent" => "",
-        "absolutpath" => "",
+        "absolutparent" => "/usr/tmp",
+        "absolutpath" => "/usr/tmp/index.php",
         "name" => "index.php",
-        "namedisk" => "",
+        "namedisk" => "/",
         "parentin" => "/usr/local/www/../site/../../tmp/index.php",
     ],
     [

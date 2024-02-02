@@ -6,7 +6,8 @@ include_once dirname(__FILE__) . '/functcreatetab.php';
 
 $line = "<br/>";
 
-function createtab($value, $line) {
+function createtab($value) {
+    global $line;
     $tabAllVal = recupeother($value);
     $name = $tabAllVal["name"];
     $namedisk = $tabAllVal["namedisk"];
@@ -25,18 +26,18 @@ function createtab($value, $line) {
 //echo "<br /><br />".$line;
 echo "\$testpathhttp = [".$line;
 foreach ($testpathhttp as $value) {
-    createtab($value, $line);
+    createtab($value);
 }
 echo "];".$line;
 //echo "<br /><br />".$line;
 echo "\$testpatrelatif = [".$line;
 foreach ($testpatrelatif as $value) {
-    createtab($value, $line);
+    createtab($value);
 }
 echo "];".$line;
 //echo "<br /><br />".$line;
 echo "\$testpath = [".$line;
 foreach ($testpath as $value) {
-    createtab($value, $line);
+    createtab($value);
 }
 echo "];".$line;

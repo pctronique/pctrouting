@@ -45,25 +45,117 @@ function createtabpathall($pathall) {
     ];
 }
 
-function displaytaball($txt, $testout) {
-    $pathclass = createtabclass($testout);
-    $pathall = createtabpathall($txt);
-    $tabvalues1 = tabvalues($testout->getPath(), $txt["path"]);
-    $tabvalues2 = tabvalues($testout->getParent(), $txt["parent"]);
-    $tabvalues3 = tabvalues($testout->getAbsoluteParent(), $txt["absolutparent"]);
-    $valbool1 = ($tabvalues1 && $tabvalues2);
-    $valbool2 = (empty($txt["absolutparent"]) || (!empty($txt["absolutparent"]) && $tabvalues3));
-    $valbool3 = ($valbool1 && $valbool2);
-     ?>
-    <div class="allclass">
-        <?php displaytab($pathclass, "class ".'"'.$txt["data"].'"');
-        displaytab($pathall, "paths");
-        displaytab($tabvalues1, "path test", $tabvalues1["validpath"]);
-        displaytab($tabvalues2, "parent test", $tabvalues2["validpath"]);
-        if(!empty($txt["absolutparent"])) {
-            $tabvalues3 = tabvalues($testout->getAbsoluteParent(), $txt["absolutparent"]);
-            displaytab($tabvalues3, "absoluteParent test", $tabvalues3["validpath"]);
-        } ?>
-    </div>
-<?php 
+function textpathsys(string $txt):string {
+    return preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $txt);
+}
+
+function displaytaball($tab, $theclass, $name = null) {
+    if(empty($name)) {
+        $name = "class";
+    }
+    $header = ["key", "class", "expected", "validation"];
+    $valuestab = [];
+    $linetd = [
+        "parentin",
+        $tab["parentin"],
+        $tab["parentin"],
+        "",
+        "valid" => ""
+    ];
+    array_push($valuestab, $linetd);
+    $filein = [
+        "filein",
+        "",
+        "",
+        "",
+        "valid" => ""
+    ];
+    if(!empty($tab["filein"])) {
+        $filein = [
+            "filein",
+            $tab["filein"],
+            $tab["filein"],
+            "",
+            "valid" => ""
+        ];
+    }
+    array_push($valuestab, $filein);
+    $testName = $theclass->getName() == textpathsys($tab["name"]);
+    $linetd = [
+        "name",
+        $theclass->getName(),
+        textpathsys($tab["name"]),
+        $testName,
+        "valid" => $testName
+    ];
+    array_push($valuestab, $linetd);
+    $testPath = $theclass->getPath() == textpathsys($tab["path"]);
+    $linetd = [
+        "path",
+        $theclass->getPath(),
+        textpathsys($tab["path"]),
+        $testPath,
+        "valid" => $testPath
+    ];
+    array_push($valuestab, $linetd);
+    $testParent = $theclass->getParent() == textpathsys($tab["parent"]);
+    $linetd = [
+        "parent",
+        $theclass->getParent(),
+        textpathsys($tab["parent"]),
+        $testParent,
+        "valid" => $testParent
+    ];
+    array_push($valuestab, $linetd);
+    $linetdabpr = [
+        "absolutparent",
+        $theclass->getAbsoluteParent(),
+        "",
+        "",
+        "valid" => ""
+    ];
+    $linetdabpat = [
+        "absolutpath",
+        $theclass->getAbsolutePath(),
+        "",
+        "",
+        "valid" => ""
+    ];
+    $linetdabdis = [
+        "namedisk",
+        $theclass->getDiskname(),
+        "",
+        "",
+        "valid" => ""
+    ];
+    if(!empty($tab["absolutparent"])) {
+        $testAbsParent = $theclass->getAbsoluteParent() == textpathsys($tab["absolutparent"]);
+        $linetdabpr = [
+            "absolutparent",
+            $theclass->getAbsoluteParent(),
+            textpathsys($tab["absolutparent"]),
+            $testAbsParent,
+            "valid" => $testAbsParent
+        ];
+        $testAbsPath = $theclass->getAbsolutePath() == textpathsys($tab["absolutpath"]);
+        $linetdabpat = [
+            "absolutpath",
+            $theclass->getAbsolutePath(),
+            textpathsys($tab["absolutpath"]),
+            $testAbsPath,
+            "valid" => $testAbsPath
+        ];
+        $testAbsDisk = $theclass->getDiskname() == textpathsys($tab["namedisk"]);
+        $linetdabdis = [
+            "namedisk",
+            $theclass->getDiskname(),
+            textpathsys($tab["namedisk"]),
+            $testAbsDisk,
+            "valid" => $testAbsDisk
+        ];
+    }
+    array_push($valuestab, $linetdabpr);
+    array_push($valuestab, $linetdabpat);
+    array_push($valuestab, $linetdabdis);
+    displaytabLin($valuestab, $name, $header);
 }
