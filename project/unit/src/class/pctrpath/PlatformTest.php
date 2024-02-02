@@ -31,5 +31,11 @@ class PlatformTest extends TestCase
         $this->assertNotEmpty($testFunction);
         $this->assertIsString($testFunction);
     }
+    
+    public function testIswin():void {
+        $testFunction = $this->object->iswin();
+        $this->assertNotNull($testFunction);
+        $this->assertIsBool($testFunction);
+    }
 
 }

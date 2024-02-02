@@ -73,7 +73,7 @@ if (!class_exists('Path')) {
             return preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $path);
         }
 
-        public function exists() {
+        public function exists():bool {
             return file_exists($this->absolutePath);
         }
 

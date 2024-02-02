@@ -4,6 +4,9 @@ include_once dirname(__FILE__) . '/code/tabpathtest.php';
 include_once dirname(__FILE__) . '/code/tabletest.php';
 include_once dirname(__FILE__) . '/code/pathtest.php';
 
+$testAllpath = array_merge($testpath, $testpatrelatif);
+$testAllpathhtt = array_merge($testpathhttp, $testpatrelatif);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,10 +51,7 @@ include_once dirname(__FILE__) . '/code/pathtest.php';
             ?>
         <h1>Path test</h1>
         <?php
-            foreach ($testpath as $value) {
-                displaytaball($value, new Path($value["parentin"]));
-            }
-            foreach ($testpatrelatif as $value) {
+            foreach ($testAllpath as $value) {
                 displaytaball($value, new Path($value["parentin"]));
             }
         ?>
@@ -71,10 +71,7 @@ include_once dirname(__FILE__) . '/code/pathtest.php';
     </section>
     <section>
         <h1>PathServe test</h1>
-        <?php foreach ($testpathhttp as $value) {
-            displaytaball($value, new PathServe($value["parentin"]));
-        }
-        foreach ($testpatrelatif as $value) {
+        <?php foreach ($testAllpathhtt as $value) {
             displaytaball($value, new PathServe($value["parentin"]));
         } ?>
     </section>

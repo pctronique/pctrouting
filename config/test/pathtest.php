@@ -9,6 +9,9 @@ function boolstring($val) {
     return $val ? "true" : "false";
 }
 
+$testAllpath = array_merge($testpath, array_merge($testpatrelatif, array_merge($testpath2, $testpatrelatif2)));
+$testAllpathhtt = array_merge($testpathhttp, array_merge($testpatrelatif, array_merge($testpathhttp2, $testpatrelatif2)));
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,39 +52,24 @@ function boolstring($val) {
       </menu>
     </header>
     <section class="firstsection">
-      <?php $path01 = new Path();
-            $path02 = new Path($path01);
-            ?>
         <h1>Path test</h1>
         <?php
-        foreach ($testpath as $value) {
-            displaytaball($value, new Path($value["parentin"]));
-        }
-        foreach ($testpatrelatif as $value) {
-            displaytaball($value, new Path($value["parentin"]));
-        }
-        foreach ($testpath2 as $value) {
-            displaytaball($value, new Path($value["parentin"], $value["filein"]));
-        }
-        foreach ($testpatrelatif2 as $value) {
-            displaytaball($value, new Path($value["parentin"], $value["filein"]));
+        foreach ($testAllpath as $value) {
+            $obj = (!empty($value["parentin"])) ? 
+                            new Path($value["parentin"], $value["filein"]) : 
+                            new Path($value["parentin"]);
+            displaytaball($value, $obj, $i, __LINE__);
         }
         ?>
     </section>
     <section>
         <h1>PathServe test</h1>
         <?php 
-        foreach ($testpathhttp as $value) {
-            displaytaball($value, new PathServe($value["parentin"]));
-        }
-        foreach ($testpatrelatif as $value) {
-            displaytaball($value, new PathServe($value["parentin"]));
-        }
-        foreach ($testpathhttp2 as $value) {
-            displaytaball($value, new PathServe($value["parentin"], $value["filein"]));
-        }
-        foreach ($testpatrelatif2 as $value) {
-            displaytaball($value, new PathServe($value["parentin"], $value["filein"]));
+        foreach ($testAllpathhtt as $value) {
+            $obj = (!empty($value["parentin"])) ? 
+                            new PathServe($value["parentin"], $value["filein"]) : 
+                            new PathServe($value["parentin"]);
+            displaytaball($value, $obj, $i, __LINE__);
         }
         ?>
     </section>

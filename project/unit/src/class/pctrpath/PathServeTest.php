@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 define("RACINE_UNIT", dirname(__FILE__)."/../../..");
 require_once(RACINE_UNIT . '/config_path.php');
 require_once(RACINE_UNIT . '/function_test.php');
+require_once(RACINE_UNIT . '/function_test_path.php');
 require_once(RACINE_WWW . '/src/class/pctrpath/PathServe.php');
 require_once(RACINE_WWW . '/src/class/pctrpath/RegexPath.php');
 
@@ -30,20 +31,20 @@ class PathServeTest extends TestCase
     }
 
     public function testPathdef():void {
-        foreach (array_https() as $value) {
-            $this->object = new PathServe($value[0]);
+        foreach (array_pathhttp() as $value) {
+            $this->object =  (!empty($value["filein"])) ? 
+                                new PathServe($value["parentin"], $value["filein"]) : 
+                                new PathServe($value["parentin"]);
             $this->testing();
-            fwrite(STDOUT, "path recp : ".$this->object->getPath() . "\n");
-            fwrite(STDOUT, "path defa : ".preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value[1]) . "\n");
-            fwrite(STDOUT, "parent recp : ".$this->object->getParent() . "\n");
-            fwrite(STDOUT, "parent defa : ".preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value[2]) . "\n");
-            $this->assertTrue($this->object->getPath() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value[1]));
-            $this->assertTrue($this->object->getParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value[2]));
-            if(!empty($value[3])) {
-                fwrite(STDOUT, "absoluteparent recp : ".$this->object->getAbsoluteParent() . "\n");
-                fwrite(STDOUT, "absoluteparent defa : ".preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value[3]) . "\n");
-                $this->assertTrue($this->object->getAbsoluteParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value[3]));
+            $this->assertEquals($this->object->getName(), $value["name"]);
+            $this->assertEquals($this->object->getPath(), $value["path"]);
+            $this->assertEquals($this->object->getParent(), $value["parent"]);
+            if(!empty($value["absolutparent"])) {
+                $this->assertEquals($this->object->getAbsoluteParent(), $value["absolutparent"]);
+                $this->assertEquals($this->object->getAbsolutePath(), $value["absolutpath"]);
+                $this->assertEquals($this->object->getDiskname(), $value["namedisk"]);
             }
+            $this->testing();
         }
     }
 

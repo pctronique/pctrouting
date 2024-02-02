@@ -31,16 +31,16 @@ function array_route() {
         "./?key0=value0&key1=value1"],
         ["route1?key0=value0&key1=value1",
         "./route1?key0=value0&key1=value1",
-        "./?".RouteMain::$NAMEKEY."0=route1&key0=value0&key1=value1"],
+        "./?".PCTR_ROUTING_NR."=route1&key0=value0&key1=value1"],
         ["./route1?key0=value0&key1=value1",
         "./route1?key0=value0&key1=value1",
-        "./?".RouteMain::$NAMEKEY."0=route1&key0=value0&key1=value1"],
+        "./?".PCTR_ROUTING_NR."=route1&key0=value0&key1=value1"],
         ["route1/route2?key0=value0&key1=value1",
         "./route1/route2?key0=value0&key1=value1",
-        "./?".RouteMain::$NAMEKEY."0=route1&".RouteMain::$NAMEKEY."1=route2&key0=value0&key1=value1"],
+        "./?".PCTR_ROUTING_NR."=route1/route2&key0=value0&key1=value1"],
         ["./route1/route2?key0=value0&key1=value1",
         "./route1/route2?key0=value0&key1=value1",
-        "./?".RouteMain::$NAMEKEY."0=route1&".RouteMain::$NAMEKEY."1=route2&key0=value0&key1=value1"]
+        "./?".PCTR_ROUTING_NR."=route1/route2&key0=value0&key1=value1"]
     );
 }
 

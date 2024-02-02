@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 define("RACINE_UNIT", dirname(__FILE__)."/../../..");
 require_once(RACINE_UNIT . '/config_path.php');
 require_once(RACINE_UNIT . '/function_test.php');
+require_once(RACINE_UNIT . '/function_test_path.php');
 require_once(RACINE_WWW . '/src/class/pctrpath/Path.php');
 require_once(RACINE_WWW . '/src/class/pctrpath/RegexPath.php');
 
@@ -29,21 +30,25 @@ class PathTest extends TestCase
         $this->testing();
     }
 
+    private function systemsepa(string $text): string {
+        return preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $text);
+    }
+
     public function testPathdef():void {
-        foreach (array_path() as $value) {
-            $this->object = new Path($value[0]);
+        foreach (array_pathmain() as $value) {
+            $this->object = (!empty($value["filein"])) ? 
+                                new Path($value["parentin"], $value["filein"]) : 
+                                new Path($value["parentin"]);
             $this->testing();
-            fwrite(STDOUT, "path recp : ".$this->object->getPath() . "\n");
-            fwrite(STDOUT, "path defa : ".preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value[1]) . "\n");
-            fwrite(STDOUT, "parent recp : ".$this->object->getParent() . "\n");
-            fwrite(STDOUT, "parent defa : ".preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value[2]) . "\n");
-            $this->assertTrue($this->object->getPath() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value[1]));
-            $this->assertTrue($this->object->getParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value[2]));
-            if(!empty($value[3])) {
-                fwrite(STDOUT, "absoluteparent recp : ".$this->object->getAbsoluteParent() . "\n");
-                fwrite(STDOUT, "absoluteparent defa : ".preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value[3]) . "\n");
-                $this->assertTrue($this->object->getAbsoluteParent() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $value[3]));
+            $this->assertEquals($this->object->getName(), $this->systemsepa($value["name"]));
+            $this->assertEquals($this->object->getPath(), $this->systemsepa($value["path"]));
+            $this->assertEquals($this->object->getParent(), $this->systemsepa($value["parent"]));
+            if(!empty($value["absolutparent"])) {
+                $this->assertEquals($this->object->getAbsoluteParent(), $this->systemsepa($value["absolutparent"]));
+                $this->assertEquals($this->object->getAbsolutePath(), $this->systemsepa($value["absolutpath"]));
+                $this->assertEquals($this->object->getDiskname(), $this->systemsepa($value["namedisk"]));
             }
+            $this->testing();
         }
     }
 
@@ -62,6 +67,7 @@ class PathTest extends TestCase
         $this->testGetAbsoluteParent();
         $this->testGetAbsolutePath();
         $this->testGetPath();
+        $this->testExists();
     }
     
     public function testGetName(): void
@@ -104,6 +110,12 @@ class PathTest extends TestCase
         $testFunction = $this->object->getPath();
         $this->assertNotNull($testFunction);
         $this->assertIsString($testFunction);
+    }
+
+    public function testExists(): void {
+        $testFunction = $this->object->exists();
+        $this->assertNotNull($testFunction);
+        $this->assertIsBool($testFunction);
     }
 
 }
