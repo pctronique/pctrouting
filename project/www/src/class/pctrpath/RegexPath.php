@@ -18,6 +18,7 @@ if (!enum_exists("RegexPath")) {
         case ABSOWIN = '/^[^.^\/^\\\\.]{1,}:/sim';
         case TWOSLASH = '/[\/]{2,}|\/\.\/|\\\\/sim';
         case ABSOSERVE = '/^[^.^\/.]{1,}:[\/]{2}[\.\w: ]{1,}/sim';
+        case FILEWEB = '/\/[\w \-_]{1,}\.php$|\/[\w \-_]{1,}\.html$/sim';
         //case PATHRETU = '/[\w ]{1,}[\/]{1,}[\.]{2}|[\/]{2,}|^[\.]{2}$|^\/[\.]{2}$/sim';
         case PATHRETU = '/[\w\._\-]{1,}[\w]{1,}[\/]{1,}[\.]{2}|[\/]{2,}|\/ | \//sim';
     }

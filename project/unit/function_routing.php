@@ -323,3 +323,9 @@ $tabrouting = [
         ],
     ]
 ];
+
+
+function array_tabrouting() {
+    global $tabrouting;
+    return $$tabrouting;
+}

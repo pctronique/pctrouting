@@ -43,7 +43,7 @@ if (!class_exists('Path')) {
             $valueout = "";
             if(!empty($_SERVER) && array_key_exists("PWD" ,$_SERVER) && !empty($_SERVER['PWD']) && 
             array_key_exists("REQUEST_URI" ,$_SERVER) && !empty($_SERVER['REQUEST_URI'])) {
-                $valueout = $_SERVER['PWD']."/".$_SERVER['REQUEST_URI'];
+                $valueout = $_SERVER['PWD']."/".preg_replace(RegexPath::FILEWEB->value, "/", $_SERVER['REQUEST_URI']);
             } else if(!empty($_SERVER) && array_key_exists("PWD" ,$_SERVER) && !empty($_SERVER['PWD'])) {
                 $valueout = $_SERVER['PWD'];
             }

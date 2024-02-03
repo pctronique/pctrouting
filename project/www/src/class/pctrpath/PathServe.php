@@ -35,7 +35,7 @@ if (!class_exists('PathServe')) {
         protected function absolut_def():string|null {
             $valueout = "";
             if(!empty($_SERVER) && !empty($_SERVER) && array_key_exists("REQUEST_URI" ,$_SERVER) && !empty($_SERVER['REQUEST_URI'])) {
-                $valueout = PathServe::base().$_SERVER['REQUEST_URI'];
+                $valueout = PathServe::base().preg_replace(RegexPath::FILEWEB->value, "/", $_SERVER['REQUEST_URI']);
             }
             if(empty($valueout)) {
                 $valueout = PathServe::base();

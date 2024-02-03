@@ -1,9 +1,103 @@
 <?php
 
-include_once dirname(__FILE__) . '/code/tabpathtest2.php';
-include_once dirname(__FILE__) . '/code/tabpathtest.php';
+include_once dirname(__FILE__) . '/../src/class/pctrpath/Path.php';
+include_once dirname(__FILE__) . '/../src/class/pctrpath/PathServe.php';
+include_once dirname(__FILE__) . '/../src/class/pctrpath/RouteMain.php';
+include_once dirname(__FILE__) . '/code/testrouting.php';
 include_once dirname(__FILE__) . '/code/tabletest.php';
 include_once dirname(__FILE__) . '/code/pathtest.php';
+
+function lienhttp($path0, $path1) {
+    return (new PathServe($path0, $path1))->getAbsolutePath();
+}
+
+function lienpath($path0, $path1) {
+    return (new Path($path0, $path1))->getAbsolutePath();
+}
+
+function tabind($ind) {
+    return trim(implode("/", $ind), "/");
+}
+
+function boolstring($val) {
+    return $val ? "true" : "false";
+}
+
+function disptabl($tab) {
+    $header = ["key", "class", "expected", "validation"];
+    displaytabLin($tab, "class RouteMain", $header);
+}
+
+function addlind($name, $text0, $text1, $istest) {
+    $isvalid = ($text0 == $text1);
+    $txtval = "";
+    $tstvalid = "";
+    if($istest){
+        $txtval = $isvalid;
+        $tstvalid = $isvalid;
+    }
+    return [
+        $name,
+        $text0,
+        $text1,
+        $txtval,
+        "valid" => $tstvalid
+    ];
+}
+
+function tabtestrt($tabtest, $route, $routenot) {
+    $tabroutetest = [];
+    $tabnroutetest = [];
+    array_push($tabroutetest, addlind("url_a_n", $tabtest["url_a_n"], $tabtest["url_a_n"], false));
+    array_push($tabnroutetest, addlind("url_a_n", $tabtest["url_a_n"], $tabtest["url_a_n"], false));
+    array_push($tabroutetest, addlind("getCurrentDir", $route->getCurrentDir(), $tabtest["getCurrentDir"], true));
+    array_push($tabnroutetest, addlind("getCurrentDir", $routenot->getCurrentDir(), $tabtest["getCurrentDir_n"], true));
+    array_push($tabroutetest, addlind("getCurrentDir", $route->getIsRoutage(), $tabtest["getIsRoutage"], true));
+    array_push($tabnroutetest, addlind("getCurrentDir", $routenot->getIsRoutage(), $tabtest["getIsRoutage_n"], true));
+    array_push($tabroutetest, addlind("getUrl", $route->getUrl(), $tabtest["getUrl"], true));
+    array_push($tabnroutetest, addlind("getUrl", $routenot->getUrl(), $tabtest["getUrl"], true));
+    foreach ($tabtest["getUrl"] as $key => $value) {
+        array_push($tabroutetest, addlind("getIndPgKey_".$key, $value["getIndPgKey"], $value["getIndPgKey"], false));
+        array_push($tabnroutetest, addlind("getIndPgKey_".$key, $value["getIndPgKey"], $value["getIndPgKey"], false));
+        array_push($tabroutetest, addlind("getIndPgKey_res_".$key, $route->getIndPgKey($value["getIndPgKey"]), $value["getIndPgKey_res"], true));
+        array_push($tabnroutetest, addlind("getIndPgKey_res_".$key, $routenot->getIndPgKey($value["getIndPgKey"]), $value["getIndPgKey_res"], true));
+    }
+    foreach ($tabtest["tabIndexbool"] as $key => $value) {
+        array_push($tabroutetest, addlind("indexbool_".$key, $value["indexbool"], $value["indexbool"], false));
+        array_push($tabnroutetest, addlind("indexbool_".$key, $value["indexbool"], $value["indexbool"], false));
+        array_push($tabroutetest, addlind("indexbool_res_".$key, $route->indexbool($value["indexbool"]), $value["indexbool_res"], true));
+        array_push($tabnroutetest, addlind("indexbool_res_".$key, $routenot->indexbool($value["indexbool"]), $value["indexbool_res"], true));
+    }
+    foreach ($tabtest["tabPathSystem"] as $key => $value) {
+        array_push($tabroutetest, addlind("pathSystem_".$key, $value["pathSystem"], $value["pathSystem"], false));
+        array_push($tabnroutetest, addlind("pathSystem_".$key, $value["pathSystem"], $value["pathSystem"], false));
+        array_push($tabroutetest, addlind("pathSystem_res_".$key, $route->pathSystem($value["pathSystem"]), lienpath($route->getCurrentDir(), $value["pathSystem_res"]), true));
+        array_push($tabnroutetest, addlind("pathSystem_res_".$key, $routenot->pathSystem($value["pathSystem"]), lienpath($routenot->getCurrentDir(), $value["pathSystem_res_r"]), true));
+    }
+    foreach ($tabtest["tabPath"] as $key => $value) {
+        array_push($tabroutetest, addlind("path_".$key, $value["path"], $value["path"], false));
+        array_push($tabnroutetest, addlind("path_".$key, $value["path"], $value["path"], false));
+        array_push($tabroutetest, addlind("path_res_".$key, $route->path($value["path"]), lienhttp($route->getCurrentDir(), $value["path_res"]), true));
+        array_push($tabnroutetest, addlind("path_res_".$key, $routenot->path($value["path"]), lienhttp($routenot->getCurrentDir(), $value["path_res_r"]), true));
+    }
+    disptabl($tabroutetest);
+    disptabl($tabnroutetest);
+}
+
+
+function display() {
+    global $tabrouting;
+    foreach ($tabrouting as $value) {
+        $_GET["url"] = $value["url_a_n"];
+        $table0 = new RouteMain();
+        $_GET[PCTR_ROUTING_NR] = $_GET["url"];
+        unset($_GET["url"]);
+        $table2 = new RouteMain();
+        tabtestrt($value, $table0, $table2);
+    }
+}
+
+
 
 /*
 public function path(string|null $path = null):string|null {
@@ -16,14 +110,6 @@ public function getCurrentDir():string|null
 public function getIsRoutage(): bool
 public function getUrl(): string|null
 */
-
-function boolstring($val) {
-    return $val ? "true" : "false";
-}
-
-$testAllpath = array_merge($testpath, array_merge($testpatrelatif, array_merge($testpath2, $testpatrelatif2)));
-$testAllpathhtt = array_merge($testpathhttp, array_merge($testpatrelatif, array_merge($testpathhttp2, $testpatrelatif2)));
-
 function displayvalue($tab, $theclass, $nb, $linetab) {
     $testName = $theclass->getName() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $tab["name"]);
     $testPath = $theclass->getPath() == preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $tab["path"]);
@@ -85,37 +171,18 @@ function displayvalue($tab, $theclass, $nb, $linetab) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./../css/style.css" />
+    <link rel="stylesheet" href="./../css/style_media.css" />
+    <link rel="stylesheet" href="./css/tabtest.css" />
+    <link rel="stylesheet" href="./css/pathtest.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
 </head>
 <body>
     <section class="firstsection">
-      <?php /*$path01 = new Path();
-            $path02 = new Path($path01);*/
-            ?>
-        <!--<h1>Path test</h1>-->
-        <?php
-        $i = 1;
-        foreach ($testAllpath as $value) {
-            $obj = (!empty($value["parentin"])) ? 
-                            new Path($value["parentin"], $value["filein"]) : 
-                            new Path($value["parentin"]);
-            if(displayvalue($value, $obj, $i, __LINE__)) {
-                $i++;
-            }
-        }
-        ?>
-    </section>
-    <section>
-        <!--<h1>PathServe test</h1>-->
-        <?php 
-        foreach ($testAllpathhtt as $value) {
-            $obj = (!empty($value["parentin"])) ? 
-                            new PathServe($value["parentin"], $value["filein"]) : 
-                            new PathServe($value["parentin"]);
-            if(displayvalue($value, $obj, $i, __LINE__)) {
-                $i++;
-            }
-        }
-        ?>
+      <?php display(); ?>
     </section>
 </body>
 </html>
