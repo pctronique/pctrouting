@@ -1,8 +1,5 @@
 <?php
-/**
- * Pour lire le fichier avec les configurations du site.
- */
-
+// verifier qu'on n'a pas deja creer la classe
 if (!class_exists('PathServe')) {
 
     require_once __DIR__ . "/Platform.php";
@@ -10,15 +7,15 @@ if (!class_exists('PathServe')) {
     require_once __DIR__ . "/RegexPath.php";
 
     /**
-     * Undocumented class
+     * Pour la création d'un chemin valide à partir du site.
      */
     class PathServe extends PathDef {
 
         /**
-         * Undocumented function
+         * le constructeur par défaut ou par référence.
          *
-         * @param PathServe|string|null $pathParent
-         * @param string|null $path
+         * @param PathServe|string|null $pathParent le chemin parent ou du fichier.
+         * @param string|null $path le chemin du fichier si on utilise un chemin parent.
          */
         public function __construct(PathServe|string|null $pathParent = null, string|null $path = null) {
             if(strtolower(gettype($pathParent)) == "object" && strtolower(get_class($pathParent)) == "pathserve") {
@@ -28,9 +25,9 @@ if (!class_exists('PathServe')) {
         }
 
         /**
-         * Undocumented function
+         * Récupère le chemin absolu par défaut.
          *
-         * @return string|null
+         * @return string|null chemin absolu par défaut.
          */
         protected function absolut_def():string|null {
             $valueout = "";
@@ -44,9 +41,9 @@ if (!class_exists('PathServe')) {
         }
 
         /**
-         * Undocumented function
+         * Récupère le chemin absolu de base.
          *
-         * @return string|null
+         * @return string|null le chemin absolu de base.
          */
         public static function base():string|null {
             if(!array_key_exists('REQUEST_SCHEME', $_SERVER) || !array_key_exists('HTTP_HOST', $_SERVER)) {

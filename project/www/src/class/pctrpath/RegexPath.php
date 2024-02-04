@@ -1,6 +1,10 @@
 <?php
-
+// verifier qu'on n'a pas deja creer l'enum
 if (!enum_exists("RegexPath")) {
+
+    /**
+     * Enum regex pour le chemin et le routage.
+     */
     enum RegexPath: string
     {
         case NULL = '';

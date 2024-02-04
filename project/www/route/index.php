@@ -128,9 +128,9 @@ switch (true) {
     <h1><?= $txttitle ?></h1>
     <div class="ctpgroute">
       <?php
+      displaytab(createtabclass($table), "class RouteMain | def");
       displaytab(createtabclassr($table0), "class RouteMain | routing");
       displaytab(createtabclass($table2), "class RouteMain | no routing");
-      displaytab(createtabclass($table), "class RouteMain | def");
       ?>
     </div>
   </section>

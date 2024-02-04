@@ -2,10 +2,10 @@
 
 include_once dirname(__FILE__) . '/../src/class/pctrpath/Path.php';
 include_once dirname(__FILE__) . '/../src/class/pctrpath/PathServe.php';
-include_once dirname(__FILE__) . '/../src/class/pctrpath/RouteMain.php';
-include_once dirname(__FILE__) . '/code/testrouting.php';
-include_once dirname(__FILE__) . '/code/tabletest.php';
-include_once dirname(__FILE__) . '/code/pathtest.php';
+include_once dirname(__FILE__) . '/../code/testrouting.php';
+include_once dirname(__FILE__) . '/../code/tabletest.php';
+include_once dirname(__FILE__) . '/../code/pathtest.php';
+include_once dirname(__FILE__) . '/../../unit/function_routing.php';
 
 function lienhttp($path0, $path1) {
     return (new PathServe($path0, $path1))->getAbsolutePath();
@@ -90,9 +90,10 @@ function display() {
     foreach ($tabrouting as $value) {
         $_GET["url"] = $value["url_a_n"];
         $table0 = new RouteMain();
-        $_GET[PCTR_ROUTING_NR] = $_GET["url"];
+        $_GET[PCTR_ROUTING_NR] = $table0->getUrl();
         unset($_GET["url"]);
         $table2 = new RouteMain();
+        unset($_GET[PCTR_ROUTING_NR]);
         tabtestrt($value, $table0, $table2);
     }
 }

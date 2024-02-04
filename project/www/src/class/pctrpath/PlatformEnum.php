@@ -1,6 +1,10 @@
 <?php
-
+// verifier qu'on n'a pas deja creer l'enum
 if (!enum_exists("PlatformEnum")) {
+
+    /**
+     * Enum pour les noms de plateforme.
+     */
     enum PlatformEnum
     {
         case NULL;

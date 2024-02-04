@@ -13,7 +13,7 @@ unset($_GET[PCTR_ROUTING_NR]);
 
 $table0 = new RouteMain();
 
-$_GET[PCTR_ROUTING_NR] = $_GET["url"];
+$_GET[PCTR_ROUTING_NR] = $table0->getUrl();
 
 unset($_GET["url"]);
 
@@ -43,7 +43,7 @@ function createtabclassr($pathclass) {
         "path img 2" => $pathclass->pathFile("../image2.png"),
         "path sys 1" => $pathclass->pathSystem("image.png"),
         "path sys 2" => $pathclass->pathSystem("../image2.png"),
-        "no url" => $pathclass->path("route0?test=8&pass=lkjh&nurl=place0/place1/place2")
+        "no url" => $pathclass->path("route0?test=8&pass=lkjh")
     ];
 }
 
@@ -60,6 +60,6 @@ function createtabclass($pathclass) {
         "path img 2" => $pathclass->pathFile(LINENDEF."../image2.png"),
         "path sys 1" => $pathclass->pathSystem(LINENDEF."image.png"),
         "path sys 2" => $pathclass->pathSystem(LINENDEF."../image2.png"),
-        "no url" => $pathclass->path(LINENDEF."route0?test=8&pass=lkjh&nurl=place0/place1/place2")
+        "no url" => $pathclass->path(LINENDEF."route0?test=8&pass=lkjh")
     ];
 }

@@ -1,31 +1,28 @@
 <?php
-/**
- * Pour lire le fichier avec les configurations du site.
- */
-
+// verifier qu'on n'a pas deja creer la classe
 if (!class_exists('Platform')) {
 
     include_once __DIR__ . "/PlatformEnum.php";
 
     /**
-     * Undocumented class
+     * Pour récupérer le nom de la plateforme utilisé.
      */
     class Platform {
 
         private PlatformEnum|null $name;
 
         /**
-         * Undocumented function
+         * le constructeur par défaut.
          */
         public function __construct() {
             $this->name=$this->recupPlarform(PHP_OS);
         }
 
         /**
-         * Undocumented function
+         * Transforme le nom pour le retrouver dans l'enum.
          *
-         * @param string|null $name
-         * @return string|null
+         * @param string|null $name le nom a transformer.
+         * @return string|null Le nom modifié.
          */
         private function transformName(string|null $name):string|null {
             if(empty($name)) {
@@ -41,10 +38,10 @@ if (!class_exists('Platform')) {
         }
 
         /**
-         * Undocumented function
+         * Récupère l'enum du nom de la plateforme.
          *
-         * @param string|null $name
-         * @return PlatformEnum|null
+         * @param string|null $name le nom text.
+         * @return PlatformEnum|null L'enum du nom.
          */
         private function recupPlarform(string|null $name):PlatformEnum|null {
             if(empty($name)) {
@@ -60,9 +57,9 @@ if (!class_exists('Platform')) {
         }
 
         /**
-         * Undocumented function
+         * Récupère le nom à partir de l'enum.
          *
-         * @return PlatformEnum|null
+         * @return PlatformEnum|null le nom de la plateforme.
          */
         public function getName(): PlatformEnum|null
         {
@@ -70,9 +67,9 @@ if (!class_exists('Platform')) {
         }
         
         /**
-         * Undocumented function
+         * Récupère le nom à partir d'un format texte.
          *
-         * @return string|null
+         * @return string|null le nom.
          */
         public function php_os(): string|null
         {
@@ -80,9 +77,9 @@ if (!class_exists('Platform')) {
         }
 
         /**
-         * Undocumented function
+         * Vérifier qu'on utilise une plateforme windows.
          *
-         * @return boolean
+         * @return boolean true si c'est un windows.
          */
         public function iswin():bool {
             $php_os = $this->php_os();

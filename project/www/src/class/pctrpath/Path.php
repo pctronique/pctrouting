@@ -1,8 +1,5 @@
 <?php
-/**
- * Pour lire le fichier avec les configurations du site.
- */
-
+// verifier qu'on n'a pas deja creer la classe
 if (!class_exists('Path')) {
 
     require_once __DIR__ . "/Platform.php";
@@ -12,15 +9,15 @@ if (!class_exists('Path')) {
     define("PCTR_PATH_RACINE_SITE", __DIR__."/../../..");
 
     /**
-     * Undocumented class
+     * Pour la création d'un chemin valide à partir du disque dur.
      */
     class Path extends PathDef {
 
         /**
-         * Undocumented function
+         * le constructeur par défaut ou par référence.
          *
-         * @param Path|string|null $pathParent
-         * @param string|null $path
+         * @param Path|string|null $pathParent le chemin parent ou du fichier.
+         * @param string|null $path le chemin du fichier si on utilise un chemin parent.
          */
         public function __construct(Path|string|null $pathParent = null, string|null $path = null) {
             if(strtolower(gettype($pathParent)) == "object" && strtolower(get_class($pathParent)) == "path") {
@@ -35,9 +32,9 @@ if (!class_exists('Path')) {
         }
 
         /**
-         * Undocumented function
+         * Récupère le chemin absolut par défaut.
          *
-         * @return string|null
+         * @return string|null chemin absolu par défaut.
          */
         protected function absolut_def():string|null {
             $valueout = "";
@@ -54,9 +51,9 @@ if (!class_exists('Path')) {
         }
 
         /**
-         * Undocumented function
+         * Récupère le chemin absolu de base.
          *
-         * @return string|null
+         * @return string|null le chemin absolu de base.
          */
         public static function base():string|null {
             $valueout = new Path(PCTR_PATH_RACINE_SITE);
@@ -64,15 +61,20 @@ if (!class_exists('Path')) {
         }
 
         /**
-         * Undocumented function
+         * Remplace le séparateur par celui de la plateforme.
          *
-         * @param string|null $path
-         * @return string|null
+         * @param string|null $path chemin avec le séparateur /.
+         * @return string|null chemin avec le séparateur de la plateforme.
          */
         private function separator_system(string|null $path):string|null {
             return preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $path);
         }
 
+        /**
+         * Vérifier que le fichier ou dossier existe.
+         *
+         * @return boolean true si le fichier ou dossier existe.
+         */
         public function exists():bool {
             return file_exists($this->absolutePath);
         }

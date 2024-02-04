@@ -31,6 +31,8 @@ class RouteMainTest extends TestCase
     }
 
     private function tabtestrt($tabtest, $route, $routenot) {
+        $this->assertEquals($this->tabind($route->getIndPg()), $tabtest["getIndPg"]);
+        $this->assertEquals($this->tabind($routenot->getIndPg()), $tabtest["getIndPg"]);
         $this->assertEquals($route->getCurrentDir(), $tabtest["getCurrentDir"]);
         $this->assertEquals($routenot->getCurrentDir(), $tabtest["getCurrentDir_n"]);
         $this->assertEquals($route->getIsRoutage(), $tabtest["getIsRoutage"]);
@@ -62,8 +64,8 @@ class RouteMainTest extends TestCase
             $_GET[PCTR_ROUTING_NR] = $_GET["url"];
             unset($_GET["url"]);
             $table2 = new RouteMain();
-            tabtestrt($value, $table0, $table2);
             unset($_GET[PCTR_ROUTING_NR]);
+            $this->tabtestrt($value, $table0, $table2);
         }
     }
 

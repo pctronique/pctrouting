@@ -1,10 +1,10 @@
 <?php
 
-include_once dirname(__FILE__) . '/../../src/class/pctrpath/Path.php';
-include_once dirname(__FILE__) . '/../../src/class/pctrpath/PathDef.php';
-include_once dirname(__FILE__) . '/../../src/class/pctrpath/RouteMain.php';
-include_once dirname(__FILE__) . '/../../src/class/pctrpath/Platform.php';
-include_once dirname(__FILE__) . '/../../src/class/pctrpath/PathServe.php';
+include_once dirname(__FILE__) . '/../src/class/pctrpath/Path.php';
+include_once dirname(__FILE__) . '/../src/class/pctrpath/PathDef.php';
+include_once dirname(__FILE__) . '/../src/class/pctrpath/RouteMain.php';
+include_once dirname(__FILE__) . '/../src/class/pctrpath/Platform.php';
+include_once dirname(__FILE__) . '/../src/class/pctrpath/PathServe.php';
 
 function pathclass($text) {
     return preg_replace(RegexPath::SEPSYSTEM->value, DIRECTORY_SEPARATOR, $text);

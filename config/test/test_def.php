@@ -1,9 +1,8 @@
 <?php
 
-include_once dirname(__FILE__) . '/code/tabpathtest2.php';
-include_once dirname(__FILE__) . '/code/tabpathtest.php';
-include_once dirname(__FILE__) . '/code/tabletest.php';
-include_once dirname(__FILE__) . '/code/pathtest.php';
+include_once dirname(__FILE__) . '/../../unit/function_test_path.php';
+include_once dirname(__FILE__) . '/../code/tabletest.php';
+include_once dirname(__FILE__) . '/../code/pathtest.php';
 
 function boolstring($val) {
     return $val ? "true" : "false";

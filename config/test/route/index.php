@@ -1,8 +1,8 @@
 <?php
 
 include_once dirname(__FILE__) . '/../../src/class/pctrpath/RouteMain.php';
-include_once dirname(__FILE__) . '/../code/tabletest.php';
-include_once dirname(__FILE__) . '/../code/routetest.php';
+include_once dirname(__FILE__) . '/../../code/tabletest.php';
+include_once dirname(__FILE__) . '/../../code/routetest.php';
 
 $txttitle = "";
 switch (true) {

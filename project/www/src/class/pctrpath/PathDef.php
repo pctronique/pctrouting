@@ -1,8 +1,5 @@
 <?php
-/**
- * Pour lire le fichier avec les configurations du site.
- */
-
+// verifier qu'on n'a pas deja creer la classe
 if (!class_exists('PathDef')) {
 
     require_once __DIR__ . "/Platform.php";
@@ -11,7 +8,7 @@ if (!class_exists('PathDef')) {
     define("RACINE_SITE", __DIR__."/../../..");
 
     /**
-     * Creation de la class pour la lecture du fichier ini avec les configurations
+     * Pour la création d'un chemin valide.
      */
     abstract class PathDef {
 
@@ -23,10 +20,10 @@ if (!class_exists('PathDef')) {
         private string|null $diskname;
 
         /**
-         * Undocumented function
+         * le constructeur par défaut ou par référence.
          *
-         * @param string|null $pathParent
-         * @param string|null $path
+         * @param string|null $pathParent le chemin parent ou du fichier.
+         * @param string|null $path le chemin du fichier si on utilise un chemin parent.
          */
         public function __construct(string|null $pathParent = null, string|null $path = null) {
             if(empty($pathParent) && empty($path)) {
@@ -37,10 +34,10 @@ if (!class_exists('PathDef')) {
         }
 
         /**
-         * Undocumented function
+         * Création des données de la classe?
          *
-         * @param string|null $pathParent
-         * @param string|null $path
+         * @param string|null $pathParent le chemin parent ou du fichier.
+         * @param string|null $path le chemin du fichier si on utilise un chemin parent.
          * @return self
          */
         private function recupvalue(string|null $pathParent = null, string|null $path = null):self {
@@ -50,26 +47,30 @@ if (!class_exists('PathDef')) {
             if(empty($path)) {
                 $path = "";
             }
+            // récupération de base
             $this->diskname = $this->recup_name_disk($pathParent);
             $this->name = $this->del_name_disk($path);
             $this->parent = $this->del_name_disk($pathParent);
             $is_absolute = $this->getIsAbsolute($this->parent);
-            //var_dump($is_absolute);
+            // récupération pour faire le travaille sur les valeurs.
             $this->name = $this->del_relative($this->name);
             $this->parent = $this->del_relative($this->parent);
             $this->absoluteParent = "";
             $this->absolutePath = "";
             $this->path = "";
             $pathall=$this->parent."/".$this->name;
+            // si le chemin de base est absolu.
             if(!($is_absolute || !empty($this->diskname))) {
                 $pathall=trim($pathall, "/");
             }
+            // sépare le chemin du ficher ou dossier.
             $this->sep_file_parent(trim($this->not_dote_path($pathall), "/"));
             if($is_absolute || !empty($this->diskname)) {
                 $this->pathmodabsol();
             } else {
-                $this->pathmodrelat($this->absolut_def());
+                $this->pathmodrelat();
             }
+            // recupère le nom du disque pour linux.
             if(empty($this->diskname)) {
                 $this->diskname = "/";
             }
@@ -82,6 +83,11 @@ if (!class_exists('PathDef')) {
             return $this;
         }
 
+        /**
+         * Si on travail sur un chemin absolu.
+         *
+         * @return self
+         */
         private function pathmodabsol():self {
             $this->path = "/" . trim($this->reg_slash($this->parent . "/" . $this->name), "/");
             $this->parent = "/" . trim($this->parent, "/");
@@ -98,7 +104,13 @@ if (!class_exists('PathDef')) {
             return $this;
         }
 
-        private function pathmodrelat(string|null $basepath = null):self {
+        /**
+         * Si on travail sur un chemin relatif.
+         * 
+         * @return self
+         */
+        private function pathmodrelat():self {
+            $basepath = $this->absolut_def();
             $this->path = "./".trim($this->reg_slash($this->parent . "/" . $this->name), "/");
             $basepath = $this->absolut_def();
             if(!empty($basepath)) {
@@ -116,10 +128,10 @@ if (!class_exists('PathDef')) {
         }
 
         /**
-         * Undocumented function
+         * Supprime le début ("./") d'un chemin relatif.
          *
-         * @param string|null $path
-         * @return string|null
+         * @param string|null $path chemin relatif.
+         * @return string|null chemin relatif sans "./".
          */
         private function del_relative(string|null $path):string|null {
             if(empty($path)) {
@@ -129,10 +141,10 @@ if (!class_exists('PathDef')) {
         }
 
         /**
-         * Undocumented function
+         * Récupère le nom du disque
          *
-         * @param string|null $path
-         * @return string|null
+         * @param string|null $path chemin avec le nom du disque.
+         * @return string|null le nom du disque.
          */
         private function recup_name_disk(string|null $path):string|null {
             if(empty($path)) {
@@ -140,12 +152,12 @@ if (!class_exists('PathDef')) {
             }
             $path = preg_replace(RegexPath::ANTISLASH->value, "/", trim($path));
             if(preg_match_all(RegexPath::ABSOSERVE->value, $path) != false) {
-                return $this->recup_value_disk(RegexPath::ABSOSERVE->value, $path);
+                return $this->reg_replace(RegexPath::ABSOSERVE->value, $path);
             } else if(preg_match_all(RegexPath::ABSOWIN->value, $path) != false) {
-                $valuedef = $this->recup_value_disk(RegexPath::ABSOWIN->value, $path);
+                $valuedef = $this->reg_replace(RegexPath::ABSOWIN->value, $path);
                 $path = $this->del_name_disk($path);
                 if(preg_match_all(RegexPath::MAXSLASH->value, $path) != false) {
-                    $valuedef .= $this->recup_value_disk(RegexPath::MAXSLASH->value, $path);
+                    $valuedef .= $this->reg_replace(RegexPath::MAXSLASH->value, $path);
                     $valuedef=substr($valuedef, 0, (strlen($valuedef)-1));
                 }
                 return $valuedef;
@@ -154,13 +166,13 @@ if (!class_exists('PathDef')) {
         }
 
         /**
-         * Undocumented function
+         * Remplace le texte à partir du regex.
          *
-         * @param string|null $regex
-         * @param string|null $path
-         * @return string|null
+         * @param string|null $regex le regex.
+         * @param string|null $path Le chemin.
+         * @return string|null Le chemin après modification.
          */
-        private function recup_value_disk(string|null $regex, string|null $path):string|null {
+        private function reg_replace(string|null $regex, string|null $path):string|null {
             if(empty($path) || empty($regex)) {
                 return "";
             }
@@ -172,9 +184,9 @@ if (!class_exists('PathDef')) {
         }
 
         /**
-         * Undocumented function
+         * Sépare le fichier ou dossier du chemin parent.
          *
-         * @param string|null $pathParent
+         * @param string|null $pathParent le chemin.
          * @return self
          */
         private function sep_file_parent(string|null $pathParent):self {
@@ -194,10 +206,10 @@ if (!class_exists('PathDef')) {
         }
         
         /**
-         * Undocumented function
+         * Retire le double slash.
          *
-         * @param string|null $path
-         * @return string|null
+         * @param string|null $path chemin avec double slash.
+         * @return string|null chemin avec simple slash.
          */
         protected function reg_slash(string|null $path):string|null {
             if(empty($path)) {
@@ -207,10 +219,10 @@ if (!class_exists('PathDef')) {
         }
 
         /**
-         * Undocumented function
+         * Vérifier que le chemin soit absolu.
          *
-         * @param string|null $path
-         * @return boolean
+         * @param string|null $path le chemin.
+         * @return boolean true si le chemin est absolu.
          */
         private function getIsAbsolute(string|null $path):bool {
             if(empty($path)) {
@@ -222,10 +234,10 @@ if (!class_exists('PathDef')) {
         }
 
         /**
-         * Undocumented function
+         * Supprime le nom du disque du chemin.
          *
-         * @param string|null $path
-         * @return string|null
+         * @param string|null $path chemin avec le nom du disque.
+         * @return string|null chemin sans le nom du disque.
          */
         private function del_name_disk(string|null $path):string|null {
             if(empty($path)) {
@@ -237,10 +249,10 @@ if (!class_exists('PathDef')) {
         }
 
         /**
-         * Undocumented function
+         * Retire au maximum les deux points dans un chemin.
          *
-         * @param string|null $path
-         * @return string|null
+         * @param string|null $path chemin avec trop de deux points
+         * @return string|null chemin avec le minimum de deux points.
          */
         private function not_dote_path(string|null $path):string|null {
             if(empty($path)) {
@@ -265,6 +277,12 @@ if (!class_exists('PathDef')) {
             return $thepath;
         }
 
+        /**
+         * Supprime le get et ancrage du chemin.
+         *
+         * @param string|null $lien chemin avec get et ancrage
+         * @return string|null chemin sans get, ni ancrage.
+         */
         protected static function del_get_anc(string|null $lien):string|null {
             if(empty($lien)) {
                 return "";
@@ -273,27 +291,27 @@ if (!class_exists('PathDef')) {
         }
 
         /**
-         * Undocumented function
+         * Récupère le chemin absolut par défaut.
          *
-         * @return string|null
+         * @return string|null chemin absolu par défaut.
          */
         protected function absolut_def():string|null {
             return "";
         }
 
         /**
-         * Undocumented function
+         * Récupère le chemin absolu de base.
          *
-         * @return string|null
+         * @return string|null le chemin absolu de base.
          */
         public static function base():string|null {
             return "";
         }
 
         /**
-         * Undocumented function
+         * Récupère le nom du fichier ou dossier.
          *
-         * @return string|null
+         * @return string|null le nom du fichier ou dossier.
          */
         public function getName(): string|null
         {
@@ -301,9 +319,9 @@ if (!class_exists('PathDef')) {
         }
 
         /**
-         * Undocumented function
+         * Récupère le chemin parent.
          *
-         * @return string|null
+         * @return string|null le chemin parent.
          */
         public function getParent(): string|null
         {
@@ -311,9 +329,9 @@ if (!class_exists('PathDef')) {
         }
 
         /**
-         * Undocumented function
+         * Récupère le nom du disque.
          *
-         * @return string|null
+         * @return string|null le nom du disque.
          */
         public function getDiskname(): string|null
         {
@@ -321,9 +339,9 @@ if (!class_exists('PathDef')) {
         }
 
         /**
-         * Undocumented function
+         * Récupère le chemin absolu du parent.
          *
-         * @return string|null
+         * @return string|null le chemin absolu du parent.
          */
         public function getAbsoluteParent(): string|null
         {
@@ -331,9 +349,9 @@ if (!class_exists('PathDef')) {
         }
 
         /**
-         * Undocumented function
+         * Récupère le chemin absolu.
          *
-         * @return string|null
+         * @return string|null le chemin absolu.
          */
         public function getAbsolutePath(): string|null
         {
@@ -341,9 +359,9 @@ if (!class_exists('PathDef')) {
         }
 
         /**
-         * Undocumented function
+         * Récupère le chemin relatif.
          *
-         * @return string|null
+         * @return string|null le chemin relatif.
          */
         public function getPath(): string|null
         {

@@ -1,15 +1,14 @@
 <?php
-
+// verifier qu'on n'a pas deja creer la classe
 if (!class_exists('RouteMain')) {
 
-    /* en cas d'erreur sur la classe */
     include_once __DIR__ . '/Path.php';
     include_once __DIR__ . '/PathServe.php';
     require_once __DIR__ . "/RegexPath.php";
     define("PCTR_ROUTING_NR", "nurl");
 
     /**
-     * Undocumented class
+     * Pour le routage des pages du site.
      */
     class RouteMain {
         
@@ -19,20 +18,24 @@ if (!class_exists('RouteMain')) {
         private bool $isRoutage;
 
         /**
-         * Undocumented function
-         *
-         * @param boolean $isRoutage
+         * le constructeur par défaut ou par référence.
          */
         public function __construct() {
             $this->isRoutage = array_key_exists("url", $_GET);
             $this->currentDir = "./";
             $this->index = array();
             $this->url = "";
-            $this->isRoutage = (!empty($_GET) && array_key_exists("url", $_GET));
+            $emptyget = (!empty($_GET));
+            $isnotroute = ($emptyget && array_key_exists(PCTR_ROUTING_NR, $_GET));
+            $this->isRoutage = ($emptyget && array_key_exists("url", $_GET));
             if($this->isRoutage && !empty($_GET['url'])) {
                 $this->url = preg_replace(RegexPath::RELATIVE->value, "", (new PathServe($_GET["url"]))->getPath());
-            } else if(!$this->isRoutage && !empty($_GET) && array_key_exists(PCTR_ROUTING_NR, $_GET) && !empty($_GET[PCTR_ROUTING_NR])) {
+            } else if(!$this->isRoutage && $isnotroute && !empty($_GET[PCTR_ROUTING_NR])) {
                 $this->url = preg_replace(RegexPath::RELATIVE->value, "", (new PathServe($_GET[PCTR_ROUTING_NR]))->getPath());
+            }
+            if($emptyget) {
+                unset($_GET['url']);
+                unset($_GET[PCTR_ROUTING_NR]);
             }
             $this->index = $this->createTabIndex($this->url);
             if($this->isRoutage) {
@@ -45,10 +48,10 @@ if (!class_exists('RouteMain')) {
         }
 
         /**
-         * Undocumented function
+         * Créer la table index de routage.
          *
-         * @param string|null $path
-         * @return array|null
+         * @param string|null $path chemin routage.
+         * @return array|null table index.
          */
         private function createTabIndex(string|null $path):array|null {
             if(empty($path)) {
@@ -58,17 +61,16 @@ if (!class_exists('RouteMain')) {
             $tabIndex = explode("/", trim($path, "/"));
             foreach ($tabIndex as $key => $value) {
                 array_push($arrayIndex, $value);
-                //$arrayIndex[RouteMain::$NAMEKEY.$key] = $value;
             }
             unset($tabIndex);
             return $arrayIndex;
         }
 
         /**
-         * Undocumented function
+         * Chemin non routé. Créer un tableau de travail.
          *
-         * @param string|null $path
-         * @return array|null
+         * @param string|null $path Chemin non routé
+         * @return array|null tableau de travail.
          */
         private function pathnoroute(string|null $path):array|null {
             $tabpath = ["parent" => "", "path" => ""];
@@ -101,10 +103,10 @@ if (!class_exists('RouteMain')) {
         }
         
         /**
-         * Undocumented function
+         * Créer un chemin d'un lien valide absolu à partir d'un chemin relatif.
          *
-         * @param string|null $path
-         * @return string|null
+         * @param string|null $path d'un chemin relatif.
+         * @return string|null chemin d'un lien valide absolu.
          */
         public function path(string|null $path = null):string|null {
             if(empty($path)) {
@@ -121,17 +123,10 @@ if (!class_exists('RouteMain')) {
                 $explodePathGet = explode("?", $explodePath[0], 2);
                 $tabpath = $this->pathnoroute($explodePathGet[0]);
                 $pathGetIndex .= $tabpath["parent"];
-                //$pathGetIndex .= $this->currentDirectory($path);
                 $tabIndex = $this->createTabIndex($tabpath["path"]);
                 if(!empty($tabpath["path"])) {
                     $pathGetIndex .= "?nurl=".$tabpath["path"];
                 }
-                /*if(count($tabIndex) > 0) {
-                    $pathGetIndex .= "?";
-                }
-                foreach ($tabIndex as $key => $value) {
-                    $pathGetIndex .= $key . "=" .$value . "&";
-                }*/
                 $pathGetIndex = trim($pathGetIndex, "&");
                 if(count($explodePathGet) > 1) {
                     if(count($tabIndex) > 0) {
@@ -152,10 +147,10 @@ if (!class_exists('RouteMain')) {
         }
 
         /**
-         * Undocumented function
+         * Créer un chemin d'un lien valide absolu pour un fichier à partir d'un chemin relatif d'un fichier.
          *
-         * @param string|null $path
-         * @return string|null
+         * @param string|null $path chemin relatif d'un fichier.
+         * @return string|null un chemin d'un lien valide absolu pour un fichier.
          */
         public function pathFile(string|null $path):string|null {
             $pathou = "./".$path;
@@ -166,10 +161,10 @@ if (!class_exists('RouteMain')) {
         }
 
         /**
-         * Undocumented function
+         * Créer un chemin valide absolu pour un fichier sur un disque dur à partir d'un chemin relatif d'un fichier.
          *
-         * @param string|null $path
-         * @return string|null
+         * @param string|null $path chemin relatif d'un fichier.
+         * @return string|null chemin valide absolu pour un fichier sur un disque dur.
          */
         public function pathSystem(string|null $path):string|null {
             $pathou = "./".$path;
@@ -180,10 +175,10 @@ if (!class_exists('RouteMain')) {
         }
 
         /**
-         * Undocumented function
+         * Vérifier l'emplacement du routage.
          *
-         * @param string|null $index
-         * @return boolean
+         * @param string|null $index entrer chemin base du routage.
+         * @return boolean true si on est au bon endroit.
          */
         public function indexbool(string|null $index):bool {
             if(empty($index)) {
@@ -204,19 +199,19 @@ if (!class_exists('RouteMain')) {
         }
         
         /**
-         * Undocumented function
+         * Récupérer le tableau du routage.
          *
-         * @return array|null
+         * @return array|null tableau du routage.
          */
         public function getIndPg():array|null {
             return  $this->index;
         }
         
         /**
-         * Undocumented function
+         * Récupère une valeur du tableau index à parir d'une clée.
          *
-         * @param integer $key
-         * @return string|null
+         * @param integer $key la clée.
+         * @return string|null la valeur du tableau index.
          */
         public function getIndPgKey(int $key):string|null {
             if(($key >= 0) && !empty($this->index) && ($key < count($this->index))) {
@@ -227,9 +222,9 @@ if (!class_exists('RouteMain')) {
         }
         
         /**
-         * Undocumented function
+         * Récupère le chemin relatif du parent.
          *
-         * @return string|null
+         * @return string|null chemin relatif du parent.
          */
         public function getCurrentDir():string|null
         {
@@ -237,9 +232,9 @@ if (!class_exists('RouteMain')) {
         }
 
         /**
-         * Get the value of isRoutage
+         * Si on est en mode de routage.
          *
-         * @return bool
+         * @return bool true si on route la page.
          */
         public function getIsRoutage(): bool
         {
@@ -247,9 +242,9 @@ if (!class_exists('RouteMain')) {
         }
 
         /**
-         * Get the value of url
+         * Récupère l'url du routage.
          *
-         * @return string|null
+         * @return string|null url du routage.
          */
         public function getUrl(): string|null
         {
