@@ -2,7 +2,7 @@
 
 Merci de visiter le wiki (https://github.com/pctronique/pctrouting/wiki).
 
-Pour mettre facilement un routage simple.
+Pour mettre facilement un routage des pages du site.
 
 Pas besoin de base de données, pas de configuration pour l'utiliser.
 
