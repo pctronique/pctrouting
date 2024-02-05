@@ -1,5 +1,11 @@
-/.env
 /nbproject/private/
+/build/
+/dist/
+/lang/
+/bin/
+/test/
+/.vscode
+/.env
 /projecttmp/
 /project/cron/config_path.php
 /project/cron/fileTime.json
@@ -26,5 +32,3 @@
 /project/www/robots.txt
 /project/www/config.php
 /project/www/config/config.php
-/data/config/config_def.ini
-/.vscode
