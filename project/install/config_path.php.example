@@ -1,1 +1,1 @@
-<?php define("RACINE_WWW", dirname(__FILE__)."/../"); ?>
+<?php define("RACINE_WWW", __DIR__."/../"); ?>

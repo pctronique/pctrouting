@@ -17,6 +17,8 @@ wget -qO- https://get.docker.com/ | sh
 # Install docker-compose
 COMPOSE_VERSION=`git ls-remote https://github.com/docker/compose | grep refs/tags | grep -oP "[0-9]+\.[0-9][0-9]+\.[0-9]+$" | tail -n 1`
 sudo sh -c "curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
+sudo groupadd docker
+sudo usermod -aG docker $USER
 sudo newgrp docker
 sudo chmod +x /usr/local/bin/docker-compose
 sudo ln /usr/local/bin/docker-compose /usr/bin/docker-compose
@@ -32,4 +34,7 @@ sudo chmod +x /usr/local/bin/docker-cleanup
 
 sudo curl -L "https://github.com/docker/compose/releases/download/1.27.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
+
+sudo usermod -aG docker $USER
+
 docker-compose --version
