@@ -1,7 +1,7 @@
 <?php
 
-include_once dirname(__FILE__) . '/../src/class/pctrpath/Path.php';
-include_once dirname(__FILE__) . '/../src/class/pctrpath/PathServe.php';
+include_once dirname(__FILE__) . '/../src/class/pctrouting/Path.php';
+include_once dirname(__FILE__) . '/../src/class/pctrouting/PathServe.php';
 include_once dirname(__FILE__) . '/../code/testrouting.php';
 include_once dirname(__FILE__) . '/../code/tabletest.php';
 include_once dirname(__FILE__) . '/../code/pathtest.php';

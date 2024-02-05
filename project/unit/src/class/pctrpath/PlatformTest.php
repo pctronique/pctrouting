@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 define("RACINE_UNIT", dirname(__FILE__)."/../../..");
 require_once(RACINE_UNIT . '/config_path.php');
 require_once(RACINE_UNIT . '/function_test.php');
-require_once(RACINE_WWW . '/src/class/pctrpath/Platform.php');
+require_once(RACINE_WWW . '/src/class/pctrouting/Platform.php');
 
 /**
  * ClassNameTest

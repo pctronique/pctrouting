@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__FILE__) . '/../../src/class/pctrpath/RouteMain.php';
+include_once dirname(__FILE__) . '/../../src/class/pctrouting/RouteMain.php';
 
 $isroting = (!empty($_GET) && array_key_exists("url", $_GET));
 if(!(!empty($_GET) && array_key_exists("url", $_GET))) {

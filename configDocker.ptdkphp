@@ -54,7 +54,7 @@ docs_containerCmdDown:
 #
 # Project (Docs)
 #
-docs_srcFolder:project/www/src/class/pctrpath
+docs_srcFolder:project/www/src/class/pctrouting
 docs_docsFolder:project/docs
 docs_tmp:projecttmp/tmp/php
 #

@@ -1,6 +1,6 @@
 <?php
 
-include_once dirname(__FILE__) . '/../../src/class/pctrpath/RegexPath.php';
+include_once dirname(__FILE__) . '/../../src/class/pctrouting/RegexPath.php';
 include_once dirname(__FILE__) . '/../code/tabpathtestdef2.php';
 include_once dirname(__FILE__) . '/functcreatetab.php';
 

@@ -1,7 +1,7 @@
 <?php
 
 require __DIR__ . "/config_path.php";
-require_once(RACINE_WWW . '/src/class/pctrpath/RouteMain.php');
+require_once(RACINE_WWW . '/src/class/pctrouting/RouteMain.php');
 
 /* 
  * To change this license header, choose License Headers in Project Properties.

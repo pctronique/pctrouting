@@ -5,8 +5,8 @@ define("RACINE_UNIT", dirname(__FILE__)."/../../..");
 require_once(RACINE_UNIT . '/config_path.php');
 require_once(RACINE_UNIT . '/function_test.php');
 require_once(RACINE_UNIT . '/function_test_path.php');
-require_once(RACINE_WWW . '/src/class/pctrpath/Path.php');
-require_once(RACINE_WWW . '/src/class/pctrpath/RegexPath.php');
+require_once(RACINE_WWW . '/src/class/pctrouting/Path.php');
+require_once(RACINE_WWW . '/src/class/pctrouting/RegexPath.php');
 
 /**
  * ClassNameTest
