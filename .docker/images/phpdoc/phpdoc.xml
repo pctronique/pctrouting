@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor
+        configVersion="3"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://www.phpdoc.org"
+        xsi:noNamespaceSchemaLocation="data/xsd/phpdoc.xsd"
+>
+    <paths>
+        <output>/usr/local/apache2/docs/</output>
+        <cache>/var/tmp/docker/phpdoc/</cache>
+    </paths>
+    <version number="3.0.0">
+        <api>
+            <source dsn="/usr/local/apache2/www/">
+                <path>.</path>
+            </source>
+        </api>
+    </version>
+</phpdocumentor>

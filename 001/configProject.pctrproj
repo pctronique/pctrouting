@@ -11,36 +11,14 @@ tr_key = apache
 tr_text = Apache
 tr_com = 
 is_container = true
-name_docker = ${NAME_PROJECT}_httpd
+name_docker = ${NAME_HTTPD_CONTAINER}
 
 [Php]
 tr_key = php
 tr_text = Php
 tr_com = 
 is_container = true
-name_docker = ${NAME_PROJECT}_php
-
-[MariaDB]
-tr_key = mariaDB
-tr_text = MariaDB
-tr_com = 
-is_container = true
-name_docker = ${NAME_PROJECT}_mariadb
-
-[mailhog]
-tr_key = mailhog
-tr_text = mailhog
-tr_com = 
-is_container = true
-name_docker = ${NAME_PROJECT}_mailhog
-
-[PhpMyAdmin]
-tr_key = phpMyAdmin
-tr_text = PhpMyAdmin
-tr_com = 
-is_container = true
-name_docker = ${NAME_PROJECT}_phpmyadmin
-config = true
+name_docker = ${NAME_PHP_CONTAINER}
 
 [config_bt_folder_www]
 tr_key = bt_folder_www
@@ -59,24 +37,6 @@ is_container = true
 sub =
 type = http
 lien = http://localhost:${VALUE_HTTPD_PORT}
-
-[config_bt_phpmyadmin]
-tr_key = bt_phpmyadmin
-tr_text = Open phpMyAdmin
-tr_com = 
-is_container = true
-sub = 
-type = http
-lien = http://localhost:${VALUE_PHPMYADMIN_PORT}
-
-[config_bt_mailhog]
-tr_key = bt_mailhog
-tr_text = Open mailhog
-tr_com = 
-is_container = true
-sub = 
-type = http
-lien = http://localhost:${VALUE_MAILHOG_PORT}
 
 [config_bt_folder_unit]
 tr_key = bt_folder_unit
@@ -128,57 +88,28 @@ tr_key = expose_httpd
 tr_text = port
 tr_com = 
 is_container = false
-sub = ${NAME_PROJECT}_httpd
+sub = ${NAME_HTTPD_CONTAINER}
 type = expose
 lien = .env,VALUE_HTTPD_PORT=%port
 value = ${VALUE_HTTPD_PORT}
-
-[config_bt_port_phpmyadmin]
-tr_key = expose_phpmyadmin
-tr_text = port
-tr_com = 
-is_container = false
-sub = ${NAME_PROJECT}_phpmyadmin
-type = expose
-lien = .env,VALUE_PHPMYADMIN_PORT=%port
-value = ${VALUE_PHPMYADMIN_PORT}
 
 [config_bt_file_httpd]
 tr_key = bt_file_httpd
 tr_text = httpd.conf
 tr_com = 
 is_container = false
-sub = ${NAME_PROJECT}_httpd
+sub = ${NAME_HTTPD_CONTAINER}
 type = file
-lien = .docker/containers/apache/httpd.conf
+lien = .docker/apache/httpd.conf
 
 [config_bt_file_php]
 tr_key = bt_file_php
 tr_text = php.ini
 tr_com = 
 is_container = false
-sub = ${NAME_PROJECT}_php
+sub = ${NAME_PHP_CONTAINER}
 type = file
-lien = .docker/containers/php/php.ini
-
-[config_bt_file_mariadb]
-tr_key = bt_file_mariadb
-tr_text = mariadb.cnf
-tr_com = 
-is_container = false
-sub = ${NAME_PROJECT}_mariadb
-type = file
-lien = .docker/containers/mariadb/mariadb.cnf
-
-[config_bt_port_mailhog]
-tr_key = expose_mailhog
-tr_text = port
-tr_com = 
-is_container = false
-sub = ${NAME_PROJECT}_mailhog
-type = expose
-lien = .env,VALUE_MAILHOG_PORT=%port
-value = ${VALUE_MAILHOG_PORT}
+lien = .docker/php/php.ini
 
 [config_docker_img_php]
-name = ${NAME_PROJECT}_php
+name = ${NAME_PHP_CONTAINER}
