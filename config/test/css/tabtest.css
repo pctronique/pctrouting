@@ -1,0 +1,102 @@
+.tab * {
+    border: 1px #ebebeb solid;
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: anywhere;
+}
+
+.tab {
+    display:flex;
+    flex-direction: column;
+    margin: 5px;
+    border: 1px #7d7d7d solid;
+}
+
+.tabtitle {
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+.tabtitle h2 {
+    width: 100%;
+}
+
+.tabtitle h2, .tabth {
+    padding: 7px;
+}
+
+.tabbody {
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+.dispval {
+    width: 45px;
+}
+
+.tabth {
+    background-color: white;
+}
+
+.tab0 {
+    background-color: #fffdc8;
+}
+
+.tab1 {
+}
+
+.tabth pre {
+    border: unset;
+}
+
+.tabtitle, .nullvl {
+    background-color: #e9e9e9;
+}
+
+.pathtrue {
+    background-color: green;
+}
+
+.pathfalse {
+    background-color: red;
+}
+
+.textval {
+    border: unset;
+}
+
+.texttrue {
+    color: green;
+}
+
+.textfalse {
+    color: red;
+}
+
+.tdval {
+    height: 20px;
+    border: unset;
+    width: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.tdval0 {
+    border: unset;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.tdvalnul {
+    background-color: #ededed;
+}
+
+.tabth {
+    border: #a7a7a7 1px solid;
+}
+
+.tabthtl {
+    background-color: #ededed;
+    text-align: center;
+}

@@ -21,6 +21,7 @@
 /project/www/.htaccess
 /project/www/upload
 /project/www/config/config.php
+/project/www/test
 /project/www/config/sgbd_config.php
 /project/www/src/config/config.php
 /project/www/src/config/sgbd_config.php

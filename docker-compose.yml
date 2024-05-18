@@ -41,6 +41,7 @@ services:
             #- ./config/filedotenv.php:/usr/local/apache2/www/${FOLDER_CONFIG}/filedotenv.php:rw
             #- ./config/config.php:/usr/local/apache2/www/${FOLDER_CONFIG}/config.php:rw
             #- ./config/data:/docker-entrypoint-initdata.d:rw
+            #- ./config/test:/usr/local/apache2/www/test:rw
             - ./config/dockercron:/var/docker/cron/dockercron:rw
             - ./config/config_cron_path.php:/usr/local/apache2/cron/config_path.php:rw
             - ./config/config_error_path.php:/usr/local/apache2/error/config_path.php:rw

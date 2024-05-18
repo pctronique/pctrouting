@@ -116,16 +116,21 @@ if (!class_exists('RouteMain')) {
             if(!$this->isRoutage) {
                 $pathGetIndex = "";
                 $explodePath = [];
+                $tabpath = [];
+                $explodePathGet = [];
                 if(!empty($path)) {
+                    $tabpath = [$path];
                     $pathrecp = new PathServe($path);
                     $explodePath = explode("#", preg_replace(RegexPath::RELATIVE->value, "", $pathrecp->getPath()), 2);
-                }
-                $explodePathGet = explode("?", $explodePath[0], 2);
-                $tabpath = $this->pathnoroute($explodePathGet[0]);
-                $pathGetIndex .= $tabpath["parent"];
-                $tabIndex = $this->createTabIndex($tabpath["path"]);
-                if(!empty($tabpath["path"])) {
-                    $pathGetIndex .= "?nurl=".$tabpath["path"];
+                    if(!empty($explodePath)) {
+                        $explodePathGet = explode("?", $explodePath[0], 2);
+                    }
+                    $tabpath = $this->pathnoroute($explodePathGet[0]);
+                    $pathGetIndex .= $tabpath["parent"];
+                    $tabIndex = $this->createTabIndex($tabpath["path"]);
+                    if(!empty($tabpath["path"])) {
+                        $pathGetIndex .= "?nurl=".$tabpath["path"];
+                    }
                 }
                 $pathGetIndex = trim($pathGetIndex, "&");
                 if(count($explodePathGet) > 1) {
