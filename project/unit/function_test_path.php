@@ -5249,12 +5249,12 @@ $testpath2 = [
     ]
 ];
 
-/*global $testpathhttp;
-global $testpathhttp2;
-global $testpath;
-global $testpath2;
-global $testpatrelatif;
-global $testpatrelatif2;*/
+define("testpath0", $testpath);
+define("testpath02", $testpath2);
+define("testpatrelatif0", $testpatrelatif);
+define("testpatrelatif02", $testpatrelatif2);
+define("testpathhttp0", $testpathhttp);
+define("testpathhttp02", $testpathhttp2);
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -5267,7 +5267,7 @@ function array_pathmain() {
     global $testpath2;
     global $testpatrelatif;
     global $testpatrelatif2;
-    return array_merge($testpath, array_merge($testpatrelatif, array_merge($testpath2, $testpatrelatif2)));
+    return array_merge(testpath0, array_merge(testpatrelatif0, array_merge(testpath02, testpatrelatif02)));
 }
 
 function array_pathhttp() {
@@ -5275,5 +5275,5 @@ function array_pathhttp() {
     global $testpathhttp2;
     global $testpatrelatif;
     global $testpatrelatif2;
-    return array_merge($testpathhttp, array_merge($testpatrelatif, array_merge($testpathhttp2, $testpatrelatif2)));
+    return array_merge(testpathhttp0, array_merge(testpatrelatif0, array_merge(testpathhttp02, testpatrelatif02)));
 }
