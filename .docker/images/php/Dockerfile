@@ -20,6 +20,13 @@ ENV DEF_XDEBUG_VERSION=${DEF_PHPXDEBUG_VERSION:-"${VALUE_XDEBUG_VERSION}"}
 ENV XDEBUG_VERSION=${DEF_XDEBUG_VERSION:+"xdebug-${DEF_XDEBUG_VERSION}"}
 ENV XDEBUG_VERSION=${XDEBUG_VERSION:-'xdebug'}
 
+#ENV DEF_PHPYAML_VERSION=${VALUE_PHP_VERSION:-"2.2.3"}
+#ENV DEF_PHPYAML_VERSION=${DEF_PHPYAML_VERSION##${DEF_PHPX_VERSION}}
+#ARG VALUE_YAML_VERSION
+#ENV DEF_YAML_VERSION=${DEF_PHPYAML_VERSION:-"${VALUE_YAML_VERSION}"}
+#ENV YAML_VERSION=${DEF_YAML_VERSION:+"yaml-${DEF_YAML_VERSION}"}
+ENV YAML_VERSION=${YAML_VERSION:-'yaml'}
+
 ENV DEF_PHPUNIT_VERSION=${VALUE_PHP_VERSION:-"11.1.3"}
 ENV DEF_PHPUNIT_VERSION=${DEF_PHPUNIT_VERSION##${DEF_PHPX_VERSION}}
 ARG VALUE_PHP_UNIT_VERSION
@@ -83,7 +90,7 @@ RUN go install github.com/mailhog/mhsendmail@${DEF_MHSEND_VERSION}
 RUN cp /root/go/bin/mhsendmail /usr/bin/mhsendmail
 
 # Install YAML extension
-RUN pecl install yaml && echo "extension=yaml.so" > /usr/local/etc/php/conf.d/ext-yaml.ini
+RUN pecl install ${YAML_VERSION} && echo "extension=yaml.so" > /usr/local/etc/php/conf.d/ext-yaml.ini
     
 # Goto temporary directory.
 WORKDIR /tmp
