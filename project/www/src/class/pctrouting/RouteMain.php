@@ -33,10 +33,10 @@ if (!class_exists('RouteMain')) {
             } else if(!$this->isRoutage && $isnotroute && !empty($_GET[PCTR_ROUTING_NR])) {
                 $this->url = preg_replace(RegexPath::RELATIVE->value, "", (new PathServe($_GET[PCTR_ROUTING_NR]))->getPath());
             }
-            if($emptyget) {
+            /*if($emptyget) {
                 unset($_GET['url']);
                 unset($_GET[PCTR_ROUTING_NR]);
-            }
+            }*/
             $this->index = $this->createTabIndex($this->url);
             if($this->isRoutage) {
                 foreach ($this->index as $value) {
