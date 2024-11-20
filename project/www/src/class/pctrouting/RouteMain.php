@@ -202,6 +202,36 @@ if (!class_exists('RouteMain')) {
             }
             return false;
         }
+
+        /**
+         * Summary of indexregexbool
+         * @param string|null $index
+         * @return bool
+         */
+        public function indexregexbool(string|null $index):bool {
+            if(empty($index)) {
+                return false;
+            }
+            $nbind = preg_match("/\//sim",$index);
+            $tabind = array_values($this->index);
+            if(count($tabind) >= $nbind) {
+                $indv = implode("/", $this->index);
+                return preg_match($index,$indv);
+            }
+            return false;
+        }
+        
+        /**
+         * 
+         * 
+         * @return string|null
+         */
+        public function lastvaluerouting(): string|null {
+            if(empty($this->index)) {
+                return "";
+            }
+            return end($this->index);
+        }
         
         /**
          * Récupérer le tableau du routage.
