@@ -8,6 +8,8 @@ if (!class_exists('PathServe')) {
 
     /**
      * Pour la création d'un chemin valide à partir du site.
+     * @version 1.1.0
+     * @author pctronique (NAULOT ludovic)
      */
     class PathServe extends PathDef {
 

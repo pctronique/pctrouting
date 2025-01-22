@@ -6,6 +6,8 @@ if (!class_exists('Platform')) {
 
     /**
      * Pour récupérer le nom de la plateforme utilisé.
+     * @version 1.1.0
+     * @author pctronique (NAULOT ludovic)
      */
     class Platform {
 

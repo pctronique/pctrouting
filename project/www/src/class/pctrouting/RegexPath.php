@@ -4,6 +4,8 @@ if (!enum_exists("RegexPath")) {
 
     /**
      * Enum regex pour le chemin et le routage.
+     * @version 1.1.0
+     * @author pctronique (NAULOT ludovic)
      */
     enum RegexPath: string
     {

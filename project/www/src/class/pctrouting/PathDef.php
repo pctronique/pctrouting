@@ -9,6 +9,8 @@ if (!class_exists('PathDef')) {
 
     /**
      * Pour la création d'un chemin valide.
+     * @version 1.1.0
+     * @author pctronique (NAULOT ludovic)
      */
     abstract class PathDef {
 

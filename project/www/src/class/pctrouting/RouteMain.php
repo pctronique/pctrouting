@@ -9,6 +9,8 @@ if (!class_exists('RouteMain')) {
 
     /**
      * Pour le routage des pages du site.
+     * @version 1.1.0
+     * @author pctronique (NAULOT ludovic)
      */
     class RouteMain {
         
@@ -201,6 +203,53 @@ if (!class_exists('RouteMain')) {
                 return (strtolower($index) == strtolower($indv));
             }
             return false;
+        }
+
+        /**
+         * Summary of indexregexbool
+         * @param string|null $index
+         * @return bool
+         */
+        public function indexregexbool(string|null $index):bool {
+            if(empty($index)) {
+                return false;
+            }
+            $nbind = preg_match("/\//sim",$index);
+            $tabind = array_values($this->index);
+            if(count($tabind) >= $nbind) {
+                $indv = implode("/", $this->index);
+                return preg_match($index,$indv);
+            }
+            return false;
+        }
+
+        /**
+         * Summary of indexregexbool
+         * @param string|null $index
+         * @return string|null
+         */
+        public function recupregexvalue(string|null $regex):string|null {
+            if(empty($regex)) {
+                return "";
+            }
+            $indv = implode("/", $this->index);
+            $valid = preg_match($regex,$indv, $matches);
+            if($valid) {
+                return $matches[0];
+            }
+            return "";
+        }
+        
+        /**
+         * 
+         * 
+         * @return string|null
+         */
+        public function lastvaluerouting(): string|null {
+            if(empty($this->index)) {
+                return "";
+            }
+            return end($this->index);
         }
         
         /**
