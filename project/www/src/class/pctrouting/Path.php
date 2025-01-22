@@ -10,6 +10,8 @@ if (!class_exists('Path')) {
 
     /**
      * Pour la création d'un chemin valide à partir du disque dur.
+     * @version 1.1.0
+     * @author pctronique (NAULOT ludovic)
      */
     class Path extends PathDef {
 

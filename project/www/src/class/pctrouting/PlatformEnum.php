@@ -4,6 +4,8 @@ if (!enum_exists("PlatformEnum")) {
 
     /**
      * Enum pour les noms de plateforme.
+     * @version 1.1.0
+     * @author pctronique (NAULOT ludovic)
      */
     enum PlatformEnum
     {
