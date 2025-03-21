@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#/////////////////////////////////////
+#//    DEVELOPPEUR : PCTRONIQUE     //
+#/////////////////////////////////////
+
 folder_main=${0%/*}/../../
 folderLoad=$folder_main
 

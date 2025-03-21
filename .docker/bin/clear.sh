@@ -1,4 +1,9 @@
 #!/bin/bash
+
+#/////////////////////////////////////
+#//    DEVELOPPEUR : PCTRONIQUE     //
+#/////////////////////////////////////
+
 sudo service openvpn stop
 sudo docker network prune -f
 sudo service openvpn stop
