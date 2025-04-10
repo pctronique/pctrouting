@@ -77,13 +77,16 @@ RUN apt-get install -y libmcrypt-dev
 RUN apt-get install -y libyaml-dev
 RUN apt-get install -y libc-client-dev
 RUN apt-get install -y libkrb5-dev
+RUN apt-get install -y libbz2-dev
 #del list
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-configure gd --with-jpeg
-RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
-RUN docker-php-ext-install -j7 gd mysqli pdo_mysql xsl zip intl imap
+#RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+#RUN docker-php-ext-install -j7 gd mysqli pdo_mysql xsl zip intl imap
+RUN docker-php-ext-install -j7 gd mysqli pdo_mysql xsl zip intl
+RUN docker-php-ext-install bz2
    
 #install mhsendmail
 RUN go install github.com/mailhog/mhsendmail@${DEF_MHSEND_VERSION}
