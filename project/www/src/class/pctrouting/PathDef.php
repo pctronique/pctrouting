@@ -36,7 +36,7 @@ if (!class_exists('PathDef')) {
         }
 
         /**
-         * Création des données de la classe?
+         * Création des données de la classe.
          *
          * @param string|null $pathParent le chemin parent ou du fichier.
          * @param string|null $path le chemin du fichier si on utilise un chemin parent.

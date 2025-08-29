@@ -16,8 +16,6 @@ Le dossier du projet : /project/www/ (https://github.com/pctronique/pctrouting/t
 
 Class dans : /project/www/src/class/pctrouting/ (https://github.com/pctronique/pctrouting/tree/main/project/www/src/class/pctrouting)
 
-Exemple : /project/www/example/ (https://github.com/pctronique/pctrouting/tree/main/project/www/example)
-
 En-dehors du dossier projet, c'est du contenu pour docker (pas utile si vous n'utilisez pas docker).
 
 Créer avec docker, mais vous pouvez l'utiliser avec WAMP, LAMP, etc...

@@ -54,13 +54,13 @@ docs_containerCmdDown:
 #
 # Project (Docs)
 #
-docs_srcFolder:project/www
+docs_srcFolder:project/www/src/class/pctrouting
 docs_docsFolder:project/docs
 docs_tmp:.dockertmp/tmp/php
 #
 # Container (Docs)
 #
 docs_projectFolderDocker:/usr/local/apache2
-docs_srcFolderDocker:www
+docs_srcFolderDocker:www/src/class/pctrouting
 docs_docsFolderDocker:docs
 docs_tmpDocker:/var/tmp/docker/phpdoc/

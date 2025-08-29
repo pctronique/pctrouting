@@ -20,6 +20,8 @@ then
     PHP_FOLDER_PROJECT=/usr/local/apache2/www/
 fi
 
+${PHP_FOLDER_INIT}/recup_all_depends.sh
+
 ${PHP_FOLDER_INIT}/importdata.sh 2>> ${PHP_FOLDER_LOG}/installdata.log
 
 cp ${CRON_FOLDER_INIT}/dockercron /etc/cron.d/dockercron

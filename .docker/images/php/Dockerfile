@@ -77,13 +77,16 @@ RUN apt-get install -y libmcrypt-dev
 RUN apt-get install -y libyaml-dev
 RUN apt-get install -y libc-client-dev
 RUN apt-get install -y libkrb5-dev
+RUN apt-get install -y libbz2-dev
 #del list
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-configure gd --with-jpeg
-RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
-RUN docker-php-ext-install -j7 gd mysqli pdo_mysql xsl zip intl imap
+#RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+#RUN docker-php-ext-install -j7 gd mysqli pdo_mysql xsl zip intl imap
+RUN docker-php-ext-install -j7 gd mysqli pdo_mysql xsl zip intl
+RUN docker-php-ext-install bz2
    
 #install mhsendmail
 RUN go install github.com/mailhog/mhsendmail@${DEF_MHSEND_VERSION}
@@ -127,6 +130,18 @@ RUN chmod +x ${PHP_FOLDER_INIT}/importdata.sh
 
 COPY docker-data-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-data-entrypoint.sh
+
+COPY filereadini.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/filereadini.sh
+
+COPY perceprogress.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/perceprogress.sh
+
+COPY recup_all_depends.sh ${PHP_FOLDER_INIT}
+RUN chmod +x ${PHP_FOLDER_INIT}/recup_all_depends.sh
+
+COPY recup_one_depend.sh ${PHP_FOLDER_INIT}
+RUN chmod +x ${PHP_FOLDER_INIT}/recup_one_depend.sh
 
 RUN composer selfupdate && \
     composer require "${PHP_UNIT_VERSION}" --prefer-source --no-interaction && \

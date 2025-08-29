@@ -13,6 +13,7 @@
 /project/www/config/filedotenv.php
 /project/www/config/.env
 /project/www/data
+/project/www/bin_def
 /project/www/.phpdoc
 /project/www/src/config/config_sgbd.php
 /project/www/src/config/filedotenv.php

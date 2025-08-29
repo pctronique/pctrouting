@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-            <title>pctrouting_doc</title>
+            <title>pctrouting</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
@@ -25,7 +25,7 @@
     </head>
 <body id="top">
     <header class="phpdocumentor-header phpdocumentor-section">
-    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">pctrouting_doc</a></h1>
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">pctrouting</a></h1>
     <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
     <label class="phpdocumentor-header__menu-icon" for="menu-button">
         <i class="fas fa-bars"></i>
@@ -54,7 +54,7 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -three phpdocumentor-sidebar">
-                    <section class="phpdocumentor-sidebar__category">
+                    <section class="phpdocumentor-sidebar__category -packages">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Application.html" class="">Application</a>
@@ -62,14 +62,14 @@
 
                         </section>
             
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -reports">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
     </section>
 
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -indices">
         <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
     </section>
@@ -100,14 +100,41 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">8</span>
+    <span class="phpdocumentor-element-found-in__line">10</span>
 
     </aside>
 
             <p class="phpdocumentor-summary">Enum regex pour le chemin et le routage.</p>
 
+
+
+
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/RegexPath.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">version</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.1.0</span>
+                                                                                
+                                             
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>pctronique (NAULOT ludovic)</p>
+</section>
+
+                                    </dd>
+                                            </dl>
 
 
 
@@ -133,105 +160,105 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_ABSOLIN">ABSOLIN</a>
+    <a class="" href="classes/RegexPath.html#enumcase_ABSOLIN">ABSOLIN</a>
     <span>
-                &nbsp;= &#039;/^\\//sim&#039;                    </span>
+                &nbsp;= &#039;/^\//sim&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_ABSOSERVE">ABSOSERVE</a>
+    <a class="" href="classes/RegexPath.html#enumcase_ABSOSERVE">ABSOSERVE</a>
     <span>
-                &nbsp;= &#039;/^[^.^\\/.]{1,}:[\\/]{2}[\\.\\w: ]{1,}/sim&#039;                    </span>
+                &nbsp;= &#039;/^[^.^\/.]{1,}:[\/]{2}[\.\w: ]{1,}/sim&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_ABSOWIN">ABSOWIN</a>
+    <a class="" href="classes/RegexPath.html#enumcase_ABSOWIN">ABSOWIN</a>
     <span>
-                &nbsp;= &#039;/^[^.^\\/^\\\\.]{1,}:/sim&#039;                    </span>
+                &nbsp;= &#039;/^[^.^\/^\\\\.]{1,}:/sim&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_ANTISLASH">ANTISLASH</a>
+    <a class="" href="classes/RegexPath.html#enumcase_ANTISLASH">ANTISLASH</a>
     <span>
                 &nbsp;= &#039;/\\\\/sim&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_ENDFILE">ENDFILE</a>
+    <a class="" href="classes/RegexPath.html#enumcase_ENDFILE">ENDFILE</a>
     <span>
-                &nbsp;= &#039;/\\.[a-zA-Z]*$/sim&#039;                    </span>
+                &nbsp;= &#039;/\.[a-zA-Z]*$/sim&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_ENDPATH">ENDPATH</a>
+    <a class="" href="classes/RegexPath.html#enumcase_ENDPATH">ENDPATH</a>
     <span>
-                &nbsp;= &#039;/[\\/\\\\]{1,}$/sim&#039;                    </span>
+                &nbsp;= &#039;/[\/\\\\]{1,}$/sim&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_FILEWEB">FILEWEB</a>
+    <a class="" href="classes/RegexPath.html#enumcase_FILEWEB">FILEWEB</a>
     <span>
-                &nbsp;= &#039;/\\/[\\w \\-_]{1,}\\.php$|\\/[\\w \\-_]{1,}\\.html$/sim&#039;                    </span>
+                &nbsp;= &#039;/\/[\w \-_]{1,}\.php$|\/[\w \-_]{1,}\.html$/sim&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_MAXSLASH">MAXSLASH</a>
+    <a class="" href="classes/RegexPath.html#enumcase_MAXSLASH">MAXSLASH</a>
     <span>
-                &nbsp;= &#039;/^[\\/]{2,}/sim&#039;                    </span>
+                &nbsp;= &#039;/^[\/]{2,}/sim&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_NAMROUTE">NAMROUTE</a>
+    <a class="" href="classes/RegexPath.html#enumcase_NAMROUTE">NAMROUTE</a>
     <span>
-                &nbsp;= &#039;/^%1\\//sim&#039;                    </span>
+                &nbsp;= &#039;/^%1\//sim&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_NULL">NULL</a>
+    <a class="" href="classes/RegexPath.html#enumcase_NULL">NULL</a>
     <span>
                 &nbsp;= &#039;&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_PATHENDRETU">PATHENDRETU</a>
+    <a class="" href="classes/RegexPath.html#enumcase_PATHENDRETU">PATHENDRETU</a>
     <span>
                 &nbsp;= &#039;/[.]{2}$/sim&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_PATHNORETU">PATHNORETU</a>
+    <a class="" href="classes/RegexPath.html#enumcase_PATHNORETU">PATHNORETU</a>
     <span>
-                &nbsp;= &#039;/^[.]{2}\\//sim&#039;                    </span>
+                &nbsp;= &#039;/^[.]{2}\//sim&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_PATHRETU">PATHRETU</a>
+    <a class="" href="classes/RegexPath.html#enumcase_PATHRETU">PATHRETU</a>
     <span>
-                &nbsp;= &#039;/[\\w\\._\\-]{1,}[\\w]{1,}[\\/]{1,}[\\.]{2}|[\\/]{2,}|\\/ | \\//sim&#039;                    </span>
+                &nbsp;= &#039;/[\w\._\-]{1,}[\w]{1,}[\/]{1,}[\.]{2}|[\/]{2,}|\/ | \//sim&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_RELATIVE">RELATIVE</a>
+    <a class="" href="classes/RegexPath.html#enumcase_RELATIVE">RELATIVE</a>
     <span>
-                &nbsp;= &#039;/^[.]{1}\\//sim&#039;                    </span>
+                &nbsp;= &#039;/^[.]{1}\//sim&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_RTINDEX">RTINDEX</a>
+    <a class="" href="classes/RegexPath.html#enumcase_RTINDEX">RTINDEX</a>
     <span>
-                &nbsp;= &#039;/%1[\\d]{1,}/sim&#039;                    </span>
+                &nbsp;= &#039;/%1[\d]{1,}/sim&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_SEPSYSTEM">SEPSYSTEM</a>
+    <a class="" href="classes/RegexPath.html#enumcase_SEPSYSTEM">SEPSYSTEM</a>
     <span>
-                &nbsp;= &#039;/[\\/\\\\]{1}/sim&#039;                    </span>
+                &nbsp;= &#039;/[\/\\\\]{1}/sim&#039;                    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -case -">
-    <a href="classes/RegexPath.html#enumcase_TWOSLASH">TWOSLASH</a>
+    <a class="" href="classes/RegexPath.html#enumcase_TWOSLASH">TWOSLASH</a>
     <span>
-                &nbsp;= &#039;/[\\/]{2,}|\\/\\.\\/|\\\\/sim&#039;                    </span>
+                &nbsp;= &#039;/[\/]{2,}|\/\.\/|\\\\/sim&#039;                    </span>
 </dt>
 
     </dl>
@@ -259,15 +286,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -283,15 +313,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -307,15 +340,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -331,15 +367,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -355,15 +394,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -379,15 +421,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -403,15 +448,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -427,15 +475,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -451,15 +502,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -475,15 +529,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -499,15 +556,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -523,15 +583,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -547,15 +610,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -571,15 +637,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -595,15 +664,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -619,15 +691,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -643,15 +718,18 @@
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/class/pctrouting/RegexPath.php"><a href="files/src-class-pctrouting-regexpath.html"><abbr title="src/class/pctrouting/RegexPath.php">RegexPath.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RegexPath.php"><a href="files/regexpath.html">RegexPath.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
     
     
     
+    
+    
+
     
 
 </article>
@@ -662,7 +740,7 @@
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/class/pctrouting/RegexPath.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/RegexPath.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -767,23 +845,23 @@
                             <li class="phpdocumentor-on-this-page-section__title">Cases</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li><a href="classes/RegexPath.html#enumcase_NULL">NULL</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_ABSOLIN">ABSOLIN</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_ANTISLASH">ANTISLASH</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_NAMROUTE">NAMROUTE</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_RTINDEX">RTINDEX</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_RELATIVE">RELATIVE</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_MAXSLASH">MAXSLASH</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_PATHENDRETU">PATHENDRETU</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_PATHNORETU">PATHNORETU</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_ENDFILE">ENDFILE</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_ENDPATH">ENDPATH</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_SEPSYSTEM">SEPSYSTEM</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_ABSOWIN">ABSOWIN</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_TWOSLASH">TWOSLASH</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_ABSOSERVE">ABSOSERVE</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_FILEWEB">FILEWEB</a></li>
-                                                    <li><a href="classes/RegexPath.html#enumcase_PATHRETU">PATHRETU</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_NULL">NULL</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_ABSOLIN">ABSOLIN</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_ANTISLASH">ANTISLASH</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_NAMROUTE">NAMROUTE</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_RTINDEX">RTINDEX</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_RELATIVE">RELATIVE</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_MAXSLASH">MAXSLASH</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_PATHENDRETU">PATHENDRETU</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_PATHNORETU">PATHNORETU</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_ENDFILE">ENDFILE</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_ENDPATH">ENDPATH</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_SEPSYSTEM">SEPSYSTEM</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_ABSOWIN">ABSOWIN</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_TWOSLASH">TWOSLASH</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_ABSOSERVE">ABSOSERVE</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_FILEWEB">FILEWEB</a></li>
+                                                    <li class=""><a href="classes/RegexPath.html#enumcase_PATHRETU">PATHRETU</a></li>
                                             </ul>
                 </li>
             

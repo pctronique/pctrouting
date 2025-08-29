@@ -1,91 +1,6 @@
 Search.appendIndex(
     [
                 {
-            "fqsen": "\\pathclass\u0028\u0029",
-            "name": "pathclass",
-            "summary": "",
-            "url": "namespaces/default.html#function_pathclass"
-        },                {
-            "fqsen": "\\testpath\u0028\u0029",
-            "name": "testpath",
-            "summary": "",
-            "url": "namespaces/default.html#function_testpath"
-        },                {
-            "fqsen": "\\tabvalues\u0028\u0029",
-            "name": "tabvalues",
-            "summary": "",
-            "url": "namespaces/default.html#function_tabvalues"
-        },                {
-            "fqsen": "\\createtabclass\u0028\u0029",
-            "name": "createtabclass",
-            "summary": "",
-            "url": "namespaces/default.html#function_createtabclass"
-        },                {
-            "fqsen": "\\createtabpathall\u0028\u0029",
-            "name": "createtabpathall",
-            "summary": "",
-            "url": "namespaces/default.html#function_createtabpathall"
-        },                {
-            "fqsen": "\\textpathsys\u0028\u0029",
-            "name": "textpathsys",
-            "summary": "",
-            "url": "namespaces/default.html#function_textpathsys"
-        },                {
-            "fqsen": "\\displaytaball\u0028\u0029",
-            "name": "displaytaball",
-            "summary": "",
-            "url": "namespaces/default.html#function_displaytaball"
-        },                {
-            "fqsen": "\\LINENDEF",
-            "name": "LINENDEF",
-            "summary": "",
-            "url": "namespaces/default.html#constant_LINENDEF"
-        },                {
-            "fqsen": "\\createtabclassr\u0028\u0029",
-            "name": "createtabclassr",
-            "summary": "",
-            "url": "namespaces/default.html#function_createtabclassr"
-        },                {
-            "fqsen": "\\pathvalid\u0028\u0029",
-            "name": "pathvalid",
-            "summary": "",
-            "url": "namespaces/default.html#function_pathvalid"
-        },                {
-            "fqsen": "\\tdbool\u0028\u0029",
-            "name": "tdbool",
-            "summary": "",
-            "url": "namespaces/default.html#function_tdbool"
-        },                {
-            "fqsen": "\\tdarray\u0028\u0029",
-            "name": "tdarray",
-            "summary": "",
-            "url": "namespaces/default.html#function_tdarray"
-        },                {
-            "fqsen": "\\tdstring\u0028\u0029",
-            "name": "tdstring",
-            "summary": "",
-            "url": "namespaces/default.html#function_tdstring"
-        },                {
-            "fqsen": "\\returnvalue\u0028\u0029",
-            "name": "returnvalue",
-            "summary": "",
-            "url": "namespaces/default.html#function_returnvalue"
-        },                {
-            "fqsen": "\\dnamebool\u0028\u0029",
-            "name": "dnamebool",
-            "summary": "",
-            "url": "namespaces/default.html#function_dnamebool"
-        },                {
-            "fqsen": "\\displaytab\u0028\u0029",
-            "name": "displaytab",
-            "summary": "",
-            "url": "namespaces/default.html#function_displaytab"
-        },                {
-            "fqsen": "\\displaytabLin\u0028\u0029",
-            "name": "displaytabLin",
-            "summary": "",
-            "url": "namespaces/default.html#function_displaytabLin"
-        },                {
             "fqsen": "\\PCTR_PATH_RACINE_SITE",
             "name": "PCTR_PATH_RACINE_SITE",
             "summary": "",
@@ -218,7 +133,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\PathServe\u003A\u003Aabsolut_def\u0028\u0029",
             "name": "absolut_def",
-            "summary": "R\u00E9cup\u00E8re\u0020le\u0020chemin\u0020absolut\u0020par\u0020d\u00E9faut.",
+            "summary": "R\u00E9cup\u00E8re\u0020le\u0020chemin\u0020absolu\u0020par\u0020d\u00E9faut.",
             "url": "classes/PathServe.html#method_absolut_def"
         },                {
             "fqsen": "\\PathServe\u003A\u003Abase\u0028\u0029",
@@ -426,6 +341,21 @@ Search.appendIndex(
             "summary": "V\u00E9rifier\u0020l\u0027emplacement\u0020du\u0020routage.",
             "url": "classes/RouteMain.html#method_indexbool"
         },                {
+            "fqsen": "\\RouteMain\u003A\u003Aindexregexbool\u0028\u0029",
+            "name": "indexregexbool",
+            "summary": "Valider\u0020un\u0020chemin\u0020\u00E0\u0020partir\u0020d\u0027un\u0020regex.",
+            "url": "classes/RouteMain.html#method_indexregexbool"
+        },                {
+            "fqsen": "\\RouteMain\u003A\u003Arecupregexvalue\u0028\u0029",
+            "name": "recupregexvalue",
+            "summary": "V\u00E9rifier\u0020le\u0020chemin\u0020\u00E0\u0020partir\u0020d\u0027un\u0020regex.",
+            "url": "classes/RouteMain.html#method_recupregexvalue"
+        },                {
+            "fqsen": "\\RouteMain\u003A\u003Alastvaluerouting\u0028\u0029",
+            "name": "lastvaluerouting",
+            "summary": "R\u00E9cup\u00E8re\u0020la\u0020derni\u00E8re\u0020valeur\u0020du\u0020tableau\u0020index.",
+            "url": "classes/RouteMain.html#method_lastvaluerouting"
+        },                {
             "fqsen": "\\RouteMain\u003A\u003AgetIndPg\u0028\u0029",
             "name": "getIndPg",
             "summary": "R\u00E9cup\u00E9rer\u0020le\u0020tableau\u0020du\u0020routage.",
@@ -450,81 +380,6 @@ Search.appendIndex(
             "name": "getUrl",
             "summary": "R\u00E9cup\u00E8re\u0020l\u0027url\u0020du\u0020routage.",
             "url": "classes/RouteMain.html#method_getUrl"
-        },                {
-            "fqsen": "\\createtab\u0028\u0029",
-            "name": "createtab",
-            "summary": "",
-            "url": "namespaces/default.html#function_createtab"
-        },                {
-            "fqsen": "\\del_name_disk\u0028\u0029",
-            "name": "del_name_disk",
-            "summary": "",
-            "url": "namespaces/default.html#function_del_name_disk"
-        },                {
-            "fqsen": "\\recup_value_disk\u0028\u0029",
-            "name": "recup_value_disk",
-            "summary": "",
-            "url": "namespaces/default.html#function_recup_value_disk"
-        },                {
-            "fqsen": "\\recup_name_disk\u0028\u0029",
-            "name": "recup_name_disk",
-            "summary": "",
-            "url": "namespaces/default.html#function_recup_name_disk"
-        },                {
-            "fqsen": "\\recupname\u0028\u0029",
-            "name": "recupname",
-            "summary": "",
-            "url": "namespaces/default.html#function_recupname"
-        },                {
-            "fqsen": "\\recupeother\u0028\u0029",
-            "name": "recupeother",
-            "summary": "",
-            "url": "namespaces/default.html#function_recupeother"
-        },                {
-            "fqsen": "\\boolstring\u0028\u0029",
-            "name": "boolstring",
-            "summary": "",
-            "url": "namespaces/default.html#function_boolstring"
-        },                {
-            "fqsen": "\\displayvalue\u0028\u0029",
-            "name": "displayvalue",
-            "summary": "",
-            "url": "namespaces/default.html#function_displayvalue"
-        },                {
-            "fqsen": "\\lienhttp\u0028\u0029",
-            "name": "lienhttp",
-            "summary": "",
-            "url": "namespaces/default.html#function_lienhttp"
-        },                {
-            "fqsen": "\\lienpath\u0028\u0029",
-            "name": "lienpath",
-            "summary": "",
-            "url": "namespaces/default.html#function_lienpath"
-        },                {
-            "fqsen": "\\tabind\u0028\u0029",
-            "name": "tabind",
-            "summary": "",
-            "url": "namespaces/default.html#function_tabind"
-        },                {
-            "fqsen": "\\disptabl\u0028\u0029",
-            "name": "disptabl",
-            "summary": "",
-            "url": "namespaces/default.html#function_disptabl"
-        },                {
-            "fqsen": "\\addlind\u0028\u0029",
-            "name": "addlind",
-            "summary": "",
-            "url": "namespaces/default.html#function_addlind"
-        },                {
-            "fqsen": "\\tabtestrt\u0028\u0029",
-            "name": "tabtestrt",
-            "summary": "",
-            "url": "namespaces/default.html#function_tabtestrt"
-        },                {
-            "fqsen": "\\display\u0028\u0029",
-            "name": "display",
-            "summary": "",
-            "url": "namespaces/default.html#function_display"
         },                {
             "fqsen": "\\",
             "name": "\\",
