@@ -2,9 +2,8 @@
 // verifier qu'on n'a pas deja creer la classe
 if (!class_exists('RouteMain')) {
 
-    include_once __DIR__ . '/Path.php';
-    include_once __DIR__ . '/PathServe.php';
-    require_once __DIR__ . "/RegexPath.php";
+    include_once __DIR__ . '/../pctrpath/Path.php';
+    include_once __DIR__ . '/../pctrpath/PathServe.php';
     define("PCTR_ROUTING_NR", "nurl");
 
     /**
