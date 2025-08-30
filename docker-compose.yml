@@ -36,12 +36,12 @@ services:
             - ./project/unit/:/usr/local/apache2/unit:rw
             - ./project/install/:/usr/local/apache2/install:rw
             - ./project/error/:/usr/local/apache2/error:rw
-            #- ./.env:/usr/local/apache2/www/${FOLDER_CONFIG}/.env:rw
-            #- ./config/config_sgbd.php:/usr/local/apache2/www/${FOLDER_CONFIG}/config_sgbd.php:rw
-            #- ./config/filedotenv.php:/usr/local/apache2/www/${FOLDER_CONFIG}/filedotenv.php:rw
-            #- ./config/config.php:/usr/local/apache2/www/${FOLDER_CONFIG}/config.php:rw
-            #- ./config/data:/docker-entrypoint-initdata.d:rw
-            #- ./config/test:/usr/local/apache2/www/test:rw
+            - ./.env:/usr/local/apache2/www/${FOLDER_CONFIG}/.env:rw
+            - ./config/config_sgbd.php:/usr/local/apache2/www/${FOLDER_CONFIG}/config_sgbd.php:rw
+            - ./config/filedotenv.php:/usr/local/apache2/www/${FOLDER_CONFIG}/filedotenv.php:rw
+            - ./config/config.php:/usr/local/apache2/www/${FOLDER_CONFIG}/config.php:rw
+            - ./config/config.ini:/usr/local/apache2/www/${FOLDER_CONFIG}/config.ini:rw
+            - ./config/data:/docker-entrypoint-initdata.d:rw
             - ./config/dockercron:/var/docker/cron/dockercron:rw
             - ./config/config_cron_path.php:/usr/local/apache2/cron/config_path.php:rw
             - ./config/config_error_path.php:/usr/local/apache2/error/config_path.php:rw
@@ -58,6 +58,60 @@ services:
         environment:
             - TZ=${VALUE_TIMEZONES}
             - PHP_FOLDER_DATA=${FOLDER_DATA}
+            
+###########################
+# Setup the Database (MariaDB) container
+###########################
+    mariadb:
+        container_name: ${NAME_PROJECT}_mariadb
+        restart: always
+        image: mariadb:${VALUE_MARIABD_VERSION}
+        volumes:
+            - ./.docker/containers/mariadb/mariadb.cnf:/etc/mysql/conf.d/mariadb.cnf:ro
+            - ./config/sgbd_data:/docker-entrypoint-initdb.d/:rw
+            - ./.dockertmp/log/mariadb:/var/log/mariadb:rw
+            - ./.dockertmp/tmp/mariadb:/var/tmp/mariadb:rw
+            - ./.dockertmp/mariadb_data:/var/lib/mysql
+        environment:
+            - TZ=${VALUE_TIMEZONES}
+            - MYSQL_DATABASE=${SGBD_DATABASE}
+            - MYSQL_ROOT_PASSWORD=${SGBD_PASSWORD}
+            
+###########################
+# Setup the PhpMyAdmin container
+###########################
+    myadmin:
+        container_name: ${NAME_PROJECT}_phpmyadmin
+        restart: always
+        image: phpmyadmin/phpmyadmin:${VALUE_PHPMYADMIN_VERSION}
+        environment:
+            - PMA_PORT=3306
+            - PMA_HOST=${NAME_PROJECT}_mariadb
+            - PMA_USER=root
+            - PMA_PASSWORD=${SGBD_PASSWORD}
+        ports:
+            - ${VALUE_PHPMYADMIN_PORT}:80
+        depends_on: 
+            - mariadb
+            
+###########################
+# Setup the mailhog container
+###########################
+    mailhog:
+        build:
+            context: .docker/images/mailhog
+            args:
+                - VALUE_MHOG_VERSION=${VALUE_MAILHOG_VERSION}
+        container_name: ${NAME_PROJECT}_mailhog
+        restart: always
+        volumes:
+            - ./.dockertmp/mailhog:/mailhog
+            - ./config/email_data:/docker-entrypoint-initdata.d:rw
+        environment:
+            - MH_STORAGE=maildir
+            - MH_MAILDIR_PATH=/mailhog
+        ports:
+            - ${VALUE_MAILHOG_PORT}:8025
 
 ###########################
 # Setup the phpdoc container
