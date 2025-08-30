@@ -137,11 +137,10 @@ RUN chmod +x /usr/local/bin/filereadini.sh
 COPY perceprogress.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/perceprogress.sh
 
+COPY recup_one_depend.sh ${PHP_FOLDER_INIT}
+
 COPY recup_all_depends.sh ${PHP_FOLDER_INIT}
 RUN chmod +x ${PHP_FOLDER_INIT}/recup_all_depends.sh
-
-COPY recup_one_depend.sh ${PHP_FOLDER_INIT}
-RUN chmod +x ${PHP_FOLDER_INIT}/recup_one_depend.sh
 
 RUN composer selfupdate && \
     composer require "${PHP_UNIT_VERSION}" --prefer-source --no-interaction && \

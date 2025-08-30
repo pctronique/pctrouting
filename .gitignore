@@ -24,6 +24,7 @@
 /project/www/config/config.php
 /project/www/test
 /project/www/config/sgbd_config.php
+/project/www/src/config/config.ini
 /project/www/src/config/config.php
 /project/www/src/config/sgbd_config.php
 /project/cron/config_path.php
@@ -35,5 +36,5 @@
 /composer.lock
 /project/www/vendor/
 /project/www/composer.lock
-/project/www/src/class/pctrouting
-/project/www/src/class/pctrouting
+/project/www/src/class/pctrplatform
+/project/www/src/class/pctrpath
