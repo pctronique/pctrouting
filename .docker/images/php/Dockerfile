@@ -138,6 +138,7 @@ COPY perceprogress.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/perceprogress.sh
 
 COPY recup_one_depend.sh ${PHP_FOLDER_INIT}
+RUN chmod +x ${PHP_FOLDER_INIT}/recup_one_depend.sh
 
 COPY recup_all_depends.sh ${PHP_FOLDER_INIT}
 RUN chmod +x ${PHP_FOLDER_INIT}/recup_all_depends.sh
