@@ -16,6 +16,11 @@ fi
 
 folder=${0%/*}/
 
+if [[ ! -e ${PHP_FOLDER_INIT}/projects_depends.ini ]]; then
+then
+    exit 0
+fi
+
 all_projects=$(filereadini.sh ${PHP_FOLDER_INIT}/projects_depends.ini list_depends_pct allproject)
 IFS=',;' read -r -a list_projects <<< "$all_projects"
 

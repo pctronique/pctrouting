@@ -2,7 +2,7 @@
 [config]
 tr_file_name = JDProjectDamp
 tr_key = title
-tr_text = damp
+tr_text = pctrouting
 tr_com = 
 is_container = false
 
@@ -42,6 +42,13 @@ is_container = true
 name_docker = ${NAME_PROJECT}_phpmyadmin
 config = true
 
+[Phpdoc]
+tr_key = phpdoc
+tr_text = phpdoc
+tr_com =
+is_container = true
+name_docker = ${NAME_PROJECT}_phpdoc
+
 [config_bt_folder_www]
 tr_key = bt_folder_www
 tr_text = Open Aplication Folder
@@ -80,7 +87,7 @@ lien = http://localhost:${VALUE_MAILHOG_PORT}
 
 [config_bt_folder_unit]
 tr_key = bt_folder_unit
-tr_text = Open Aplication Unit Folder
+tr_text = Open Unit Folder
 tr_com = 
 is_container = false
 sub = 
@@ -89,7 +96,7 @@ lien = project/unit
 
 [config_bt_folder_cron]
 tr_key = bt_folder_cron
-tr_text = Open Aplication Cron Folder
+tr_text = Open Cron Folder
 tr_com = 
 is_container = false
 sub = 
@@ -98,7 +105,7 @@ lien = project/cron
 
 [config_bt_folder_install]
 tr_key = bt_folder_install
-tr_text = Open Aplication Install Folder
+tr_text = Open Install Folder
 tr_com = 
 is_container = false
 sub = 
@@ -107,21 +114,39 @@ lien = project/install
 
 [config_bt_folder_error]
 tr_key = bt_folder_error
-tr_text = Open Aplication Error Folder
+tr_text = Open Error Folder
 tr_com = 
 is_container = false
 sub = 
 type = folder
 lien = project/error
 
-[config_bt_folder_data]
-tr_key = bt_folder_data
-tr_text = Open Aplication Data Folder
+[config_bt_folder_docs]
+tr_key = bt_folder_docs
+tr_text = Open Docs Folder
 tr_com = 
 is_container = false
 sub = 
 type = folder
-lien = project/www/data
+lien = project/docs
+
+[config_bt_folder_data]
+tr_key = bt_folder_data
+tr_text = Open Data Folder
+tr_com = 
+is_container = false
+sub = 
+type = folder
+lien = project/www/${FOLDER_DATA}
+
+[config_bt_folder_config]
+tr_key = bt_folder_config
+tr_text = Open Config Folder
+tr_com = 
+is_container = false
+sub = 
+type = folder
+lien = project/www/${FOLDER_CONFIG}
 
 [config_bt_port_httpd]
 tr_key = expose_httpd
