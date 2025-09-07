@@ -17,7 +17,6 @@ fi
 folder=${0%/*}/
 
 if [[ ! -e ${PHP_FOLDER_INIT}/projects_depends.ini ]]; then
-then
     exit 0
 fi
 
