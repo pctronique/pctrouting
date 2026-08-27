@@ -144,7 +144,7 @@ COPY recup_all_depends.sh ${PHP_FOLDER_INIT}
 RUN chmod +x ${PHP_FOLDER_INIT}/recup_all_depends.sh
 
 RUN composer selfupdate && \
-    composer require "${PHP_UNIT_VERSION}" --prefer-source --no-interaction && \
+    composer require "${PHP_UNIT_VERSION}" --prefer-source --no-interaction --no-security-blocking && \
     ln -s /tmp/vendor/bin/phpunit /usr/local/bin/phpunit
 
 ENTRYPOINT ["docker-data-entrypoint.sh", "docker-php-entrypoint"]
